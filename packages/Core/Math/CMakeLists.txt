@@ -1,0 +1,40 @@
+###############################################################################
+#
+# Golem Core/Math library
+#
+###############################################################################
+
+if(GOLEM_BUILD_CORE)
+	SET(PACKAGE_DIR "${PACKAGE_CORE}/Math")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemMath SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})		
+		TARGET_COMPILE_OPTIONS(GolemMath PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemMath STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	TARGET_LINK_LIBRARIES(GolemMath GolemSys)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemMath PUBLIC ${PACKAGE_DIR}/include)
+	
+	if (CPACK_BUILD_CORE)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemMath RUNTIME DESTINATION bin COMPONENT core_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemMath LIBRARY DESTINATION bin COMPONENT core_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemMath ARCHIVE DESTINATION lib COMPONENT core_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Math/ COMPONENT core_headers)
+	endif (CPACK_BUILD_CORE)
+	
+	SET_PROPERTY(TARGET GolemMath PROPERTY PROJECT_LABEL "Math")
+	SET_PROPERTY(TARGET GolemMath PROPERTY FOLDER "Core")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+endif(GOLEM_BUILD_CORE)

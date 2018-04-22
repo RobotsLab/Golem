@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="verbose"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="GolemManager">
+    <!-- x_offs/y_offs: DPI 100% -> 8, DPI 125% -> 10, DPI 150% -> 12 -->
+    <window x="0" y="0" width="1200" height="900" x_offs="8" y_offs="8"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="GolemManager.xml">
+    <simulation restitution="0.0" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.2">
+      <view_point v1="4.1155" v2="10.1337" v3="10.0000"/>
+      <view_dir v1="-0.4614" v2="-0.3739" v3="-0.8046"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <!--<clear_color R="55" G="55" B="60" A="255"/>-->
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Object" view_inc="0.2">
+      <view_point v1="-0.1117" v2="7.2135" v3="4.3441"/>
+      <view_dir v1="0.1842" v2="-0.6145" v3="-0.7671"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <!--<clear_color R="55" G="55" B="60" A="255"/>-->
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <manager>
+    <data_template path="./data.xml" delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1" ext=".xml" xml_handler="handler" xml_item="item" xml_label="label" xml_prefix="prefix" xml_name="use_name" sep_name="-" sep_field="&#x9;"/>
+
+    <handler library_path="GolemDataText" config_path="GolemDataText"/>
+    <handler library_path="GolemDataImage" config_path="GolemDataImage"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3D"/>
+    <handler library_path="GolemDataVideo" config_path="GolemDataVideo"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemDataTrajectory"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemDataContactModel"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemDataContactQuery"/>
+    <!--<handler library_path="GolemDataPart3DHoP" config_path="GolemDataPart3DHoP"/>-->
+  </manager>
+</golem>

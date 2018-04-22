@@ -1,0 +1,54 @@
+###############################################################################
+#
+# Golem Core/Sys library
+#
+###############################################################################
+
+if(GOLEM_BUILD_CORE)
+	SET(PACKAGE_DIR "${PACKAGE_CORE}/Sys")
+
+	# EXPAT
+	find_package(EXPAT REQUIRED)
+	
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemSys SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})		
+		TARGET_COMPILE_OPTIONS(GolemSys PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemSys STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	# Windows 32/64 bit
+	if (WIN32)
+		TARGET_COMPILE_OPTIONS(GolemSys PUBLIC /D_CRT_SECURE_NO_WARNINGS)
+		TARGET_LINK_LIBRARIES(GolemSys GolemDefs WinMM ${EXPAT_LIBRARIES} ${CMAKE_DL_LIBS})
+	# Unix Linux/Apple
+	elseif (UNIX)
+		if (APPLE)
+			TARGET_LINK_LIBRARIES(GolemSys GolemDefs pthread ${EXPAT_LIBRARIES} ${CMAKE_DL_LIBS})
+		else(APPLE)
+			TARGET_LINK_LIBRARIES(GolemSys GolemDefs pthread rt ${EXPAT_LIBRARIES} ${CMAKE_DL_LIBS})
+		endif()
+	endif ()
+
+	TARGET_INCLUDE_DIRECTORIES(GolemSys PUBLIC ${PACKAGE_DIR}/include ${PACKAGE_CORE}/Math/include ${EXPAT_INCLUDE_DIRS})
+		
+	if (CPACK_BUILD_CORE)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemSys RUNTIME DESTINATION bin COMPONENT core_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemSys LIBRARY DESTINATION bin COMPONENT core_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemSys ARCHIVE DESTINATION lib COMPONENT core_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Sys/ COMPONENT core_headers)
+	endif (CPACK_BUILD_CORE)
+	
+	SET_PROPERTY(TARGET GolemSys PROPERTY PROJECT_LABEL "Sys")
+	SET_PROPERTY(TARGET GolemSys PROPERTY FOLDER "Core")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+endif(GOLEM_BUILD_CORE)

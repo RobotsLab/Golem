@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data tmp_dir="HandlerVideoTmp" frame_suffix=".frame" delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1">
+    <cloud suffix=".pcd">
+      <region_capture>
+        <bounds type="box" group="1">
+          <dimensions v1="1.0" v2="1.0" v3="1.0"/>
+          <pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </region_capture>
+      
+      <appearance mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <colour override="0" R="127" G="127" B="127" A="255"/>
+      </appearance>
+    </cloud>
+
+    <!--suffix=".avi" format="-1"-->
+    <!--suffix=".avi" format="I420"-->
+    <!--suffix=".avi" format="MJPG"-->
+    <!--suffix=".avi" format="MP4V"-->
+    <!--suffix=".avi" format="XVID"-->
+    <!--suffix=".avi" format="X264"-->
+    <video suffix=".avi" format="XVID" fps="30.0">
+      <appearance show="1" show_camera_frame="1">
+      </appearance>
+    </video>
+  </data>
+</golem>

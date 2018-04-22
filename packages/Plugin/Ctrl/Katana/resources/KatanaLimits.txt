@@ -1,0 +1,151 @@
+Katana 300, KNI 3.2
+******************************************************************************************************************************
+
+AXIS #1:
+angleOffset=0.000000, angleRange=348.000000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -3.141593
+angle (encoder init) = -3.018874
+angle (min, max) = (-3.141593, 2.932112)
+encoder (min, max) = (31000, -18493)
+
+AXIS #2:
+angleOffset=124.250000, angleRange=-137.850000, encoderOffset=-31000, encodersPerCycle=94976, rotationDir=1, encoderPositionAfter=-30000, offset=0.000000, gain=-1.000000
+angle (encoder min) = -2.168572
+angle (encoder init) = -2.102416
+angle (min, max) = (-2.168572, 0.237372)
+encoder (min, max) = (-31000, 5368)
+
+AXIS #3:
+angleOffset=52.700000, angleRange=250.000000, encoderOffset=-31000, encodersPerCycle=81408, rotationDir=-1, encoderPositionAfter=-30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.221804
+angle (encoder init) = 2.144623
+angle (min, max) = (-2.141493, 2.221804)
+encoder (min, max) = (25533, -31000)
+
+AXIS #4:
+angleOffset=63.500000, angleRange=232.700000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -2.033309
+angle (encoder init) = -1.910590
+angle (min, max) = (-2.033309, 2.028059)
+encoder (min, max) = (31000, -2095)
+
+AXIS #5:
+angleOffset=8.500000, angleRange=342.800000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.993240
+angle (encoder init) = 2.870521
+angle (min, max) = (-2.989776, 2.993240)
+encoder (min, max) = (-17754, 31000)
+
+Katana 300, KNI 3.9.2
+******************************************************************************************************************************
+
+AXIS #1:
+angleOffset=6.650000, angleRange=346.700000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -3.025528
+angle (encoder init) = -2.902810
+angle (min, max) = (-3.025528, 3.025474)
+encoder (min, max) = (31000, -18308)
+
+AXIS #2:
+angleOffset=124.250000, angleRange=-143.000000, encoderOffset=-31000, encodersPerCycle=94976, rotationDir=1, encoderPositionAfter=-30000, offset=0.000000, gain=-1.000000
+angle (encoder min) = -2.168572
+angle (encoder init) = -2.102416
+angle (min, max) = (-2.168572, 0.327277)
+encoder (min, max) = (-31000, 6727)
+
+AXIS #3:
+angleOffset=52.700000, angleRange=127.300000, encoderOffset=-31000, encodersPerCycle=81408, rotationDir=-1, encoderPositionAfter=-30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.221804
+angle (encoder init) = 2.144623
+angle (min, max) = (-0.000017, 2.221804)
+encoder (min, max) = (-2213, -31000)
+
+AXIS #4:
+angleOffset=63.500000, angleRange=232.700000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -2.033309
+angle (encoder init) = -1.910590
+angle (min, max) = (-2.033309, 2.028059)
+encoder (min, max) = (31000, -2095)
+
+AXIS #5:
+angleOffset=8.500000, angleRange=342.800000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.993240
+angle (encoder init) = 2.870521
+angle (min, max) = (-2.989776, 2.993240)
+encoder (min, max) = (-17754, 31000)
+
+Katana 450, KNI 4.x.x
+******************************************************************************************************************************
+
+AXIS #1:
+angleOffset=6.650000, angleRange=339.000000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -3.025528
+angle (encoder init) = -2.902810
+angle (min, max) = (-3.025528, 2.891097)
+encoder (min, max) = (31000, -17213)
+
+AXIS #2:
+angleOffset=124.250000, angleRange=-132.000000, encoderOffset=-31000, encodersPerCycle=94976, rotationDir=1, encoderPositionAfter=-30000, offset=0.000000, gain=-1.000000
+angle (encoder min) = -2.168572
+angle (encoder init) = -2.102416
+angle (min, max) = (-2.168572, 0.135294)
+encoder (min, max) = (-31000, 3825)
+
+AXIS #3:
+angleOffset=52.700000, angleRange=245.000000, encoderOffset=-31000, encodersPerCycle=47488, rotationDir=-1, encoderPositionAfter=-30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.221804
+angle (encoder init) = 2.089493
+angle (min, max) = (-2.054223, 2.221804)
+encoder (min, max) = (1318, -31000)
+
+AXIS #4:
+angleOffset=63.500000, angleRange=224.000000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -2.033309
+angle (encoder init) = -1.910590
+angle (min, max) = (-2.033309, 1.876256)
+encoder (min, max) = (31000, -858)
+
+AXIS #5:
+angleOffset=8.500000, angleRange=336.000000, encoderOffset=31000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=30000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.993240
+angle (encoder init) = 2.870521
+angle (min, max) = (-2.871108, 2.993240)
+encoder (min, max) = (-16787, 31000)
+
+Katana 450, AxNI
+******************************************************************************************************************************
+
+AXIS #1:
+angleOffset=6.650000, angleRange=339.000000, encoderOffset=100000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=99000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -3.025528
+angle (encoder init) = -2.902810
+angle (min, max) = (-3.025528, 2.891097)
+encoder (min, max) = (100000, 51787)
+
+AXIS #2:
+angleOffset=124.250000, angleRange=-132.000000, encoderOffset=100000, encodersPerCycle=94976, rotationDir=1, encoderPositionAfter=101000, offset=0.000000, gain=-1.000000
+angle (encoder min) = -2.168572
+angle (encoder init) = -2.102416
+angle (min, max) = (-2.168572, 0.135294)
+encoder (min, max) = (100000, 134825)
+
+AXIS #3:
+angleOffset=52.700000, angleRange=127.400000, encoderOffset=100000, encodersPerCycle=47488, rotationDir=-1, encoderPositionAfter=101000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.221804
+angle (encoder init) = 2.089493
+angle (min, max) = (-0.001682, 2.221804)
+encoder (min, max) = (116805, 100000)
+
+AXIS #4:
+angleOffset=63.500000, angleRange=224.000000, encoderOffset=100000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=99000, offset=-3.141593, gain=1.000000
+angle (encoder min) = -2.033309
+angle (encoder init) = -1.910590
+angle (min, max) = (-2.033309, 1.876256)
+encoder (min, max) = (100000, 68142)
+
+AXIS #5:
+angleOffset=8.500000, angleRange=336.000000, encoderOffset=100000, encodersPerCycle=51200, rotationDir=1, encoderPositionAfter=99000, offset=3.141593, gain=-1.000000
+angle (encoder min) = 2.993240
+angle (encoder init) = 2.870521
+angle (min, max) = (-2.871108, 2.993240)
+encoder (min, max) = (52213, 100000)

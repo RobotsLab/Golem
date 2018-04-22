@@ -1,0 +1,40 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/KukaLWRSim library
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_CTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/KukaLWRSim")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemCtrlKukaLWRSim SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	if (WIN32)		
+		TARGET_COMPILE_OPTIONS(GolemCtrlKukaLWRSim PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	elseif (UNIX)
+	endif()
+
+	TARGET_LINK_LIBRARIES(GolemCtrlKukaLWRSim GolemCtrlKuka)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlKukaLWRSim PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemCtrlKukaLWRSim ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemCtrlKukaLWRSim RUNTIME DESTINATION bin COMPONENT ctrl_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemCtrlKukaLWRSim LIBRARY DESTINATION bin COMPONENT ctrl_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/KukaLWRSim/ COMPONENT ctrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT ctrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlKukaLWRSim PROPERTY PROJECT_LABEL "KukaLWRSim")
+	SET_PROPERTY(TARGET GolemCtrlKukaLWRSim PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL)

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <activectrl planner_index="0" active="1" simple_mode="0" ctrl_thread_sleep="100">
+    <profile duration="0.1" velocity="0.5" acceleration="0.5"/>
+    <tolerance lin="0.0005" ang="0.0031415926"/>
+    <increment lin="0.005" ang="0.0872664626" low="4"/>
+    <frame_size v1="0.5" v2="0.5" v3="0.5"/>
+    <frame_size_active v1="0.5" v2="0.5" v3="1.0"/>
+
+    <input_devices>
+      <joystick label="left" index="0">
+        <axis_map>
+          <item axis="0" ctrl="0" gain="0.002"/>
+          <item axis="1" ctrl="1" gain="0.002"/>
+          <item axis="3" ctrl="2" gain="0.002"/>
+        </axis_map>
+        <button_map>
+          <item button="0" ctrl="0"/>
+			  <item button="0" ctrl="1" up="0" down="1"/>
+			  <item button="0" ctrl="2" up="1" down="0"/>
+			  <item button="2" ctrl="3" up="0" down="1"/>
+			  <item button="3" ctrl="4" up="0" down="1"/>
+        </button_map>
+      </joystick>
+      <joystick label="right" index="1">
+        <axis_map>
+          <item axis="0" ctrl="3" gain="0.002"/>
+          <item axis="1" ctrl="4" gain="0.002"/>
+          <item axis="3" ctrl="5" gain="0.002"/>
+        </axis_map>
+        <button_map>
+          <item button="0" ctrl="0"/>
+          <item button="0" ctrl="1" up="0" down="1"/>
+          <item button="0" ctrl="2" up="1" down="0"/>
+        </button_map>
+      </joystick>
+    </input_devices>
+  </activectrl>
+</golem>

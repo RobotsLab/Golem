@@ -1,0 +1,41 @@
+###############################################################################
+#
+# Golem Plugin/Data/Text library
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_DATA)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_DATA}/Text")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemDataText SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	if(WIN32)
+		TARGET_COMPILE_OPTIONS(GolemDataText PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	elseif(UNIX)
+		TARGET_COMPILE_OPTIONS(GolemDataText PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	endif()
+
+	TARGET_LINK_LIBRARIES(GolemDataText GolemTools)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemDataText PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemDataText ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemDataText RUNTIME DESTINATION bin COMPONENT data_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemDataText LIBRARY DESTINATION bin COMPONENT data_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Data/Text/ COMPONENT data_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT data_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemDataText PROPERTY PROJECT_LABEL "Text")
+	SET_PROPERTY(TARGET GolemDataText PROPERTY FOLDER "Plugin/Data")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_DATA)

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="7" sampling_rate="2000" samples_per_channel="5" samples_bias="0" connection_type="differential" calibration_file="FT10731.cal" channel_map="Dev2/ai0:FX,Dev2/ai1:FY,Dev2/ai2:FZ,Dev2/ai3:TX,Dev2/ai4:TY,Dev2/ai5:TZ">
+    <handler snapshot="" sequence=""/>
+
+    <calibration file="GolemFTDAQWrist.cal" use_inertia="1" sampling_interval="10" sample_window_size="100" mass_param_manitude="1.0" offset_param_manitude="1.0">
+      <local_frame_param_manitude v1="0.0" v2="0.0" v3="0.1"/>
+      <!-- z = 78(kuka end-effector mounting) + 10 (Kuka mounting plate) + 18+3(F/T sensor and Kinect mounting plates) + 33.3(Gamma FT sensor) -->
+      <!-- Angle between the <Y- axis of the Ati, HIT Hand axis> = 10 degrees -->
+      <local_frame v1="0.0" v2="0.0" v3="0.1423" roll="0.0" pitch="0.0" yaw="0.3927"/>
+    </calibration>
+
+    <appearance>
+      <frame show="0" v1="0.02" v2="0.02" v3="0.02"/>
+      <shape show="0" R="127" G="0" B="0" A="64">
+        <bounds type="box" group="1">
+          <dimensions v1="0.025" v2="0.025" v3="0.025"/>
+          <pose v1="0.0" v2="0.0" v3="-0.025" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

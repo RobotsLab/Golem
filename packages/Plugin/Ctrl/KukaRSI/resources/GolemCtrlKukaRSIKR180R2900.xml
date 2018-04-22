@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Kuka KR180 R2900 controller" enable_io="1" debug="0">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></global_pose>
+    <io thread_priority="critical" thread_timeout="10000" state_queue_size="5000" command_queue_size="500" time_quant="0.0001" cycle_avr_len="50" cycle_dur_ctrl="0" cycle_dur_init="0.012" cycle_dur_offs="0.03" cycle_dur_max_dev="2.0" sim_delta_recv="0.01" sim_delta_send="0.002"/>
+    
+    <rsi port="49148" message="hi" type="ROMANS1">
+      <gain k1="0.02" k2="0.02" k3="0.02" k4="0.02" k5="0.02" k6="0.02"/>
+    </rsi>
+
+    <chain name="Kuka KR180 R2900 arm" custom_kinematics="0" linked_chain_index="-1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+      <reference_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+      <encoder_offset c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0"/>
+
+      <joint name="Axis #1">
+        <!--<min pos="-3.14159" vel="-1.832596" acc="-3.1415926"></min>
+        <max pos="+3.14159" vel="+1.832596" acc="+3.1415926"></max>-->
+        <min pos="-1.57079633" vel="-1.832596" acc="-3.1415926"></min>
+        <max pos="+1.57079633" vel="+1.832596" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="0.0" n3="-1.0" l1="0.0" l2="0.0" l3="0.0" th="0.0"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.4" v2="0.4" v3="0.4"/>
+          <pose v1="0.0" v2="0.0" v3="0.4" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #2">
+        <min pos="-2.44346" vel="-1.867502" acc="-3.1415926"></min>
+        <max pos="-0.087266" vel="+1.867502" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="-1.0" n2="0.0" n3="0.0" l1="0.0" l2="0.35" l3="0.675" th="-1.57079633"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.2" v2="0.675" v3="0.2"/>
+          <pose v1="0.2" v2="0.675" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #3">
+        <min pos="-2.09439" vel="-1.989675" acc="-3.1415926"></min>
+        <max pos="+2.70526" vel="+1.989675" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="-1.0" n2="0.0" n3="0.0" l1="0.0" l2="1.7" l3="0.675" th="+1.57079633"/>
+      </joint>
+      <joint name="Axis #4">
+        <min pos="-3.14159" vel="-3.124139" acc="-3.1415926"></min>
+        <max pos="+3.14159" vel="+3.124139" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="-1.0" n3="0.0" l1="0.0" l2="2.9" l3="0.634" th="0.0"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.15" v2="0.6" v3="0.15"/>
+          <pose v1="0.0" v2="-0.6" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+        <bounds type="sphere" group="1" radius="0.215">
+          <pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #5">
+        <!--<min pos="-2.18166" vel="-3.001966" acc="-3.1415926"></min>
+        <max pos="+2.18166" vel="+3.001966" acc="+3.1415926"></max>-->
+        <min pos="-1.832596" vel="-3.001966" acc="-3.1415926"></min>
+        <max pos="+1.832596" vel="+3.001966" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="-1.0" n2="0.0" n3="0.0" l1="0.0" l2="2.9" l3="0.634" th="+1.57079633"/>
+      </joint>
+      <joint name="Axis #6">
+        <min pos="-3.14159" vel="-3.822271" acc="-3.1415926"></min>
+        <max pos="+3.14159" vel="+3.822271" acc="+3.1415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="-1.0" n3="0.0" l1="0.0" l2="2.9" l3="0.634" th="0.0"/>
+      </joint>
+    </chain>
+  </controller>
+</golem>

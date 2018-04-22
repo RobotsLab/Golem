@@ -1,0 +1,35 @@
+###############################################################################
+#
+# Golem App/UI/Tracking application
+#
+###############################################################################
+
+if(GOLEM_BUILD_APP_UI)
+	SET(PACKAGE_DIR "${PACKAGE_APP_UI}/Tracking")
+
+	# OpenCV
+	FIND_PACKAGE(OpenCV REQUIRED)
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_EXECUTABLE(GolemAppTracking ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	TARGET_LINK_LIBRARIES(GolemAppTracking GolemApp GolemContact GolemPlannerGraphPlanner)
+	TARGET_INCLUDE_DIRECTORIES(GolemAppTracking PUBLIC ${PACKAGE_DIR}/include ${OPENCV_INCLUDE_DIRS})
+
+	COPY_FILES(GolemAppTracking ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+	SET_PROPERTY(TARGET GolemAppTracking PROPERTY RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
+	SET_PROPERTY(TARGET GolemAppTracking PROPERTY DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+	
+	if (CPACK_BUILD_CORE)
+		INSTALL(TARGETS GolemAppTracking RUNTIME DESTINATION bin COMPONENT app_execs)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/App/Tracking/ COMPONENT app_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT app_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemAppTracking PROPERTY PROJECT_LABEL "Tracking")
+	SET_PROPERTY(TARGET GolemAppTracking PROPERTY FOLDER "App/UI")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_APP_UI)

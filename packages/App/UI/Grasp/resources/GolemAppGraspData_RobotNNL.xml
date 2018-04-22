@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data>
+    <item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix=""></item>
+  </data>
+</golem>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="6" host="localhost" port="26873" record="0">
+    <handler snapshot="" sequence=""/>
+    
+    <calibration file="GolemFTClient_RobotNNL.cal" use_inertia="1" sampling_interval="10" sample_window_size="100" mass_param_manitude="1.0" offset_param_manitude="1.0">
+      <local_frame_param_manitude v1="0.0" v2="0.0" v3="0.0"/>
+		 <!-- v2=0.215+0.013+0.013+0.06591+0.015=0.32191 -->
+      <local_frame v1="0.0" v2="0.32191" v3="0.0" roll="-1.57079633" pitch="-1.57079633" yaw="0.0"/>
+    </calibration>
+
+    <appearance>
+      <frame show="0" v1="0.02" v2="0.02" v3="0.02"/>
+      <shape show="1" R="127" G="127" B="127" A="127">
+        <bounds type="box" group="1">
+          <dimensions v1="0.08" v2="0.08" v3="0.14"/>
+          <pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

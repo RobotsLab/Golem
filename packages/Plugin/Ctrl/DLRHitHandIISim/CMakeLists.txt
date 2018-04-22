@@ -1,0 +1,37 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/DLRHitHandIISim library
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_CTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/DLRHitHandIISim")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemCtrlDLRHitHandIISim SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	TARGET_COMPILE_OPTIONS(GolemCtrlDLRHitHandIISim PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	
+	TARGET_LINK_LIBRARIES(GolemCtrlDLRHitHandIISim GolemCtrlDLR GolemCtrlSingleCtrl)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlDLRHitHandIISim PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemCtrlDLRHitHandIISim ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemCtrlDLRHitHandIISim RUNTIME DESTINATION bin COMPONENT ctrl_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemCtrlDLRHitHandIISim LIBRARY DESTINATION bin COMPONENT ctrl_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/DLRHitHandIISim/ COMPONENT ctrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT ctrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlDLRHitHandIISim PROPERTY PROJECT_LABEL "DLRHitHandIISim")
+	SET_PROPERTY(TARGET GolemCtrlDLRHitHandIISim PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL)

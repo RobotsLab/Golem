@@ -1,0 +1,62 @@
+###############################################################################
+#
+# Golem Tools/SM library
+#
+###############################################################################
+
+option(GOLEM_BUILD_TOOLS_SM "Build Golem Tools SM shared memory library" YES)
+mark_as_advanced(GOLEM_BUILD_TOOLS_SM)
+
+if(GOLEM_BUILD_TOOLS_SM)
+	SET(PACKAGE_DIR "${PACKAGE_TOOLS}/SM")
+
+	# Boost
+	if (WIN32)
+		ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB)
+		SET(Boost_USE_STATIC_LIBS ON)
+		SET(Boost_ALL_DYN_LINK OFF)
+	elseif (UNIX)
+		#ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB)
+		#SET(Boost_USE_STATIC_LIBS OFF)
+		#SET(Boost_ALL_DYN_LINK ON)
+	endif ()
+	FIND_PACKAGE(Boost COMPONENTS system thread regex)
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemSM SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})		
+		TARGET_COMPILE_OPTIONS(GolemSM PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemSM STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	# Windows 32/64 bit
+	if (WIN32)
+		TARGET_COMPILE_OPTIONS(GolemSM PUBLIC /wd4005)
+		TARGET_LINK_LIBRARIES(GolemSM GolemDefs WinMM ${Boost_LIBRARIES})
+	# Unix Linux/Apple
+	elseif (UNIX)
+		TARGET_LINK_LIBRARIES(GolemSM GolemDefs ${Boost_LIBRARIES})
+	endif ()
+
+	TARGET_INCLUDE_DIRECTORIES(GolemSM PUBLIC ${PACKAGE_DIR}/include ${Boost_INCLUDE_DIRS})
+		
+	if (CPACK_BUILD_CORE)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemSM RUNTIME DESTINATION bin COMPONENT core_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemSM LIBRARY DESTINATION bin COMPONENT core_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemSM ARCHIVE DESTINATION lib COMPONENT core_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/SM/ COMPONENT core_headers)
+	endif (CPACK_BUILD_CORE)
+	
+	SET_PROPERTY(TARGET GolemSM PROPERTY PROJECT_LABEL "SM")
+	SET_PROPERTY(TARGET GolemSM PROPERTY FOLDER "Tools")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+endif(GOLEM_BUILD_TOOLS_SM)

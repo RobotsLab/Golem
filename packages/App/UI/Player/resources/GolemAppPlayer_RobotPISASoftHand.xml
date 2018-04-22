@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="8"></parallels>
+  <messages level="verbose"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="GolemPlayer">
+    <!-- x_offs/y_offs: DPI 100% -> 8, DPI 125% -> 10, DPI 150% -> 12 -->
+    <!--<window x="0" y="0" width="640" height="480" x_offs="8" y_offs="8"></window>-->
+    <!--<window x="0" y="0" width="800" height="600" x_offs="8" y_offs="8"></window>-->
+    <window x="0" y="0" width="1288" height="964" x_offs="8" y_offs="8"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="GolemPlayer_RobotPISASoftHand.xml">
+    <simulation restitution="0.0" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"/>
+    </simulation>
+    <opengl view_name="workspace" view_inc="0.2">
+      <view_point v1="9.3354" v2="-0.2502" v3="1.5930"/>
+      <view_dir v1="-0.7060" v2="-0.5662" v3="-0.4253"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="model" view_inc="0.2">
+      <view_point v1="-6.4118" v2="-9.0708" v3="3.5474"/>
+      <view_dir v1="0.3363" v2="0.6579" v3="-0.6738"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="test" view_inc="0.2">
+      <view_point v1="-12.1133" v2="-4.1075" v3="0.6532"/>
+      <view_dir v1="0.9341" v2="-0.2636" v3="-0.2409"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <player planner_index="0" trajectory_name="trajectory" trajectory_profile_semi_auto="semiauto">
+    <!-- To run robot server uncomment: <server .../> -->
+    <!--<server port="54312" clients="10" message_interval="600.0"/>-->
+    
+    <!-- To run robot controller client (controller): library_path="GolemCtrlCtrlClient" -->
+
+    <!-- DLRHitHandII (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemRobotDLRHitHandII" -->
+    <!-- DLRHitHandII (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemRobotPISASoftHand" -->
+    <!-- DLRHitHandII (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemRobotSchunkDexHand" -->
+    
+    <controller library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotPISASoftHand">
+      <renderer>
+        <joint_appearance line_width="1.0">
+          <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+          <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+          <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+        </joint_appearance>
+        <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </path_renderer>
+        <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+          <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+        </state_renderer>
+      </renderer>
+    </controller>
+    <planner library_path="GolemPlannerGraphPlanner" config_path="GolemPlannerRobotPISASoftHand">
+      <controller id="KukaLWRSim+KukaLWR"/>
+      <controller id="PISASoftHandSim+PISASoftHand"/>
+
+      <!--<sensor id="FTClient+FTClient"/>-->
+
+      <trajectory handler="TrajectoryUA+TrajectoryUA" idle_begin="0.5" idle_end="2.0" idle_perf="5.0" duration="5.0" trials="5"/>
+
+      <renderer show_duration="600.0">
+        <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_renderer>
+        <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_population_renderer>
+        <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </global_graph_renderer>
+        <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+        </global_path_renderer>
+        <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </local_graph_renderer>
+        <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+        </local_path_renderer>
+        <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+        </optimised_path_rendererex>
+        <collision_bounds>
+          <chain show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </chain>
+          <joint show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </joint>
+        </collision_bounds>
+      </renderer>
+    </planner>
+    
+    <activectrl library_path="GolemJointCtrl" config_path="GolemJointCtrl"/>
+    <activectrl library_path="GolemArmHandForce" config_path="GolemArmHandForce"/>
+    <activectrl library_path="GolemWorkspaceCtrl" config_path="GolemWorkspaceCtrl"/>
+    <activectrl library_path="GolemOspaceCtrl" config_path="GolemOspaceCtrl"/>
+
+    <objects>
+      <bounds type="plane" distance="0.0" grid_size="10" grid_delta="0.1" group="1">
+        <normal v1="0.0" v2="0.0" v3="1.0"/>
+        <pose v1="0.0" v2="0.0" v3="-0.345" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </bounds>
+      <bounds type="box" group="1" invisible="1">
+        <dimensions v1="0.15" v2="0.15" v3="0.15"/>
+        <pose v1="0.1" v2="0.0" v3="0.45" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </bounds>
+    </objects>
+  </player>
+
+  <recorder>
+    <!--<sensor library_path="GolemCameraDepthSim" config_path="GolemCameraDepthSim"/>-->
+    <!--<sensor library_path="GolemCameraKinect" config_path="GolemCameraKinect"/>-->
+    <!--<sensor library_path="GolemCameraOpenCV" config_path="GolemCameraOpenCV"/>-->
+    <sensor library_path="GolemCameraOpenGL" config_path="GolemCameraOpenGL"/>
+    <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>
+    <sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>
+    <!--<sensor library_path="GolemFTClient" config_path="GolemFTClient"/>-->
+    <!--<sensor library_path="GolemFTDAQ" config_path="GolemFTDAQ"/>-->
+
+    <recording label="recorder">
+      <!--<sensor id="OpenNI+OpenNI"/>-->
+      <sensor id="PointGrey+PointGrey"/>
+      <sensor id="OpenGL+OpenGL"/>
+    </recording>
+
+    <cloud>
+      <adjust lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.2" v2="0.2" v3="0.2"/>
+        <colour>
+          <solid R="255" G="0" B="0" A="255"/>
+          <wire R="255" G="0" B="0" A="255"/>
+        </colour>
+      </adjust>
+    </cloud>
+  </recorder>
+
+  <manager>
+    <data_template path="./data/PisaSoftHand" delete_if_moved="0" delete_if_unlinked="1" delete_if_temporary="1" ext=".xml" xml_handler="handler" xml_item="item" xml_label="label" xml_prefix="prefix" xml_name="use_name" sep_name="-" sep_field="&#x9;"/>
+
+    <data path="./data/PisaSoftHand/test/data.xml"/>
+    <data path="./data/PisaSoftHand/model/data.xml"/>
+
+    <handler library_path="GolemDataImage" config_path="GolemDataImage"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3D"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3DUA"/>
+    <handler library_path="GolemDataVideo" config_path="GolemDataVideo"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemDataTrajectory"/>
+    <handler library_path="GolemDataTrajectoryUA" config_path="GolemDataTrajectoryUA"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemDataContactModel"/>
+    <handler library_path="GolemDataContactModelUA" config_path="GolemDataContactModelUA"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemDataContactQuery"/>
+    <handler library_path="GolemDataContactQueryUA" config_path="GolemDataContactQueryUA"/>
+    <!--<handler library_path="GolemDataPart3DHoP" config_path="GolemDataPart3DHoP"/>-->
+  </manager>
+
+  <pose name="zero" dim="26" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0" c10="0.0" c11="0.0" c12="0.0" c13="0.0" c14="0.0" c15="0.0" c16="0.0" c17="0.0" c18="0.0" c19="0.0" c20="0.0" c21="0.0" c22="0.0" c23="0.0" c24="0.0" c25="0.0" c26="0.0"/>
+
+  <pose name="camera calib" dim="26" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="camera calib" dim="26" c1="2.15357" c2="-1.44173" c3="2.41636" c4="-1.23597" c5="0.526307" c6="0.0401937" c7="-1.15166" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="camera calib" dim="26" c1="2.11749" c2="-1.40559" c3="1.89855" c4="-1.20024" c5="0.972302" c6="-0.137083" c7="-1.02379" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="camera calib" dim="26" c1="2.12903" c2="-0.979393" c3="1.61952" c4="-1.22827" c5="1.31727" c6="-0.160591" c7="-1.01719" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+
+  	<!-- Offset calibration points begin-->
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="1.1781" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- Intermediate Begin-->
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- Intermediate End-->
+	<pose name="f/t sensor calib" dim="26"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="-1.5707963267949" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="1.5707963267949" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- Intermediate Begin-->
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- Intermediate End-->
+	<pose name="f/t sensor calib" dim="26"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="1.5707963267949" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="-1.5707963267949" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- End pos-->
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<!-- Offset calibration points end-->
+	
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="1.1781" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="0.852144" c2="-1.30045" c3="1.00197" c4="1.30222" c5="0.0996473" c6="-1.31975" c7="-0.0976072" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="1.09131" c2="-1.19123" c3="0.406603" c4="1.0304" c5="0.454392" c6="-1.27477" c7="0.407437" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="1.13584" c2="-0.988016" c3="0.47152" c4="1.09615" c5="-0.666784" c6="-1.08227" c7="-0.40794" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="0.925698" c2="-0.591254" c3="0.617655" c4="1.60022" c5="-1.31389" c6="-0.207623" c7="-0.407265" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="0.959443" c2="-0.495088" c3="0.907602" c4="1.77567" c5="-2.31607" c6="-1.53935" c7="-0.35797" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26" c1="0.473599" c2="-0.549839" c3="0.913706" c4="1.65676" c5="-0.359258" c6="-1.00031" c7="-0.357973" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+	<pose name="f/t sensor calib" dim="26"  c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="-0.0" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+
+  <pose name="scan" dim="26" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="1.98703" c2="-1.82022" c3="2.68371" c4="-0.993679" c5="-0.472118" c6="0.701058" c7="-0.601755" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="1.60132" c2="-1.8583" c3="1.77602" c4="-0.0109462" c5="0.450068" c6="1.04633" c7="-0.639206" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="1.65994" c2="-1.53044" c3="1.68963" c4="-0.361575" c5="0.208216" c6="0.61754" c7="-0.0829202" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="1.64565" c2="-1.20667" c3="1.61824" c4="-0.496629" c5="-0.143018" c6="0.587833" c7="0.634178" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="1.7097" c2="-0.944053" c3="1.20653" c4="-0.707639" c5="0.126298" c6="0.751986" c7="0.84115" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+  <pose name="scan" dim="26" c1="2.05575" c2="-0.926678" c3="0.688772" c4="-1.6953" c5="0.721298" c6="0.410064" c7="0.531536" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0"/>
+</golem>

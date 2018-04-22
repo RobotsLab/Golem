@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <activectrl planner_index="0" active="1" time_out="2000">
+  </activectrl>
+</golem>

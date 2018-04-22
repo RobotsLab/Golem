@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1">
+    <text suffix=".log">
+    </text>
+  </data>
+</golem>

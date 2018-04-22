@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1">
+    <cloud suffix=".pcd" thread_chunk_size="1000">
+      <filter enabled="1" window="10" samples="9"/>
+
+      <outrem_alignment enabled_radius="1" enabled_statistical="0" radius="0.01" min_neighbors_in_radius="10" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_alignment enabled_radius="1" enabled_statistical="0" radius="0.015" min_neighbors_in_radius="20" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_segmentation enabled_radius="1" enabled_statistical="0" radius="0.02" min_neighbors_in_radius="200" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_segmentation enabled_radius="1" enabled_statistical="0" radius="0.005" min_neighbors_in_radius="20" mean_k="50" stddev_mul_threshold="1.0"/>
+
+      <normal enabled_pca="1" enabled_mls="0" enabled_ii="0" normal_eps="1e-5" polynomial_fit="1" radius_search="0.015" max_depth_change_factor="0.02" normal_smoothing_size="0.02"/>
+
+      <curvature radius_search="0.015"/>
+      <narf36 planar_projection="0" focal_length="525.0" angular_resolution="0.0034907" max_angle_width="6.28318531" max_angle_height="6.28318531" noise_level="0.0" min_range="0.0" border_size="1" use_keypoints="0" support_size="0.02" rotation_invariant="1" upsampling="0" upsampling_dist_fac="5"/>
+      <fpfh radius_search="0.02"/>
+
+      <registration_alignment enabled="0" enabled_icp="1" enabled_icpnl="0" max_correspondence_distance="0.05" ransac_outlier_rejection_threshold="0.05" transformation_epsilon="1e-7" max_iterations="50"/>
+      <registration_segmentation enabled="0" enabled_icp="1" enabled_icpnl="0" max_correspondence_distance="0.05" ransac_outlier_rejection_threshold="0.05" transformation_epsilon="1e-7" max_iterations="50"/>
+
+      <downsample_alignment enabled="0" enabled_with_normals="1" enabled_voxel_grid="0" grid_leaf_size="0.0015"/>
+      <downsample_segmentation enabled="1" enabled_with_normals="1" enabled_voxel_grid="0" grid_leaf_size="0.0015"/>
+
+      <segmentation incremental="0" distance_threshold="0.00001"/>
+
+      <region final_clip="0">
+        <bounds type="box" group="1">
+          <dimensions v1="0.2" v2="0.2" v3="0.15"/>
+          <pose v1="0.60" v2="0.0" v3="0.28" roll="0.014" pitch="-0.014" yaw="0.0"/>
+        </bounds>
+      </region>
+      <region_capture>
+        <bounds type="box" group="1">
+          <dimensions v1="0.25" v2="0.25" v3="0.2"/>
+          <pose v1="0.60" v2="0.0" v3="0.28" roll="0.014" pitch="-0.014" yaw="0.0"/>
+        </bounds>
+      </region_capture>
+      <region_colour>
+        <solid R="0" G="0" B="255" A="32"/>
+        <wire R="0" G="0" B="255" A="255"/>
+      </region_colour>
+
+      <appearance mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <colour override="0" R="127" G="127" B="127" A="255"/>
+      </appearance>
+
+      <import ext=".txt" size="100000" scale="1.0" clockwise="1" delim=" &#10;&#13;,;" label="1">
+        <colour R="127" G="127" B="127" A="255"/>
+        <transform v1="0.0" v2="0.0" v3="0.0" q1="0.0" q2="0.0" q3="0.0" q0="1.0"/>
+        <transform v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </import>
+
+    </cloud>
+
+    <image suffix=".png" format="16 3">
+      <appearance show="1" show_with_cloud="0" show_camera_frame="1">
+      </appearance>
+    </image>
+
+    <properties normal_std_dev="100.0"/>
+
+    <model file="CalibrationPyramids.obj" points="100000" features="1000000" attempts="10" kernels="500000" neighbours="20000" distance_range="20.0" distance_max="0.02" feature_norm_eps="1e-5">
+      <nn_search search_checks="32" search_kdtrees="4"/>
+      <covariance dim="7" c1="0.01" c2="0.01" c3="0.01" c4="0.01" c5="0.01" c6="0.01" c7="0.01"/>
+      <mean_shift population_size="100" generations_min="20" generations_max="200" distance_diff="1e-4"/>
+      <pose_stddev lin="0.0005" ang="2000.0"/>
+      <dist prod="0" lin="1.0" ang="1.0" feature="0"/>
+      <optimisation minimum="1" population_size="10" generations_num="10000" de_diff_fac="0.5" de_cross_prob="0.1" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-8" num_of_threads="-1" thread_priority="lowest"/>
+      <align lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+        <colour>
+          <solid R="0" G="0" B="255" A="32"/>
+          <wire R="0" G="0" B="255" A="255"/>
+        </colour>
+      </align>
+    </model>
+  </data>
+</golem>

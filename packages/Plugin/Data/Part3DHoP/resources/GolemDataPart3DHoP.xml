@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1" debug="0">
+    <server host="localhost" port="26783"/>
+
+    <cloud frame_trn="1" suffix=".pcd">
+      <appearance mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <colour override="0" R="127" G="127" B="127" A="255"/>
+      </appearance>
+    </cloud>
+    
+    <part3D suffix=".c3d">
+      <appearance point_size="3.0" frame_show="0">
+        <colour R="255" G="127" B="0" A="255"/>
+        <colour_active R="127" G="255" B="0" A="255"/>
+        <colour_indirect R="0" G="127" B="255" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <frame_size_select v1="0.03" v2="0.03" v3="0.03"/>
+      </appearance>
+      
+      <properties>
+        <level id="0" weight="1.0" frame_stddev_lin="0.005" frame_stddev_ang="200.0"/>
+        <level id="1" weight="10.0" frame_stddev_lin="0.01" frame_stddev_ang="100.0"/>
+        <level id="2" weight="10.0" frame_stddev_lin="0.02" frame_stddev_ang="50.0"/>
+        <level id="3" weight="20.0" frame_stddev_lin="0.02" frame_stddev_ang="50.0"/>
+        <level id="4" weight="20.0" frame_stddev_lin="0.05" frame_stddev_ang="20.0"/>
+        <level id="5" weight="50.0" frame_stddev_lin="0.05" frame_stddev_ang="20.0"/>
+        <level id="6" weight="50.0" frame_stddev_lin="0.05" frame_stddev_ang="20.0"/>
+
+        <!--<model id="10050" weight="0.111" frame_stddev_lin="0.05" frame_stddev_ang="20.0"/>-->
+
+        <!--<realisation id="8070" weight="0.222" frame_stddev_lin="0.05" frame_stddev_ang="20.0"/>-->
+      </properties>
+    </part3D>
+
+    <properties normal_std_dev="100.0" part_indirect="0"/>
+  </data>
+</golem>

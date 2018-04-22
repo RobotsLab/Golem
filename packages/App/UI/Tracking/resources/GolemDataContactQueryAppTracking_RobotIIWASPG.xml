@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data planner_index="0" collision_points="1" delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1" query_suffix=".query">
+    <manipulator>
+      <trajectory lin="1000.0" ang="1000.0" collision="1" cluster_size="100" timeout="0.1" throw="0"/>
+    </manipulator>
+
+    <planner name="Default">
+      <type type="Any" name="Default"/>
+      <type type="pinch_narrow" name="Default"/>
+      <type type="pinch_wide" name="Default"/>
+
+      <contact name="Default" weight="1.0" penalty_exp="1.4">
+        <contact_3d>
+          <feature_3d>
+            <std_dev_adapt min="1e-4" max="1e10" overlap="5.0" penalty="1.0" enable_min="1" enable_overlap="1" enable_mean="1"/>
+            <std_dev power_scaling="1.0" v1="50.0" v2="50.0" v3="50.0" v4="50.0" v5="50.0" v6="50.0" v7="50.0" v8="50.0" v9="50.0" v10="50.0" v11="50.0" v12="50.0" v13="50.0" v14="50.0" v15="50.0" v16="50.0" v17="50.0" v18="50.0" v19="50.0" v20="50.0" v21="50.0" v22="50.0" v23="50.0" v24="50.0" v25="50.0" v26="50.0" v27="50.0" v28="50.0" v29="50.0" v30="50.0" v31="50.0" v32="50.0" v33="50.0" v34="50.0" v35="50.0" v36="50.0"/>
+          </feature_3d>
+        </contact_3d>
+
+        <query id="Any">
+          <contact_3d type="part" weight="1.0" kernels="5000" epsilon="1e-10" trials="100" trials_band="10" trials_band_fac="2.0" feature_std_dev_max="5.0" pose_std_dev_max="5.0">
+            <nn_search neighbours="0" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+          </contact_3d>
+          <contact_3d type="feature" weight="1.0" kernels="5000" epsilon="1e-10" trials="100" trials_band="10" trials_band_fac="2.0" feature_std_dev_max="5.0" pose_std_dev_max="5.0">
+            <nn_search neighbours="0" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+          </contact_3d>
+        </query>
+
+        <configuration distance_scale="0.1" distance_stddev="1.0" distance_stddev_max="2.0" kernels="1000" transform_grad_dist="2.0" path_eps="1e-8" desc_override="1">
+          <pose_stddev lin="0.001" ang="10000.0"/>
+          <config_stddev c1="0.15708" c2="0.15708" c3="0.15708" c4="0.15708" c5="0.15708" c6="0.15708" c7="0.15708" c8="0.001" c9="0.001"/>
+        </configuration>
+
+        <collision>
+          <waypoint depth_offset="0.0" depth_stddev="100.0" path_dist="-1.0" weight="0.1" points="15000"/>
+          <waypoint depth_offset="0.0" depth_stddev="100.0" path_dist="-2.0" weight="0.2" points="15000"/>
+          <waypoint depth_offset="0.005" depth_stddev="100.0" path_dist="-4.0" weight="0.5" points="15000"/>
+          <waypoint depth_offset="0.01" depth_stddev="100.0" path_dist="-7.0" weight="1.0" points="15000"/>
+        </collision>
+
+        <optimisation name="CPU" runs="40000" steps="500" tries="1" sa_temp="0.1" sa_delta_lin="1.0" sa_delta_ang="1.0" sa_energy="0.1" epsilon="1.e-10">
+          <selection collision_last="0" collision_all="0"/>
+          <selection collision_last="1" collision_all="0"/>
+        </optimisation>
+      </contact>
+
+      <selection size="0.1" begin="0.0" end="0.1"/>
+      <selection size="0.1" begin="0.1" end="1.0"/>
+
+      <nn_search neighbours="100" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+    </planner>
+
+    <clustering lin="100.0" ang="10.0" radius="2.0" density="10"/>
+
+    <appearance>
+      <config show="1">
+        <manipulator show_bounds="1" show_frames="1">
+          <bounds show_solid="1" show_wire="1" wire_width="1.0">
+            <solid_colour R="255" G="255" B="0" A="150"/>
+            <wire_colour R="127" G="127" B="127" A="255"/>
+          </bounds>
+          <bounds_select show_solid="1" show_wire="0" wire_width="1.0">
+            <solid_colour R="0" G="0" B="255" A="150"/>
+            <wire_colour R="127" G="127" B="127" A="255"/>
+          </bounds_select>
+          <chains_frame_size v1="0.1" v2="0.1" v3="0.1"/>
+          <joints_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        </manipulator>
+
+        <path show_vertices="1" show_edges="1" path_segments="20" path_delta="1.0">
+          <path_colour R="0" G="0" B="0" A="255"/>
+        </path>
+
+        <manifold show="1" transparency="127">
+          <vis_norm lin="0.2" ang="0.02"/>
+          <vis_range lin="0.2" ang="0.2"/>
+        </manifold>
+      </config>
+
+      <model config_show="0" contact_show="0" frames_show="0" distrib_samples="20000" distrib_bounds="1" sample_point_size="5.0">
+        <manipulator show_bounds="1" show_frames="0">
+          <bounds show_solid="1" show_wire="1" wire_width="1.0">
+            <solid_colour R="255" G="255" B="0" A="150"/>
+            <wire_colour R="127" G="127" B="127" A="255"/>
+          </bounds>
+          <bounds_select show_solid="1" show_wire="0" wire_width="1.0">
+            <solid_colour R="0" G="0" B="255" A="150"/>
+            <wire_colour R="127" G="127" B="127" A="255"/>
+          </bounds_select>
+          <chains_frame_size v1="0.1" v2="0.1" v3="0.1"/>
+          <joints_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        </manipulator>
+
+        <sample_colour R="255" G="0" B="0" A="30"/>
+        <sample_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </model>
+
+      <point>
+        <colour R="0" G="0" B="0" A="255"/>
+      </point>
+    </appearance>
+  </data>
+</golem>

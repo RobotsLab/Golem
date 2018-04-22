@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <planner>
+    <heuristic>
+      <collision enabled="1" path_dist_delta="0.025" skin_thickness="0.001"/>
+      <cost dist_root_fac="1.0" dist_dflt_fac="0.0" dist_limits_fac="0.0"/>
+
+      <chain enabled_lin="1" enabled_ang="1" dist_norm="0.7" dist_linear_max="0.3" dist_angular_max="0.4" dist_configspace_workspace_norm="0.98"></chain>
+
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="0" collision_joints="3"></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints="">
+        <bounds type="box" group="1">
+          <dimensions v1="0.1" v2="0.08" v3="0.1"/>
+          <pose v1="0.0" v2="0.0" v3="0.2" roll="0.0" pitch="0.0" yaw="-0.3927"/>
+        </bounds>
+      </joint>
+
+      <chain enabled_lin="0" enabled_ang="0" dist_norm="0.95" dist_linear_max="0.5" dist_angular_max="0.5" dist_configspace_workspace_norm="0.5"></chain>
+      <chain enabled_lin="0" enabled_ang="0" dist_norm="0.95" dist_linear_max="0.5" dist_angular_max="0.5" dist_configspace_workspace_norm="0.5"></chain>
+
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+    </heuristic>
+
+    <global_finder dist_scale_fac="0.7" range_fac="0.7" num_iterations="2" num_trials="10">
+      <global_path_finder name="global" graph_size_offline="20000" graph_size_online="100" graph_neighbours="100">
+        <generator_offline name="offline.global" seed="user" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="9" c1="6.28318531" c2="6.28318531" c3="6.28318531" c4="6.28318531" c5="6.28318531" c6="6.28318531" c7="6.28318531" c8="6.28318531" c9="6.28318531"/>
+          <mean dim="9" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0"/>
+        </generator_offline>
+        <generator_online name="online.root" seed="root" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="9" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926"/>
+        </generator_online>
+        <generator_online name="online.goal" seed="goal" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="9" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926"/>
+        </generator_online>
+      </global_path_finder>
+      <local_path_finder name="local" graph_size_offline="0" graph_size_online="250" graph_neighbours="100">
+      </local_path_finder>
+    </global_finder>
+    <local_finder>
+      <range dim="9" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926"/>
+    </local_finder>
+    <optimisation num_iterations="2000" t_init="0.2" t_final="0.05" e_norm="1e9" cross_prob="0.1" dist_path_thr="0.2"/>
+    <kinematics dist_root_global_fac="0.001" dist_root_local_fac="0.001" minimum="1"  population_size="100" generations_num="10000000" de_diff_fac="0.5" de_cross_prob="0.1" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-9" num_of_threads="-1" thread_priority="lowest"/>
+
+    <profile>
+      <velocity dim="9" c1="0.5" c2="0.5" c3="0.5" c4="0.5" c5="0.5" c6="0.5" c7="0.5" c8="0.5" c9="0.5"/>
+      <acceleration dim="9" c1="0.5" c2="0.5" c3="0.5" c4="0.5" c5="0.5" c6="0.5" c7="0.5" c8="0.5" c9="0.5"/>
+    </profile>
+  </planner>
+</golem>

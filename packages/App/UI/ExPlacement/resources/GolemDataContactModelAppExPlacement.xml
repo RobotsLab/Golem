@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data planner_index="0" delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1" copy_points="0" default_type="Any" model_suffix=".model" aspect_suffix=".aspect">
+    <manipulator>
+      <trajectory lin="1000.0" ang="1000.0" collision="1" cluster_size="100" timeout="0.1" throw="0"/>
+    </manipulator>
+
+    <configuration distance_scale="0.1" distance_stddev="1.0" distance_stddev_max="5.0" kernels="1000" transform_grad_dist="2.0" path_eps="1e-8" desc_override="1">
+      <pose_stddev lin="0.002" ang="1000.0"/>
+      <config_stddev c1="0.15708" c2="0.15708" c3="0.15708" c4="0.15708" c5="0.15708" c6="0.15708" c7="0.15708" c8="0.015708" c9="0.015708" c10="0.015708" c11="0.015708" c12="0.015708" c13="0.015708" c14="0.015708" c15="0.015708" c16="0.015708" c17="0.015708" c18="0.015708" c19="0.015708" c20="0.015708" c21="0.015708" c22="0.015708" c23="0.015708" c24="0.015708" c25="0.015708" c26="0.015708" c27="0.015708"/>
+    </configuration>
+
+    <model id="Any">
+      <contact_3d type="part" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="1.5708"/>
+      <contact_3d type="feature" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="1.5708"/>
+      <!--<contact_3d type="part" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="3.1415927"/>
+      <contact_3d type="feature" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="3.1415927"/>-->
+    </model>
+
+    <!--<model id="Base">
+      <contact_3d type="part" min_num="50" subsample_size="10000" distance="0.02" lambda="20.0" normal_slope="3.1415927"/>
+      <contact_3d type="feature" min_num="50" subsample_size="10000" distance="0.02" lambda="20.0" normal_slope="3.1415927"/>
+    </model>
+    <model id="Any">
+      <contact_3d type="part" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="3.1415927"/>
+      <contact_3d type="feature" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="3.1415927"/>
+    </model>-->
+
+    <contact_3d>
+      <feature_3d>
+        <std_dev_adapt min="1e-4" max="1e10" overlap="5.0" penalty="1.0" enable_min="1" enable_overlap="0" enable_mean="0"/>
+        <std_dev power_scaling="1.0" v1="50.0" v2="50.0" v3="50.0" v4="50.0" v5="50.0" v6="50.0" v7="50.0" v8="50.0" v9="50.0" v10="50.0" v11="50.0" v12="50.0" v13="50.0" v14="50.0" v15="50.0" v16="50.0" v17="50.0" v18="50.0" v19="50.0" v20="50.0" v21="50.0" v22="50.0" v23="50.0" v24="50.0" v25="50.0" v26="50.0" v27="50.0" v28="50.0" v29="50.0" v30="50.0" v31="50.0" v32="50.0" v33="50.0" v34="50.0" v35="50.0" v36="50.0"/>
+      </feature_3d>
+    </contact_3d>
+
+    <manifold compressed="0" space_enable="0" view_enable="0">
+      <feature_3d>
+        <density_dist enable="1" correspondences="10" penalty="10.0" bandwidth="5.0">
+          <dist lin="1.0" ang="0.01" feature="0.0"/>
+          <dist_max lin="0.005" ang="0.5" feature="5.0"/>
+        </density_dist>
+      </feature_3d>
+      <nn_search neighbours="100" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+      <downsample enabled="1" enabled_with_normals="1" enabled_voxel_grid="0" grid_leaf_size="0.0015"/>
+      <view>
+        <direction waypoint="2" var="100"/>
+        <position>
+          <range v1="0.05" v2="0.05" v3="0.05"/>
+        </position>
+        <frame>
+          <dist lin="10000" ang="100"/>
+        </frame>
+        <dim>
+          <dist lin="0.1" ang="1.0"/>
+          <desc weight="1.0" axis_type_lin="1" axis_index="0">
+            <steps x1="-0.01" x2="-0.005" x3="+0.005" x4="+0.01"/>
+          </desc>
+          <desc weight="1.0" axis_type_lin="0" axis_index="0">
+            <steps x1="-0.174533‬‬" x2="-‪0.087266‬" x3="+‪0.087266‬" x4="+‪0.174533‬"/>
+          </desc>
+          <desc weight="1.0" axis_type_lin="0" axis_index="1">
+            <steps x1="-0.174533‬‬" x2="-‪0.087266‬" x3="+‪0.087266‬" x4="+‪0.174533‬"/>
+          </desc>
+        </dim>
+        <optimisation minimum="1" population_size="100" generations_num="100000" init_trials="1000" de_diff_fac="0.5" de_cross_prob="0.05" test_value="1" test_generations="100" test_pairs="100" test_variance="1e-7" num_of_threads="-1" thread_priority="lowest"/>
+      </view>
+    </manifold>
+
+    <aspect enabled="1" debug_level="2">
+      <contact>
+        <distance correspondences="10" penalty="10.0">
+          <dist lin="1.0" ang="0.01" feature="0.0"/>
+          <dist_max lin="0.005" ang="0.5" feature="5.0"/>
+        </distance>
+        <clustering lin_scale="0.2">
+          <optimisation enabled="0" minimum="1" population_size="50" generations_num="100000" init_trials="1000" de_diff_fac="0.5" de_cross_prob="0.1" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-8" num_of_threads="0" thread_priority="lowest"/>
+          <outliers neighbours_fac="0.05" ftest="0.99"/>
+          <exemplar subsample="1" dist_fac="1.0"/>
+          <affinity enabled="1" steps="1000000" lambda="0.999" convergence_steps="5000" convergence_cycles="20" preference_gain="1.0" preference_offset="0.002"/>
+          <pam enabled="0" steps="1000000" clusters_min="0.05" clusters_max="0.5" ftest="0.98"/>
+          <optics enabled="0" radius="1.0" density="4.0"/>
+        </clustering>
+      </contact>
+
+      <view>
+        <downsample grid_leaf_size="0.0015"/>
+
+        <pruning enabled="0" min_contacts="3">
+          <solver name="AspectDefault">
+            <type type="Any" name="Default"/>
+
+            <contact name="Default" weight="1.0" penalty_exp="1.4">
+              <contact_3d>
+                <feature_3d>
+                  <std_dev_adapt min="1e-4" max="1e10" overlap="5.0" penalty="1.0" enable_min="1" enable_overlap="1" enable_mean="1"/>
+                  <std_dev power_scaling="1.0" v1="50.0" v2="50.0" v3="50.0" v4="50.0" v5="50.0" v6="50.0" v7="50.0" v8="50.0" v9="50.0" v10="50.0" v11="50.0" v12="50.0" v13="50.0" v14="50.0" v15="50.0" v16="50.0" v17="50.0" v18="50.0" v19="50.0" v20="50.0" v21="50.0" v22="50.0" v23="50.0" v24="50.0" v25="50.0" v26="50.0" v27="50.0" v28="50.0" v29="50.0" v30="50.0" v31="50.0" v32="50.0" v33="50.0" v34="50.0" v35="50.0" v36="50.0"/>
+                </feature_3d>
+              </contact_3d>
+
+              <query id="Any">
+                <contact_3d type="part" weight="1.0" kernels="5000" epsilon="1e-10" trials="100" trials_band="10" trials_band_fac="2.0" feature_std_dev_max="5.0" pose_std_dev_max="5.0">
+                  <nn_search neighbours="0" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+                </contact_3d>
+                <contact_3d type="feature" weight="1.0" kernels="5000" epsilon="1e-10" trials="100" trials_band="10" trials_band_fac="2.0" feature_std_dev_max="5.0" pose_std_dev_max="5.0">
+                  <nn_search neighbours="0" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+                </contact_3d>
+              </query>
+
+              <configuration distance_scale="0.1" distance_stddev="1.0" distance_stddev_max="5.0" kernels="1000" transform_grad_dist="2.0" path_eps="1e-8" desc_override="1">
+                <pose_stddev lin="0.002" ang="1000.0"/>
+                <config_stddev c1="0.15708" c2="0.15708" c3="0.15708" c4="0.15708" c5="0.15708" c6="0.15708" c7="0.15708" c8="0.015708" c9="0.015708" c10="0.015708" c11="0.015708" c12="0.015708" c13="0.015708" c14="0.015708" c15="0.015708" c16="0.015708" c17="0.015708" c18="0.015708" c19="0.015708" c20="0.015708" c21="0.015708" c22="0.015708" c23="0.015708" c24="0.015708" c25="0.015708" c26="0.015708" c27="0.015708"/>
+              </configuration>
+
+              <collision>
+                <waypoint depth_offset="0.0" depth_stddev="100.0" path_dist="-1.0" weight="0.1" points="15000"/>
+                <waypoint depth_offset="0.0" depth_stddev="100.0" path_dist="-2.0" weight="0.2" points="15000"/>
+                <waypoint depth_offset="0.005" depth_stddev="100.0" path_dist="-4.0" weight="0.5" points="15000"/>
+                <waypoint depth_offset="0.01" depth_stddev="100.0" path_dist="-7.0" weight="1.0" points="15000"/>
+              </collision>
+
+              <optimisation name="CPU" runs="10000" steps="500" tries="1" sa_temp="0.1" sa_delta_lin="1.0" sa_delta_ang="1.0" sa_energy="0.1" epsilon="1.e-10">
+                <selection collision_last="0" collision_all="0"/>
+                <selection collision_last="1" collision_all="0"/>
+              </optimisation>
+            </contact>
+
+            <selection size="0.1" begin="0.0" end="0.1"/>
+            <selection size="0.1" begin="0.1" end="1.0"/>
+
+            <nn_search neighbours="100" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+          </solver>
+        </pruning>
+
+        <clustering>
+          <affinity enabled="1" steps="100000" convergence_steps="1000" convergence_cycles="20" lambda="0.99" preference_gain="1.0" preference_offset="0.0"/>
+          <pam enabled="0" steps="1000000" clusters_min="0.05" clusters_max="0.5" ftest="0.95"/>
+          <optics enabled="0" radius="1.0" density="4.0"/>
+        </clustering>
+      </view>
+
+      <appearance frame_show="1" point_size="3.0" normal_len="0.001">
+        <reference_frame_pair v1="1.0" v2="-0.2" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        <reference_frame_view v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        <reference_frame v1="1.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        <frame_size v1="0.05" v2="0.05" v3="0.05"/>
+        <frame_trn v1="0.2" v2="0.0" v3="0.0"/>
+        <frame_trn_complete v1="0.0" v2="0.2" v3="0.0"/>
+        <frame_trn_partial v1="0.0" v2="0.0" v3="0.1"/>
+        <point_colour R="0" G="0" B="0" A="255"/>
+        <point_sim_colour R="255" G="0" B="0" A="127"/>
+      </appearance>
+    </aspect>
+
+    <appearance>
+      <manipulator show_bounds="1" show_frames="1">
+        <bounds show_solid="1" show_wire="1" wire_width="1.0">
+          <solid_colour R="255" G="255" B="0" A="150"/>
+          <wire_colour R="127" G="127" B="127" A="255"/>
+        </bounds>
+        <bounds_select show_solid="1" show_wire="0" wire_width="1.0">
+          <solid_colour R="0" G="0" B="255" A="150"/>
+          <wire_colour R="127" G="127" B="127" A="255"/>
+        </bounds_select>
+        <chains_frame_size v1="0.1" v2="0.1" v3="0.1"/>
+        <joints_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </manipulator>
+      <path show_vertices="1" show_edges="1" path_segments="50" path_delta="0.0">
+        <path_colour R="0" G="0" B="0" A="255"/>
+      </path>
+
+      <contact id="Base" points_show="0" rays_show="0" frames_show="0" bounds_frame_show="1" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="255" G="255" B="255" A="50"/>
+        <colour R="255" G="255" B="0" A="50"/>
+        <colour R="0" G="255" B="255" A="50"/>
+        <colour R="255" G="0" B="255" A="50"/>
+        <colour R="0" G="0" B="0" A="255"/>
+        <frame_size v1="0.002" v2="0.002" v3="0.002"/>
+        <bounds_frame_size v1="0.03" v2="0.03" v3="0.03"/>
+      </contact>
+
+      <contact id="Joint9" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="0" A="50"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint10" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="0" A="127"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint11" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="0" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <contact id="Joint13" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="0" A="50"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint14" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="0" A="127"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint15" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="0" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <contact id="Joint17" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="0" B="255" A="85"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint18" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="0" B="255" A="170"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint19" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="0" B="255" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <contact id="Joint21" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="255" A="85"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint22" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="255" A="170"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint23" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="255" G="0" B="255" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <contact id="Joint25" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="85"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint26" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="170"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+      <contact id="Joint27" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <contact id="Any" points_show="1" rays_show="0" frames_show="0" bounds_frame_show="0" point_size="3.0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="255" B="255" A="255"/>
+        <colour R="0" G="0" B="0" A="255"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </contact>
+
+      <point>
+        <colour R="0" G="0" B="0" A="255"/>
+      </point>
+
+      <manifold show="1" show_frame="1" transparency="127">
+        <vis_norm lin="0.2" ang="0.02"/>
+        <vis_range lin="0.2" ang="0.2"/>
+      </manifold>
+    </appearance>
+  </data>
+</golem>

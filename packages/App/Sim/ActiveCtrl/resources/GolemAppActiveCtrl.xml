@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="1"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="verbose"/>
+  <!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (ActiveCtrl)">
+    <window x="0" y="0" width="1024" height="768"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Active workspace controller demo">
+    <simulation restitution="0.1" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Front" view_inc="0.2">
+      <view_point v1="10.0" v2="10.0" v3="10.0"/>
+      <view_dir v1="-1.0" v2="-1.0" v3="-0.7"/>
+      <view_up v1="0.0" v2="0.0" v3="1.0"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Back" view_inc="0.2">
+      <view_point v1="-5.1595" v2="-7.7712" v3="10.0000"/>
+      <view_dir v1="0.4812" v2="0.6497" v3="-0.5882"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <trajectory name="0">
+    <waypoint dt="5" c1="0"/>
+  </trajectory>
+
+  <trajectory name="1">
+    <waypoint dt="5" c1="-0.03123" c2="-0.58293" c3="1.75759" c4="-0.09631" c5="-1.13586" c6="0.81271"/>
+  </trajectory>
+
+  <trajectory name="2">
+    <waypoint dt="5" c1="-0.03118" c2="-0.59353" c3="1.76116" c4="-0.09645" c5="-1.12840" c6="0.81328"/>
+  </trajectory>
+
+  <trajectory name="3">
+    <waypoint dt="5" c1="-0.27968" c2="-0.54707" c3="1.65102" c4="-0.37204" c5="-1.09166" c6="0.93793"/>
+  </trajectory>
+
+  <trajectory name="4">
+    <waypoint dt="5" c1="0" c2="-1.5707963268" c3="+1.5707963268" c4="0" c5="0" c6="0.0"/>
+  </trajectory>
+
+  <trajectory name="5">
+    <waypoint dt="0.4000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.2000" v1="0.010000" v2="0.002679" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.040000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.002679" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.010000" v2="0.002679" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.040000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.002679" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.010000" v2="0.002679" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.040000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.037321" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.030000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.020000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.017321" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.010000" v2="0.002679" v3="0"/>
+    
+    <waypoint dt="0.2000" v1="0.000000" v2="0.000000" v3="0"/>
+  </trajectory>
+
+  <trajectory name="6">
+    <waypoint dt="0.4000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.2000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.1000" v1="0.000000" v2="0.000000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.001340" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="0.000000" v2="0.020000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.018660" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.015000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.005000" v2="0.010000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.004330" v2="0.005000" v3="0"/>
+    <waypoint dt="0.1000" v1="-0.002500" v2="0.001340" v3="0"/>
+
+    <waypoint dt="0.2000" v1="0.000000" v2="0.000000" v3="0"/>
+  </trajectory>
+
+  <robot>
+    <active_workspace_ctrl_arm pred_time="0.2" reac_time="0.1" test_variance="1e-10">
+      <gain v1="0.00001" v2="0.00001" v3="0.0001" w1="0.0001" w2="0.0001" w3="0.001"/>
+      <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+    </active_workspace_ctrl_arm>
+  </robot>
+
+  <controller library_path="GolemCtrlKukaKR5SixxSim" config_path="GolemCtrlKukaKR5Sixx">
+    <renderer>
+      <joint_appearance line_width="1.0">
+        <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+        <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+        <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+      </joint_appearance>
+      <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </path_renderer>
+      <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="1" state_joint_frames_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+        <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+      </state_renderer>
+    </renderer>
+  </controller>
+
+  <planner library_path="GolemPlannerGraphPlanner" config_path="GolemPlannerKukaKR5Sixx">
+    <renderer show_duration="600.0">
+      <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+      </goal_renderer>
+      <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+      </goal_population_renderer>
+      <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+      </global_graph_renderer>
+      <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+      </global_path_renderer>
+      <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+      </local_graph_renderer>
+      <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+      </local_path_renderer>
+      <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+      </optimised_path_rendererex>
+      <collision_bounds>
+        <chain show_solid="0" show_wire="1" wire_width="2">
+          <solid_colour R="0" G="0" B="255" A="255"/>
+          <wire_colour R="0" G="0" B="255" A="255"/>
+        </chain>
+        <joint show_solid="0" show_wire="1" wire_width="2">
+          <solid_colour R="0" G="0" B="255" A="255"/>
+          <wire_colour R="0" G="0" B="255" A="255"/>
+        </joint>
+      </collision_bounds>
+    </renderer>
+  </planner>
+</golem>

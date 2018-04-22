@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data>
+    <item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="">
+      <manifold type="Any" space="-2" view="-1">
+        <frame v1="0.0" v2="0.0" v3="0.29" roll="0.0" pitch="0.0" yaw="-0.35"/>
+        <frame_dev v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0"/>
+      </manifold>
+    </item>
+    <item cluster_index="0" config_index="0" handler="ContactQuery+ContactQuery_RobotIIWASPG" label="query" prefix="-item-query-1" query=".query"></item>
+    <item cloud=".pcd" handler="Image+Image_RobotIIWASPG" image="" label="image" prefix="-item-image-1" time_stamp="19.7631">
+      <config c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012" dim="9" m11="0.123076" m12="-0.0417051" m13="0.991521" m21="0.303054" m22="0.95297" m23="0.002466" m31="-0.944992" m32="0.30018" m33="0.129927" planner_index="0" v1="0.292545" v2="-0.0249709" v3="0.769059"></config>
+      <extrinsic m11="0.292106" m12="-0.0384526" m13="0.955613" m21="0.955622" m22="-0.0281936" m23="-0.293244" m31="0.0382181" m32="0.998863" m33="0.0285106" v1="0.0887048" v2="-0.0877931" v3="0.163405"></extrinsic>
+      <intrinsic cx="321.033" cy="235.109" f="6" fx="574.549" fy="573.53" h="480" k1="-0.0965391" k2="0.524858" k3="-1.17693" k4="0" k5="0" k6="0" p1="-0.00205975" p2="0.00214083" w="640"></intrinsic>
+    </item>
+    <item cloud=".pcd" cluster=".cluster" handler="Feature3D+Feature3D_RobotIIWASPG" label="process" prefix="-item-process-1" region_growing="" time_stamp="0">
+      <config c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012" dim="9" m11="0.123076" m12="-0.0417051" m13="0.991521" m21="0.303054" m22="0.95297" m23="0.002466" m31="-0.944992" m32="0.30018" m33="0.129927" planner_index="0" v1="0.292545" v2="-0.0249709" v3="0.769059"></config>
+      <feature3d type="curvature"></feature3d>
+    </item>
+    <item handler="Trajectory+Trajectory_RobotIIWASPG" label="trajectory" path_position="0" prefix="-item-trajectory-1" waypoint=".wp">
+      <contact path_interpol="1" path_waypoint="18446744073709551615"></contact>
+      <manifold>
+        <frame m11="0.939373" m12="0.342898" m13="0" m21="-0.342898" m22="0.939373" m23="-0" m31="-0" m32="0" m33="1" v1="0" v2="0" v3="0.29"></frame>
+        <frame_dev v1="1" v2="0.0725787" v3="0.101905" w1="0.92791" w2="0.322426" w3="0.125861"></frame_dev>
+      </manifold>
+    </item>
+  </data>
+</golem>

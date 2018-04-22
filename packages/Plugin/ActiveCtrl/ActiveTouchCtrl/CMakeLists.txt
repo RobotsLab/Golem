@@ -1,0 +1,44 @@
+###############################################################################
+#
+# Golem Plugin/ActiveCtrl/ActiveTouchCtrl library
+#
+###############################################################################
+
+option(GOLEM_BUILD_PLUGIN_ACTIVECTRL_ACTIVETOUCHCTRL "Build Golem Active Touch library" NO)
+mark_as_advanced(GOLEM_BUILD_PLUGIN_ACTIVECTRL_ACTIVETOUCHCTRL)
+
+if(GOLEM_BUILD_PLUGIN_ACTIVECTRL AND GOLEM_BUILD_PLUGIN_ACTIVECTRL_ACTIVETOUCHCTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_ACTIVECTRL}/ActiveTouchCtrl")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemActiveTouchCtrl SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	if(WIN32)
+		TARGET_COMPILE_OPTIONS(GolemActiveTouchCtrl PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	elseif(UNIX)
+		TARGET_COMPILE_OPTIONS(GolemActiveTouchCtrl PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	endif()
+
+	TARGET_LINK_LIBRARIES(GolemActiveTouchCtrl GolemActiveCtrl GolemTools)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemActiveTouchCtrl PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemActiveTouchCtrl ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemActiveTouchCtrl RUNTIME DESTINATION bin COMPONENT activectrl_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemActiveTouchCtrl LIBRARY DESTINATION bin COMPONENT activectrl_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/ActiveCtrl/ActiveTouchCtrl/ COMPONENT activectrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT activectrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemActiveTouchCtrl PROPERTY PROJECT_LABEL "ActiveTouchCtrl")
+	SET_PROPERTY(TARGET GolemActiveTouchCtrl PROPERTY FOLDER "Plugin/ActiveCtrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_ACTIVECTRL AND GOLEM_BUILD_PLUGIN_ACTIVECTRL_ACTIVETOUCHCTRL)

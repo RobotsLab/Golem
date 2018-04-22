@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="info"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <controller library_path="GolemCtrlKatana300" config_path="GolemCtrlKatana300"/>
+</golem>

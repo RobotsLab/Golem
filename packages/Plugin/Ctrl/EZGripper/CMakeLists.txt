@@ -1,0 +1,55 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/EZGripper library
+#
+###############################################################################
+
+option(GOLEM_BUILD_PLUGIN_CTRL_EZGRIPPER "Build Golem Plugin/Ctrl EZGripper controller" NO)
+mark_as_advanced(GOLEM_BUILD_PLUGIN_CTRL_EZGRIPPER)
+
+if(GOLEM_BUILD_PLUGIN_CTRL AND GOLEM_BUILD_PLUGIN_CTRL_EZGRIPPER)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/EZGripper")
+
+	# Boost
+	if (WIN32)
+		ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB)
+		SET(Boost_USE_STATIC_LIBS ON)
+		SET(Boost_ALL_DYN_LINK OFF)
+	elseif (UNIX)
+		#ADD_DEFINITIONS(-DBOOST_ALL_NO_LIB)
+		#SET(Boost_USE_STATIC_LIBS OFF)
+		#SET(Boost_ALL_DYN_LINK ON)
+	endif ()
+	FIND_PACKAGE(Boost COMPONENTS system)
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemCtrlEZGripper SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	if (WIN32)		
+		TARGET_COMPILE_OPTIONS(GolemCtrlEZGripper PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	elseif (UNIX)
+	endif()		
+
+	TARGET_LINK_LIBRARIES(GolemCtrlEZGripper GolemCtrlSingleCtrl ${Boost_LIBRARIES})
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlEZGripper PUBLIC ${PACKAGE_DIR}/include ${Boost_INCLUDE_DIRS})
+
+	COPY_FILES(GolemCtrlEZGripper ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemCtrlEZGripper RUNTIME DESTINATION bin COMPONENT ctrl_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemCtrlEZGripper LIBRARY DESTINATION bin COMPONENT ctrl_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/EZGripper/ COMPONENT ctrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT ctrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlEZGripper PROPERTY PROJECT_LABEL "EZGripper")
+	SET_PROPERTY(TARGET GolemCtrlEZGripper PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL AND GOLEM_BUILD_PLUGIN_CTRL_EZGRIPPER)

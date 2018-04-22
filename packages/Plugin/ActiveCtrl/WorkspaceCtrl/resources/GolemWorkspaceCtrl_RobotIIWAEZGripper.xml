@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <activectrl planner_index="0" active="1" mode_map="1" mode_simple="0" cache_file="GolemWorkspaceCtrl.cache" ctrl_thread_sleep="100">
+    <frame global="0" lin_keys="wsedrf" ang_keys="tgyhuj" wpt_keys="">
+      <increment lin="0.02" ang="0.0872664625997165" time="2.0" low="2"/>
+      <size v1="0.1" v2="0.1" v3="0.1"/>
+    </frame>
+    <sim pred_time="0.05" reac_time="0.05">
+      <gain v1="0.05" v2="0.05" v3="0.2"/>
+    </sim>
+    <trajectory increment="0.02">
+      <appearance>
+        <show mean="1" mean_frame="0" dev="1" dev_frame="0" target="1" current="0" global_frame="1" global_inc_frame="1"/>
+        <chains show="0" vertex_position_show="1" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"/>
+          <vertex_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+          <edge_colour R="127" G="127" B="127" A="255"/>
+        </chains>
+        <mean show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"/>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"/>
+          <edge_colour R="0" G="0" B="255" A="255"/>
+        </mean>
+        <dev show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"/>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"/>
+          <edge_colour R="255" G="0" B="0" A="255"/>
+        </dev>
+      </appearance>
+    </trajectory>
+
+    <manipulator>
+      <trajectory lin="1000.0" ang="1000.0" collision="1" cluster_size="100" timeout="0.1" throw="1"/>
+
+      <appearance>
+        <mean show_solid="1" show_wire="1" wire_width="1.0">
+          <solid_colour R="0" G="0" B="255" A="50"/>
+          <wire_colour R="0" G="0" B="255" A="255"/>
+        </mean>
+        <dev show_solid="1" show_wire="1" wire_width="1.0">
+          <solid_colour R="255" G="0" B="0" A="50"/>
+          <wire_colour R="255" G="0" B="0" A="255"/>
+        </dev>
+      </appearance>
+    </manipulator>
+
+    <manifold>
+      <appearance show="1" transparency="127">
+        <vis_norm lin="0.2" ang="0.02"/>
+        <vis_range lin="0.2" ang="0.2"/>
+      </appearance>
+    </manifold>
+
+    <hand_dir_ctrl enabled="1">
+      <open c1="1.8" c2="1.50" c3="1.8" c4="1.50"/>
+      <closed c1="0.0" c2="0.0" c3="0.0" c4="0.0"/>
+    </hand_dir_ctrl>
+
+    <!--<input_devices>
+      <joystick label="left" index="0">
+        <axis_map>
+          <item axis="0" ctrl="0" gain="0.002"/>
+          <item axis="1" ctrl="1" gain="0.002"/>
+          <item axis="7" ctrl="2" gain="0.002"/>
+        </axis_map>
+        <button_map>
+          <item button="0" ctrl="0"/>
+          <item button="0" ctrl="1" up="0" down="1"/>
+          <item button="0" ctrl="2" up="1" down="0"/>
+          <item button="2" ctrl="3" up="0" down="1"/>
+          <item button="3" ctrl="4" up="0" down="1"/>
+        </button_map>
+      </joystick>
+      <joystick label="right" index="1">
+        <axis_map>
+          <item axis="0" ctrl="3" gain="0.002"/>
+          <item axis="1" ctrl="4" gain="0.002"/>
+          <item axis="7" ctrl="5" gain="0.002"/>
+        </axis_map>
+        <button_map>
+          <item button="0" ctrl="0"/>
+          <item button="0" ctrl="1" up="0" down="1"/>
+          <item button="0" ctrl="2" up="1" down="0"/>
+        </button_map>
+      </joystick>
+    </input_devices>-->
+
+    <!--<virtuose6d library_path="GolemCtrlVirtuose6D" config_path="GolemCtrlVirtuose6D">
+      <pose_gain_increment v1="3.0" v2="3.0" v3="3.0" w1="1.0" w2="1.0" w3="1.0"/>
+      <force_gain_manifold v1="1.0" v2="1.0" v3="1.0" w1="5.0" w2="5.0" w3="5.0"/>
+      <force_gain_increment v1="0.1" v2="0.1" v3="0.1" w1="0.5" w2="0.5" w3="0.5"/>
+    </virtuose6d>/>-->
+  </activectrl>
+</golem>

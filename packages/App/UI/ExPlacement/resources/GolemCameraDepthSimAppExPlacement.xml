@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="0" calibration_file="GolemCameraDepthSim.cal" index="0" buffer_len="10" thread_timeout="10000">
+    <property width="100" height="100" fps="10" mode="" format=""/>
+    <property width="100" height="100" fps="10" mode="" format=""/>
+    <colour R="127" G="127" B="127" A="255"/>
+
+    <handler snapshot="Image+Image" sequence="Video+Video"/>
+    
+    <sensor v1="0.004" v2="0.003" focal_length="0.004"/>
+    <clip near="0.1" far="10.0" inclination="0.342" epsilon="1e-10"/>
+
+    <calibration file="GolemCameraDepthSim.cal" use_deformation_map="0">
+      <optimisation minimum="1" population_size="100" generations_num="10000000" de_diff_fac="0.5" de_cross_prob="0.2" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-7" num_of_threads="-1" thread_priority="lowest">
+        <distance_weights lin="10.0" ang="1.0"/>
+        <sample_magnitude lin="0.5" ang="1.0"/>
+      </optimisation>
+    </calibration>
+
+    <appearance>
+      <frame show="1" v1="0.05" v2="0.05" v3="0.1"/>
+      <shape show="1" R="127" G="127" B="127" A="255">
+        <bounds type="box" group="1">
+          <dimensions v1="0.025" v2="0.025" v3="0.025"/>
+          <pose v1="0.0" v2="0.0" v3="-0.025" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

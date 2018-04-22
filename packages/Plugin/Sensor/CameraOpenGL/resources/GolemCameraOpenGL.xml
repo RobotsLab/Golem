@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="0" calibration_file="GolemCameraOpenGL.cal" index="0" buffer_len="60" thread_timeout="20000">
+    <property width="640" height="480" fps="30" mode="0" format=""/>
+    <colour R="127" G="127" B="127" A="255"/>
+
+    <handler snapshot="Image+Image" sequence="Video+Video"/>
+    
+    <calibration file="GolemCameraOpenGL.cal" use_deformation_map="0">
+      <optimisation minimum="1" population_size="100" generations_num="10000000" de_diff_fac="0.5" de_cross_prob="0.2" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-6" num_of_threads="-1" thread_priority="lowest">
+        <distance_weights lin="10.0" ang="1.0"/>
+        <sample_magnitude lin="0.5" ang="1.0"/>
+      </optimisation>
+    </calibration>
+
+    <appearance>
+      <frame show="0" v1="0.05" v2="0.05" v3="0.1"/>
+      <shape show="0" R="127" G="127" B="127" A="255">
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

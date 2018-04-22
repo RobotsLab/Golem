@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <planner>
+    <heuristic>
+      <collision enabled="1" path_dist_delta="0.01" skin_thickness="0.001"/>
+      <cost dist_root_fac="1.0" dist_dflt_fac="0.0" dist_limits_fac="0.0"/>
+
+      <chain enabled_lin="1" enabled_ang="1" dist_norm="0.95" dist_linear_max="0.3" dist_angular_max="0.4" dist_configspace_workspace_norm="0.98"></chain>
+
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="0" collision_joints="3"></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="2.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints=""></joint>
+      <joint enabled="1" interpolate="0" dflt_pos="0.0" dist_dflt_fac="0.01" dist_max="3.0" collision_bounds="1" collision_joints="">
+        <!--<bounds type="box" group="1">
+          <dimensions v1="0.07" v2="0.07" v3="0.15"/>
+          <pose v1="-0.035" v2="-0.035" v3="0.22" roll="0.0" pitch="0.0" yaw="-2.3561944901994329"/>
+        </bounds>-->
+      </joint>
+
+      <chain enabled_lin="0" enabled_ang="0" dist_norm="0.95" dist_linear_max="0.5" dist_angular_max="0.5" dist_configspace_workspace_norm="0.5"></chain>
+      <chain enabled_lin="0" enabled_ang="0" dist_norm="0.95" dist_linear_max="0.5" dist_angular_max="0.5" dist_configspace_workspace_norm="0.5"></chain>
+      <chain enabled_lin="0" enabled_ang="0" dist_norm="0.95" dist_linear_max="0.5" dist_angular_max="0.5" dist_configspace_workspace_norm="0.5"></chain>
+
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints="14"></joint>
+
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+      <joint enabled="0" interpolate="1" dflt_pos="0.0" dist_dflt_fac="0.1" dist_max="1.0" collision_bounds="0" collision_joints=""></joint>
+    </heuristic>
+
+    <global_finder dist_scale_fac="0.7" range_fac="0.7" num_iterations="1" num_trials="10">
+      <global_path_finder name="global" graph_size_offline="10000" graph_size_online="100" graph_neighbours="100">
+        <generator_offline name="offline.global" seed="user" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="15" c1="6.28318531" c2="6.28318531" c3="6.28318531" c4="6.28318531" c5="6.28318531" c6="6.28318531" c7="6.28318531" c8="6.28318531" c9="6.28318531" c10="6.28318531" c11="6.28318531" c12="6.28318531" c13="6.28318531" c14="6.28318531" c15="6.28318531"/>
+          <mean dim="15" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0" c10="0.0" c11="0.0" c12="0.0" c13="0.0" c14="0.0" c15="0.0"/>
+        </generator_offline>
+        <generator_online name="online.root" seed="root" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="15" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926" c10="0.31415926" c11="0.31415926" c12="0.31415926" c13="0.31415926" c14="0.31415926" c15="0.31415926"/>
+        </generator_online>
+        <generator_online name="online.goal" seed="goal" trials="1000" weight="1.0">
+          <bandwidth trials="10" factor="1.5"/>
+          <delta dim="15" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926" c10="0.31415926" c11="0.31415926" c12="0.31415926" c13="0.31415926" c14="0.31415926" c15="0.31415926"/>
+        </generator_online>
+      </global_path_finder>
+      <local_path_finder name="local" graph_size_offline="0" graph_size_online="250" graph_neighbours="100">
+      </local_path_finder>
+    </global_finder>
+    <local_finder>
+      <range dim="15" c1="0.31415926" c2="0.31415926" c3="0.31415926" c4="0.31415926" c5="0.31415926" c6="0.31415926" c7="0.31415926" c8="0.31415926" c9="0.31415926" c10="0.31415926" c11="0.31415926" c12="0.31415926" c13="0.31415926" c14="0.31415926" c15="0.31415926"/>
+    </local_finder>
+    <optimisation num_iterations="1000" t_init="0.1" t_final="0.01" e_norm="1e9" cross_prob="0.1" dist_path_thr="0.2"/>
+    <kinematics dist_root_global_fac="0.0" dist_root_local_fac="0.01" minimum="1"  population_size="100" generations_num="10000000" de_diff_fac="0.5" de_cross_prob="0.05" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-5" num_of_threads="-1" thread_priority="lowest"/>
+    <profile>
+      <velocity dim="15" c1="0.1" c2="0.1" c3="0.1" c4="0.1" c5="0.1" c6="0.1" c7="0.1" c8="0.5" c9="0.5" c10="0.5" c11="0.5" c12="0.5" c13="0.5" c14="0.5" c15="0.5"/>
+      <acceleration dim="15" c1="0.05" c2="0.05" c3="0.05" c4="0.05" c5="0.05" c6="0.05" c7="0.05" c8="0.5" c9="0.5" c10="0.5" c11="0.5" c12="0.5" c13="0.5" c14="0.5" c15="0.5"/>
+    </profile>
+  </planner>
+</golem>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Kuka KR180 - Zimmer gripper">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></global_pose>
+
+    <client host="localhost" port="54312" time_out="1.0" lost_packages="10"/>
+
+    <controller library_path="GolemCtrlSim" config_path="GolemCtrlKukaRSIKR180R2900" linked_chain_index="-1" enable_io="1" sync_begin="1" sync_end="1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+    </controller>
+
+	  <!-- v2=0.215+0.013+0.013+0.06591+0.015+0.065+0.07=0.45691 -->
+	  <controller library_path="GolemCtrlSim" config_path="GolemCtrlZimmerParallelGripperGEH8000" linked_chain_index="0" enable_io="1" sync_begin="1" sync_end="1">
+		  <local_pose v1="0.0" v2="0.45691" v3="0.0" roll="-1.57079633" pitch="0.0" yaw="0.0"/>
+	  </controller>
+	  
+	  <!--OLD Configuration-->
+    <!-- v2=0.215+0.02=0.235 -->
+    <!--<controller library_path="GolemCtrlSim" config_path="GolemCtrlZimmerParallelGripperGEH8000" linked_chain_index="0" enable_io="1" sync_begin="1" sync_end="1">
+      <local_pose v1="0.075" v2="0.225" v3="0.0" roll="-1.57079633" pitch="1.57079633" yaw="0.0"/>
+    </controller>-->
+	  <!--OLD Configuration-->
+  </controller>
+</golem>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Birmingham robot">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></global_pose>
+
+    <client host="localhost" port="54312" time_out="1.0" lost_packages="10"/>
+
+    <controller library_path="GolemCtrlKukaKR5Sixx" config_path="GolemCtrlKukaKR5Sixx" linked_chain_index="-1" enable_io="1" sync_begin="1" sync_end="1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+    </controller>
+    <controller library_path="GolemCtrlDLRHitHandII" config_path="GolemCtrlDLRHitHandII" linked_chain_index="0" enable_io="1" sync_begin="1" sync_end="1">
+      <!-- y = 80(kuka end-effector mounting) + 7+2+2(Rustam's F/T sensor and Kinect mounting plates) + 33.3(Gamma FT sensor) + 14(approx. Schunk adapter) -->
+      <local_pose v1="0.0" v2="0.1383" v3="0.0" roll="0.0" pitch="2.74889357189" yaw="0.0"></local_pose>
+    </controller>
+  </controller>
+</golem>

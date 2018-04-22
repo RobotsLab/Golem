@@ -1,0 +1,32 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/CtrlUIServer application
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_CTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/CtrlUIServer")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_EXECUTABLE(GolemCtrlCtrlUIServer ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	TARGET_LINK_LIBRARIES(GolemCtrlCtrlUIServer GolemApp GolemSM)
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlCtrlUIServer PUBLIC ${PACKAGE_DIR}/include ${PACKAGE_PLUGIN_CTRL}/CtrlServer/include)
+
+	COPY_FILES(GolemCtrlCtrlUIServer ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+	SET_PROPERTY(TARGET GolemCtrlCtrlUIServer PROPERTY RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
+	SET_PROPERTY(TARGET GolemCtrlCtrlUIServer PROPERTY DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+	
+	if (CPACK_BUILD_CORE)
+		INSTALL(TARGETS GolemCtrlCtrlUIServer RUNTIME DESTINATION bin COMPONENT app_execs)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/CtrlUIServer/ COMPONENT app_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT app_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlCtrlUIServer PROPERTY PROJECT_LABEL "CtrlUIServer")
+	SET_PROPERTY(TARGET GolemCtrlCtrlUIServer PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL)

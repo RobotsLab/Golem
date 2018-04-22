@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data planner_index="0" delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1">
+    <manipulator>
+      <trajectory lin="1000.0" ang="1000.0" collision="1" cluster_size="100" timeout="1.0" throw="0"/>
+    </manipulator>
+        
+    <trajectory waypoint_suffix=".wp" pose_suffix=".pose">
+      <profile name="default" extrapolation="1.0" extrapolation_index="0" duration="5.0" idle="1.0" pruning="0" pruning_distance="0.2">
+        <velocity arm="0.2" hand="0.5" other="0.5" dim="70" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0" c9="1.0" c10="1.0" c11="1.0" c12="1.0" c13="1.0" c14="1.0" c15="1.0" c16="1.0" c17="1.0" c18="1.0" c19="1.0" c20="1.0" c21="1.0" c22="1.0" c23="1.0" c24="1.0" c25="1.0" c26="1.0" c27="1.0" c28="1.0" c29="1.0" c30="1.0" c31="1.0" c32="1.0" c33="1.0" c34="1.0" c35="1.0" c36="1.0" c37="1.0" c38="1.0" c39="1.0" c40="1.0" c41="1.0" c42="1.0" c43="1.0" c44="1.0" c45="1.0" c46="1.0" c47="1.0" c48="1.0" c49="1.0" c50="1.0" c51="1.0" c52="1.0" c53="1.0" c54="1.0" c55="1.0" c56="1.0" c57="1.0" c58="1.0" c59="1.0" c60="1.0" c61="1.0" c62="1.0" c63="1.0" c64="1.0" c65="1.0" c66="1.0" c67="1.0" c68="1.0" c69="1.0" c70="1.0"/>
+        <acceleration arm="0.1" hand="0.5" other="0.5" dim="70" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0" c9="1.0" c10="1.0" c11="1.0" c12="1.0" c13="1.0" c14="1.0" c15="1.0" c16="1.0" c17="1.0" c18="1.0" c19="1.0" c20="1.0" c21="1.0" c22="1.0" c23="1.0" c24="1.0" c25="1.0" c26="1.0" c27="1.0" c28="1.0" c29="1.0" c30="1.0" c31="1.0" c32="1.0" c33="1.0" c34="1.0" c35="1.0" c36="1.0" c37="1.0" c38="1.0" c39="1.0" c40="1.0" c41="1.0" c42="1.0" c43="1.0" c44="1.0" c45="1.0" c46="1.0" c47="1.0" c48="1.0" c49="1.0" c50="1.0" c51="1.0" c52="1.0" c53="1.0" c54="1.0" c55="1.0" c56="1.0" c57="1.0" c58="1.0" c59="1.0" c60="1.0" c61="1.0" c62="1.0" c63="1.0" c64="1.0" c65="1.0" c66="1.0" c67="1.0" c68="1.0" c69="1.0" c70="1.0"/>
+        <distance arm="10.0" hand="1.0" other="1.0" dim="70" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0" c9="1.0" c10="1.0" c11="1.0" c12="1.0" c13="1.0" c14="1.0" c15="1.0" c16="1.0" c17="1.0" c18="1.0" c19="1.0" c20="1.0" c21="1.0" c22="1.0" c23="1.0" c24="1.0" c25="1.0" c26="1.0" c27="1.0" c28="1.0" c29="1.0" c30="1.0" c31="1.0" c32="1.0" c33="1.0" c34="1.0" c35="1.0" c36="1.0" c37="1.0" c38="1.0" c39="1.0" c40="1.0" c41="1.0" c42="1.0" c43="1.0" c44="1.0" c45="1.0" c46="1.0" c47="1.0" c48="1.0" c49="1.0" c50="1.0" c51="1.0" c52="1.0" c53="1.0" c54="1.0" c55="1.0" c56="1.0" c57="1.0" c58="1.0" c59="1.0" c60="1.0" c61="1.0" c62="1.0" c63="1.0" c64="1.0" c65="1.0" c66="1.0" c67="1.0" c68="1.0" c69="1.0" c70="1.0"/>
+        <extrapolation arm="0.0" hand="1.0" other="0.0" dim="70" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0" c9="1.0" c10="1.0" c11="1.0" c12="1.0" c13="1.0" c14="1.0" c15="1.0" c16="1.0" c17="1.0" c18="1.0" c19="1.0" c20="1.0" c21="1.0" c22="1.0" c23="1.0" c24="1.0" c25="1.0" c26="1.0" c27="1.0" c28="1.0" c29="1.0" c30="1.0" c31="1.0" c32="1.0" c33="1.0" c34="1.0" c35="1.0" c36="1.0" c37="1.0" c38="1.0" c39="1.0" c40="1.0" c41="1.0" c42="1.0" c43="1.0" c44="1.0" c45="1.0" c46="1.0" c47="1.0" c48="1.0" c49="1.0" c50="1.0" c51="1.0" c52="1.0" c53="1.0" c54="1.0" c55="1.0" c56="1.0" c57="1.0" c58="1.0" c59="1.0" c60="1.0" c61="1.0" c62="1.0" c63="1.0" c64="1.0" c65="1.0" c66="1.0" c67="1.0" c68="1.0" c69="1.0" c70="1.0"/>
+        <command arm="0.0" hand="1.0" other="0.0" dim="70" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0" c9="1.0" c10="1.0" c11="1.0" c12="1.0" c13="1.0" c14="1.0" c15="1.0" c16="1.0" c17="1.0" c18="1.0" c19="1.0" c20="1.0" c21="1.0" c22="1.0" c23="1.0" c24="1.0" c25="1.0" c26="1.0" c27="1.0" c28="1.0" c29="1.0" c30="1.0" c31="1.0" c32="1.0" c33="1.0" c34="1.0" c35="1.0" c36="1.0" c37="1.0" c38="1.0" c39="1.0" c40="1.0" c41="1.0" c42="1.0" c43="1.0" c44="1.0" c45="1.0" c46="1.0" c47="1.0" c48="1.0" c49="1.0" c50="1.0" c51="1.0" c52="1.0" c53="1.0" c54="1.0" c55="1.0" c56="1.0" c57="1.0" c58="1.0" c59="1.0" c60="1.0" c61="1.0" c62="1.0" c63="1.0" c64="1.0" c65="1.0" c66="1.0" c67="1.0" c68="1.0" c69="1.0" c70="1.0"/>
+    
+        <action v1="0.0" v2="0.0" v3="+0.05" roll="0.0" pitch="0.0" yaw="0.0"/>
+        <action v1="0.0" v2="0.0" v3="+0.10" roll="0.0" pitch="0.0" yaw="0.0"/>
+        <action v1="0.0" v2="0.0" v3="+0.15" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </profile>
+
+      <import>
+        <robot_trj interval="0.01" begin="0" end="10000" subsampling="5">
+          <!-- LWR=7, thumb=3, index=4, middle=4, ring=4, little=4 -->
+
+          <!-- /HandJointNames/soft_hand_index_abd_joint 7+3=10 -->
+          <state type="pos" inp="0" out="10" offset="0.0" scale="1.0"/>
+          <!-- /HandJointNames/soft_hand_index_inner_joint -->
+          <state type="pos" inp="1" out="11" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_index_inner_joint_mimic -->
+          <state type="pos" inp="2" out="11" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_index_middle_joint -->
+          <state type="pos" inp="3" out="12" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_index_middle_joint_mimic -->
+          <state type="pos" inp="4" out="12" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_index_outer_joint -->
+          <state type="pos" inp="5" out="13" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_index_outer_joint_mimic -->
+          <state type="pos" inp="6" out="13" offset="0.0" scale="0.5"/>
+
+          <!-- /HandJointNames/soft_hand_little_abd_joint 7+3+4+4+4=22 -->
+          <state type="pos" inp="7" out="22" offset="0.0" scale="1.0"/>
+          <!-- /HandJointNames/soft_hand_little_inner_joint -->
+          <state type="pos" inp="8" out="23" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_little_inner_joint_mimic -->
+          <state type="pos" inp="9" out="23" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_little_middle_joint -->
+          <state type="pos" inp="10" out="24" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_little_middle_joint_mimic -->
+          <state type="pos" inp="11" out="24" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_little_outer_joint -->
+          <state type="pos" inp="12" out="25" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_little_outer_joint_mimic -->
+          <state type="pos" inp="13" out="25" offset="0.0" scale="0.5"/>
+
+          <!-- /HandJointNames/soft_hand_middle_abd_joint 7+3+4=14 -->
+          <state type="pos" inp="14" out="14" offset="0.0" scale="1.0"/>
+          <!-- /HandJointNames/soft_hand_middle_inner_joint -->
+          <state type="pos" inp="15" out="15" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_middle_inner_joint_mimic -->
+          <state type="pos" inp="16" out="15" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_middle_middle_joint -->
+          <state type="pos" inp="17" out="16" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_middle_middle_joint_mimic -->
+          <state type="pos" inp="18" out="16" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_middle_outer_joint -->
+          <state type="pos" inp="19" out="17" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_middle_outer_joint_mimic -->
+          <state type="pos" inp="20" out="17" offset="0.0" scale="0.5"/>
+
+          <!-- /HandJointNames/soft_hand_ring_abd_joint 7+3+4+4=18 -->
+          <state type="pos" inp="21" out="18" offset="0.0" scale="1.0"/>
+          <!-- /HandJointNames/soft_hand_ring_inner_joint -->
+          <state type="pos" inp="22" out="19" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_ring_inner_joint_mimic -->
+          <state type="pos" inp="23" out="19" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_ring_middle_joint -->
+          <state type="pos" inp="24" out="20" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_ring_middle_joint_mimic -->
+          <state type="pos" inp="25" out="20" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_ring_outer_joint -->
+          <state type="pos" inp="26" out="21" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_ring_outer_joint_mimic -->
+          <state type="pos" inp="27" out="21" offset="0.0" scale="0.5"/>
+
+          <!-- /HandJointNames/soft_hand_synergy_joint 7=7 -->
+          <command type="pos" inp="28" out="7" offset="0.0" scale="1.0"/>
+
+          <!-- /HandJointNames/soft_hand_thumb_abd_joint 7=7 -->
+          <state type="pos" inp="29" out="7" offset="0.0" scale="1.0"/>
+          <!-- /HandJointNames/soft_hand_thumb_inner_joint -->
+          <state type="pos" inp="30" out="8" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_thumb_inner_joint_mimic -->
+          <state type="pos" inp="31" out="8" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_thumb_outer_joint -->
+          <state type="pos" inp="32" out="9" offset="0.0" scale="0.5"/>
+          <!-- /HandJointNames/soft_hand_thumb_outer_joint_mimic -->
+          <state type="pos" inp="33" out="9" offset="0.0" scale="0.5"/>
+
+          <!--<transform v1="0.4" v2="-0.2" v3="-0.15" roll="0.0" pitch="0.0" yaw="0"/>-->
+          <transform v1="0.6" v2="-0.4" v3="-0.2" roll="0.0" pitch="0.0" yaw="1.5709"/>
+          <!--<transform v1="0.6" v2="-0.4" v3="-0.2" roll="0.0" pitch="0.0" yaw="3.1415"/>-->
+        </robot_trj>
+
+        <!-- x y z qx qy qz qw, vx vy vz wx wy wz -->
+        <robot_hand_pose type="quat" lin="0" ang="3"/>
+
+        <!-- x y z qx qy qz qw, vx vy vz wx wy wz -->
+        <object_pose type="quat" lin="0" ang="3"/>
+        
+        <!-- x y z qx qy qz qw, vx vy vz wx wy wz -->
+        <joints_pose type="quat" lin="0" ang="3"/>
+        
+        <hdf5 file_ext=".hdf5dump" robot_trj="/HandConfigurationData" robot_hand_pose="/soft_hand::hand" object_pose="/object::object">
+          <joints_pose name="/soft_hand::soft_hand_index_distal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_index_fake_link1"/>
+          <joints_pose name="/soft_hand::soft_hand_index_fake_link2"/>
+          <joints_pose name="/soft_hand::soft_hand_index_fake_link3"/>-->
+          <joints_pose name="/soft_hand::soft_hand_index_knuckle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_index_middle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_index_proximal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_invisible_wire_link"/>-->
+          <joints_pose name="/soft_hand::soft_hand_little_distal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_little_fake_link1"/>
+          <joints_pose name="/soft_hand::soft_hand_little_fake_link2"/>
+          <joints_pose name="/soft_hand::soft_hand_little_fake_link3"/>-->
+          <joints_pose name="/soft_hand::soft_hand_little_knuckle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_little_middle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_little_proximal_link"/>
+          <joints_pose name="/soft_hand::soft_hand_middle_distal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_middle_fake_link1"/>
+          <joints_pose name="/soft_hand::soft_hand_middle_fake_link2"/>
+          <joints_pose name="/soft_hand::soft_hand_middle_fake_link3"/>-->
+          <joints_pose name="/soft_hand::soft_hand_middle_knuckle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_middle_middle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_middle_proximal_link"/>
+          <joints_pose name="/soft_hand::soft_hand_ring_distal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_ring_fake_link1"/>
+          <joints_pose name="/soft_hand::soft_hand_ring_fake_link2"/>
+          <joints_pose name="/soft_hand::soft_hand_ring_fake_link3"/>-->
+          <joints_pose name="/soft_hand::soft_hand_ring_knuckle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_ring_middle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_ring_proximal_link"/>
+          <joints_pose name="/soft_hand::soft_hand_thumb_distal_link"/>
+          <!--<joints_pose name="/soft_hand::soft_hand_thumb_fake_link1"/>
+          <joints_pose name="/soft_hand::soft_hand_thumb_fake_link3"/>-->
+          <joints_pose name="/soft_hand::soft_hand_thumb_knuckle_link"/>
+          <joints_pose name="/soft_hand::soft_hand_thumb_proximal_link"/>
+        </hdf5>
+      </import>
+
+      <appearance>
+        <bounds>
+          <solid_colour R="192" G="192" B="0" A="100"/>
+        </bounds>
+        <path show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="1" inc="0.1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"/>
+          <vertex_frame_size v1="0.005" v2="0.005" v3="0.005"/>
+          <edge_colour R="127" G="127" B="127" A="255"/>
+        </path>
+        <hand_frame_size v1="0.15" v2="0.15" v3="0.15"/>
+        <joints_frame_size v1="0.02" v2="0.02" v3="0.02"/>
+        <points mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+          <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+          <colour override="1" R="0" G="0" B="0" A="255"/>
+        </points>
+      </appearance>
+    </trajectory>
+  </data>
+</golem>

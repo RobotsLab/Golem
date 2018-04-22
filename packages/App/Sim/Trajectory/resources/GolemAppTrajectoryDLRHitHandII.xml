@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="verbose"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (Trajectory)">
+    <window x="0" y="0" width="800" height="600"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Controller trajectory demo">
+    <simulation restitution="0.1" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.2">
+      <view_dir v1="-1.5" v2="-1.0" v3="-2.0"/>
+      <view_point v1="2.0" v2="2.0" v3="2.0"/>
+      <view_up v1="0.0" v2="0.0" v3="1.0"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <trajectory name="1">
+    <waypoint dt="2" />
+  </trajectory>
+  
+  <trajectory name="2">
+    <waypoint dt="2" />
+    <waypoint dt="1" c1="-0.0193187" c2="0.310019344" c3="0.407775236" c4="0.407775236" c5="3.78668E-05" c6="0.396222901" c7="0.525204479" c8="0.525204479" c9="0.006884975" c10="0.127338699" c11="0.093819476" c12="0.093819476" c13="-0.009143274" c14="0.132634551" c15="0.118100671" c16="0.118100671" c17="-0.013522479" c18="0.121727465" c19="0.106069767" c20="0.106069767"/>
+    <waypoint dt="1" c1="-0.0193187" c2="0.295498205" c3="0.509562838" c4="0.509562838" c5="0.102524131" c6="0.429733223" c7="0.360585023" c8="0.360585023" c9="0.06887907" c10="0.569116962" c11="0.445678551" c12="0.445678551" c13="-0.010260285" c14="0.135985583" c15="0.118100671" c16="0.118100671" c17="-0.012405469" c18="0.123961487" c19="0.112352953" c20="0.112352953"/>
+    <waypoint dt="1" c1="0.039917425" c2="0.615680602" c3="0.310635446" c4="0.310635446" c5="0.054568243" c6="0.363712653" c7="0.551429796" c8="0.551429796" c9="0.019127238" c10="0.42968959" c11="0.560739382" c12="0.560739382" c13="0.007064255" c14="0.518745015" c15="0.479427983" c16="0.479427983" c17="-0.006018698" c18="0.119389422" c19="0.133490461" c20="0.133490461"/>
+    <waypoint dt="1" c1="0.090184653" c2="0.572117183" c3="0.30435226" c4="0.30435226" c5="0.055126748" c6="0.364271159" c7="0.551429796" c8="0.551429796" c9="0.015217613" c10="0.424663042" c11="0.561996019" c12="0.561996019" c13="0.007064255" c14="0.518745015" c15="0.479427983" c16="0.479427983" c17="0.0023589" c18="0.583507202" c19="0.432569383" c20="0.432569383"/>
+    <waypoint dt="1" />
+  </trajectory>
+  
+  <controller library_path="GolemCtrlDLRHitHandIISim" config_path="GolemCtrlDLRHitHandII">
+    <renderer>
+      <joint_appearance line_width="1.0">
+        <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+        <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+        <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+      </joint_appearance>
+      <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </path_renderer>
+      <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+        <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+      </state_renderer>
+    </renderer>
+  </controller>
+</golem>

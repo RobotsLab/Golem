@@ -1,0 +1,52 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/KIT library
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_CTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/KIT")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemCtrlKIT SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+		if (WIN32)		
+			TARGET_COMPILE_OPTIONS(GolemCtrlKIT PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+		elseif (UNIX)
+		endif()		
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemCtrlKIT STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	# Windows 32/64 bit
+	if (WIN32)
+		TARGET_LINK_LIBRARIES(GolemCtrlKIT GolemCtrl)
+	# Unix Linux/Apple
+	elseif (UNIX)
+		TARGET_LINK_LIBRARIES(GolemCtrlKIT GolemCtrl GolemCtrlSingleCtrl)
+	endif ()
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlKIT PUBLIC ${PACKAGE_DIR}/include ${PACKAGE_PLUGIN_CTRL}/SingleCtrl/include)
+
+	if (CPACK_BUILD_CORE)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemCtrlKIT RUNTIME DESTINATION bin COMPONENT ctrl_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemCtrlKIT LIBRARY DESTINATION bin COMPONENT ctrl_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemCtrlKIT ARCHIVE DESTINATION lib COMPONENT ctrl_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/KIT/ COMPONENT ctrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT ctrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlKIT PROPERTY PROJECT_LABEL "KIT")
+	SET_PROPERTY(TARGET GolemCtrlKIT PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL)

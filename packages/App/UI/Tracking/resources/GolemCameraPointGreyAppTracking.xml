@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="0" calibration_file="GolemCameraPointGreyAppTracking.cal" index="0" buffer_len="60" thread_timeout="10000">
+    <!--PIXEL_FORMAT_MONO8     = 0x80000000, /**< 8 bits of mono information. */
+		PIXEL_FORMAT_411YUV8   = 0x40000000, /**< YUV 4:1:1. */
+		PIXEL_FORMAT_422YUV8   = 0x20000000, /**< YUV 4:2:2. */
+		PIXEL_FORMAT_444YUV8   = 0x10000000, /**< YUV 4:4:4. */
+		PIXEL_FORMAT_RGB8      = 0x08000000, /**< R = G = B = 8 bits. */
+		PIXEL_FORMAT_MONO16    = 0x04000000, /**< 16 bits of mono information. */
+		PIXEL_FORMAT_RGB16     = 0x02000000, /**< R = G = B = 16 bits. */
+		PIXEL_FORMAT_S_MONO16  = 0x01000000, /**< 16 bits of signed mono information. */
+		PIXEL_FORMAT_S_RGB16   = 0x00800000, /**< R = G = B = 16 bits signed. */
+		PIXEL_FORMAT_RAW8      = 0x00400000, /**< 8 bit raw data output of sensor. */
+		PIXEL_FORMAT_RAW16     = 0x00200000, /**< 16 bit raw data output of sensor. */
+		PIXEL_FORMAT_MONO12    = 0x00100000, /**< 12 bits of mono information. */
+		PIXEL_FORMAT_RAW12     = 0x00080000, /**< 12 bit raw data output of sensor. */
+		PIXEL_FORMAT_BGR       = 0x80000008, /**< 24 bit BGR. */
+		PIXEL_FORMAT_BGRU      = 0x40000008, /**< 32 bit BGRU. */
+		PIXEL_FORMAT_RGB       = PIXEL_FORMAT_RGB8, /**< 24 bit RGB. */
+		PIXEL_FORMAT_RGBU      = 0x40000002, /**< 32 bit RGBU. */
+		PIXEL_FORMAT_BGR16     = 0x02000001, /**< R = G = B = 16 bits. */
+		PIXEL_FORMAT_BGRU16    = 0x02000002, /**< 64 bit BGRU. */
+		PIXEL_FORMAT_422YUV8_JPEG      = 0x40000001, /**< JPEG compressed stream. */
+		NUM_PIXEL_FORMATS	   =  20, /**< Number of pixel formats. */
+		UNSPECIFIED_PIXEL_FORMAT = 0 /**< Unspecified pixel format. */-->
+    
+    <!-- Grasshopper3 USB3.0: format=0x00400000 (4194304) -->
+    <!-- Grasshopper3 USB3.0: format=0x08000000 (134217728) -->
+    <!--<property width="1024" height="768" fps="0" mode="2" transform="none" format="134217728"/>-->
+
+    <!-- Fly2 Firewire: format=0x40000000 (536870912) -->
+    <!-- Chameleon USB2.0: format=0x00400000 (4194304) -->
+
+    <property width="0" height="0" fps="0" mode="0" transform="none" format="134217728"/>
+    <!--<property width="0" height="0" fps="0" mode="0" transform="none" format="4194304"/>-->
+
+    <handler snapshot="Image+Image" sequence="Video+Video"/>
+
+    <calibration file="GolemCameraPointGreyAppTracking.cal" set_camera_res="0" use_deformation_map="1">
+      <optimisation minimum="1" population_size="100" generations_num="10000000" de_diff_fac="0.5" de_cross_prob="0.2" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-6" num_of_threads="-1" thread_priority="lowest">
+        <distance_weights lin="10.0" ang="1.0"/>
+        <sample_magnitude lin="0.5" ang="1.0"/>
+      </optimisation>
+      <deformation_dist dim="61" c1="10.0" c2="10.0" c3="10.0" c4="10.0" c5="10.0" c6="10.0" c7="10.0" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+    </calibration>
+
+    <appearance>
+      <frame show="1" v1="0.05" v2="0.05" v3="0.1"/>
+      <shape show="1" R="127" G="127" B="127" A="255">
+        <bounds type="box" group="1">
+          <dimensions v1="0.025" v2="0.025" v3="0.025"/>
+          <pose v1="0.0" v2="0.0" v3="-0.025" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

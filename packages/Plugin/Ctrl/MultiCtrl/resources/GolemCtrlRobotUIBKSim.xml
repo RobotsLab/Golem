@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="UIBK Innsbruck robot">
+    <!--<global_pose v1="0.0" v2="0.0" v3="0.0" q0="1.0" q1="0.186" q2="0.798" q3="0.0"/>-->
+    <global_pose v1="0.08800000" v2="-0.08280000" v3="0.58120000" m11="-0.00000000" m12="1.00000000" m13="-0.00000000" m21="-0.50002200" m22="-0.00000000" m23="-0.86601270" m31="-0.86601270" m32="-0.00000000" m33="0.50002200"/>
+    
+    <client host="localhost" port="54312" time_out="1.0" lost_packages="10"/>
+
+    <controller library_path="GolemCtrlKukaLWRSim" config_path="GolemCtrlKukaLWR" linked_chain_index="-1" enable_io="1" sync_begin="1" sync_end="1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+    </controller>
+    <controller library_path="GolemCtrlSchunkDexHandSim" config_path="GolemCtrlSchunkDexHand" linked_chain_index="0" enable_io="1" sync_begin="1" sync_end="1">
+      <!--<local_pose v1="0.0" v2="0.0" v3="0.1041" m11="-1.0" m12="0.0" m13="0.0" m21="0.0" m22="0.0" m23="1.0" m31="0.0" m32="1.0" m33="0.0"/>-->
+      <local_pose v1="0.0" v2="0.0" v3="0.1041" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+    </controller>
+  </controller>
+</golem>

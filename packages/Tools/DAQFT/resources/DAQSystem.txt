@@ -1,0 +1,5 @@
+Wrist - FT10731.cal - Dev2/ai0:FX,Dev2/ai1:FY,Dev2/ai2:FZ,Dev2/ai3:TX,Dev2/ai4:TY,Dev2/ai5:TZ
+Thumb - FT15754.cal - Dev2/ai6:FX,Dev2/ai7:FY,Dev2/ai16:FZ,Dev2/ai17:TX,Dev2/ai18:TY,Dev2/ai19:TZ
+Index - FT15753.cal - Dev2/ai20:FX,Dev2/ai21:FY,Dev2/ai22:FZ,Dev2/ai23:TX,Dev2/ai32:TY,Dev2/ai33:TZ
+Middle - FT15752.cal - Dev2/ai34:FX,Dev2/ai35:FY,Dev2/ai36:FZ,Dev2/ai37:TX,Dev2/ai38:TY,Dev2/ai39:TZ
+Wrist Left - FT14509.cal - Dev2/ai50:FX,Dev2/ai51:FY,Dev2/ai52:FZ,Dev2/ai53:TX,Dev2/ai54:TY,Dev2/ai55:TZ

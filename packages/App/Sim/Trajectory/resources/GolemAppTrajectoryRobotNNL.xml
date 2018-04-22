@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="verbose"/>
+  <!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (Trajectory)">
+    <window x="0" y="0" width="1200" height="800"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Controller trajectory demo">
+    <simulation restitution="0.1" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.5">
+      <!--<view_point v1="0.0" v2="15.0" v3="12.0"/>
+      <view_dir v1="0.0" v2="-1.0" v3="-0.3"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>-->
+      <view_point v1="28.1082" v2="17.8647" v3="23.9804"/>
+      <view_dir v1="-0.8614" v2="-0.2688" v3="-0.4310"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="0" wire="1" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Default" view_inc="0.5">
+      <view_point v1="4.5542" v2="17.6501" v3="20.8963"/>
+      <view_dir v1="-0.9724" v2="0.1292" v3="-0.1944"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="0" wire="1" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <trajectory name="1">
+    <waypoint dt="10" c2="-1.57079633" c3="+1.57079633"/>
+  </trajectory>
+
+  <trajectory name="2">
+    <waypoint dt="10" c2="-1.57079633" c3="+1.57079633" c8="0.02" c9="0.02"/>
+  </trajectory>
+
+  <trajectory name="3">
+    <waypoint dt="10" c1="0.0" c2="-1.57079633" c3="+1.57079633" c4="0.0" c5="1.57079633" c6="0.0"/>
+  </trajectory>
+
+  <controller library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotNNL">
+    <renderer>
+      <joint_appearance line_width="1.0">
+        <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+        <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+        <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+      </joint_appearance>
+      <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </path_renderer>
+      <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+        <state_joint_frames_size v1="0.25" v2="0.25" v3="0.25"/>
+      </state_renderer>
+    </renderer>
+  </controller>
+</golem>

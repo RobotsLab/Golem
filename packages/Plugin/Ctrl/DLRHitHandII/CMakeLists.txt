@@ -1,0 +1,45 @@
+###############################################################################
+#
+# Golem Plugin/Ctrl/DLRHitHandII library
+#
+###############################################################################
+
+if(GOLEM_BUILD_PLUGIN_CTRL)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_CTRL}/DLRHitHandII")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	#FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	SET(PACKAGE_HEADERS
+		${PACKAGE_DIR}/include/Golem/Ctrl/DLRHitHandII/DLRHitHandII.h
+		${PACKAGE_DIR}/include/Golem/Ctrl/DLRHitHandII/Data.h
+	)
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_LIBRARY(GolemCtrlDLRHitHandII SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	if(WIN32)
+		TARGET_COMPILE_OPTIONS(GolemCtrlDLRHitHandII PUBLIC ${CMAKE_DLL_EXPORT_FLAGS} PUBLIC /wd4996)
+	elseif(UNIX)
+		#TARGET_COMPILE_OPTIONS(GolemCtrlDLRHitHandII PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	endif()
+
+	TARGET_LINK_LIBRARIES(GolemCtrlDLRHitHandII GolemCtrlDLR GolemCtrlSingleCtrl)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCtrlDLRHitHandII PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemCtrlDLRHitHandII ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemCtrlDLRHitHandII RUNTIME DESTINATION bin COMPONENT ctrl_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemCtrlDLRHitHandII LIBRARY DESTINATION bin COMPONENT ctrl_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Ctrl/DLRHitHandII/ COMPONENT ctrl_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT ctrl_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCtrlDLRHitHandII PROPERTY PROJECT_LABEL "DLRHitHandII")
+	SET_PROPERTY(TARGET GolemCtrlDLRHitHandII PROPERTY FOLDER "Plugin/Ctrl")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_PLUGIN_CTRL)

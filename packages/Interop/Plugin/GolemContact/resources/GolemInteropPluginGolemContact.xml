@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="8"></parallels>
+  <messages level="debug"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="GolemContact">
+    <window x="0" y="0" width="800" height="600"></window>
+    <simulation fps="30" real_time="0"></simulation>
+  </universe>
+
+  <scene name="GolemInteropPluginGolemContact.xml">
+    <opengl view_name="Front" view_inc="0.2">
+      <view_point v1="21.0" v2="0.0" v3="10.0"/>
+      <view_dir v1="-1.0" v2="0.0" v3="-0.45"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Closeup" view_inc="0.2">
+      <view_point v1="9.9301" v2="0.8747" v3="4.3253"/>
+      <view_dir v1="-0.6061" v2="-0.6887" v3="-0.3978"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <contact bundle="./GolemInteropPluginGolemContactData_RobotDLRHitHandII.xml" camera="OpenNI+OpenNI">
+    <image handler="Image+GolemInteropPluginGolemContact_DataImage" item="image"/>
+    <process handler="Feature3D+GolemInteropPluginGolemContact_DataFeature3D" item="process"/>
+    <model handler="ContactModel+GolemInteropPluginGolemContact_DataContactModel" item="model" item_grasp="model_grasp"/>
+    <query handler="ContactQuery+GolemInteropPluginGolemContact_DataContactQuery" item="query"/>
+    <trajectory handler="Trajectory+GolemInteropPluginGolemContact_DataTrajectory" item="trajectory" item_select="trajectory_select"/>
+  </contact>
+
+  <player planner_index="0" trajectory_name="trajectory" trajectory_profile_semi_auto="semiauto">
+    <!-- To run robot server uncomment: <server .../> -->
+    <!--<server port="54312" clients="10" message_interval="600.0"/>-->
+    
+    <!-- To run robot controller client (controller): library_path="GolemCtrlCtrlClient" -->
+    
+    <controller library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotDLRHitHandII">
+      <renderer>
+        <joint_appearance line_width="1.0">
+          <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+          <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+          <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+        </joint_appearance>
+        <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </path_renderer>
+        <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+          <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+        </state_renderer>
+      </renderer>
+    </controller>
+    <planner library_path="GolemPlannerGraphPlanner" config_path="GolemPlannerRobotDLRHitHandII">
+      <controller id="KukaLWRSim+KukaLWR"/>
+      <controller id="DLRHitHandIISim+DLRHitHandII"/>
+
+      <!--<sensor id="FTClient+FTClient"/>-->
+
+      <trajectory handler="Trajectory+Trajectory" idle_begin="0.5" idle_end="2.0" idle_perf="5.0" duration="5.0" trials="5"/>
+
+      <renderer show_duration="600.0">
+        <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_renderer>
+        <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_population_renderer>
+        <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </global_graph_renderer>
+        <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+        </global_path_renderer>
+        <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </local_graph_renderer>
+        <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+        </local_path_renderer>
+        <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+        </optimised_path_rendererex>
+        <collision_bounds>
+          <chain show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </chain>
+          <joint show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </joint>
+        </collision_bounds>
+      </renderer>
+    </planner>
+    
+    <activectrl library_path="GolemJointCtrl" config_path="GolemJointCtrl"/>
+    <activectrl library_path="GolemArmHandForce" config_path="GolemArmHandForce"/>
+    <activectrl library_path="GolemWorkspaceCtrl" config_path="GolemWorkspaceCtrl"/>
+    <activectrl library_path="GolemOspaceCtrl" config_path="GolemOspaceCtrl"/>
+
+    <objects>
+      <bounds type="plane" distance="0.0" grid_size="10" grid_delta="0.1" group="1">
+        <normal v1="0.0" v2="0.0" v3="1.0"/>
+        <pose v1="0.0" v2="0.0" v3="-0.345" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </bounds>
+      <bounds type="box" group="1" invisible="1">
+        <dimensions v1="0.15" v2="0.15" v3="0.15"/>
+        <pose v1="0.1" v2="0.0" v3="0.45" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </bounds>
+    </objects>
+  </player>
+
+  <recorder>
+    <sensor library_path="GolemCameraDepthSim" config_path="GolemCameraDepthSim"/>
+    <!--<sensor library_path="GolemCameraKinect" config_path="GolemCameraKinect"/>-->
+    <!--<sensor library_path="GolemCameraOpenCV" config_path="GolemCameraOpenCV"/>-->
+    <sensor library_path="GolemCameraOpenGL" config_path="GolemCameraOpenGL"/>
+    <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>
+    <!--<sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>-->
+    <!--<sensor library_path="GolemFTClient" config_path="GolemFTClient"/>-->
+    <!--<sensor library_path="GolemFTDAQ" config_path="GolemFTDAQ"/>-->
+
+    <recording label="recorder">
+      <!--<sensor id="OpenNI+OpenNI"/>-->
+      <sensor id="PointGrey+PointGrey"/>
+      <sensor id="OpenGL+OpenGL"/>
+    </recording>
+
+    <cloud>
+      <adjust lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.2" v2="0.2" v3="0.2"/>
+        <colour>
+          <solid R="255" G="0" B="0" A="255"/>
+          <wire R="255" G="0" B="0" A="255"/>
+        </colour>
+      </adjust>
+    </cloud>
+  </recorder>
+
+  <manager>
+    <data_template path="./data" delete_if_moved="0" delete_if_unlinked="1" delete_if_temporary="1" ext=".xml" xml_handler="handler" xml_item="item" xml_label="label" xml_prefix="prefix" xml_name="use_name" sep_name="-" sep_field="&#x9;"/>
+    <data path="./GolemInteropPluginGolemContactData_RobotDLRHitHandII.xml"/>
+
+    <handler library_path="GolemDataImage" config_path="GolemDataImage"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3D"/>
+    <handler library_path="GolemDataVideo" config_path="GolemDataVideo"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemDataTrajectory"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemDataContactModel"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemDataContactQuery"/>
+    <!--<handler library_path="GolemDataPart3DHoP" config_path="GolemDataPart3DHoP"/>-->
+
+    <handler library_path="GolemDataImage" config_path="GolemInteropPluginGolemContact_DataImage"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemInteropPluginGolemContact_DataFeature3D"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemInteropPluginGolemContact_DataTrajectory"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemInteropPluginGolemContact_DataContactModel"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemInteropPluginGolemContact_DataContactQuery"/>
+  </manager>
+
+  <pose name="zero" dim="27" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0" c10="0.0" c11="0.0" c12="0.0" c13="0.0" c14="0.0" c15="0.0" c16="0.0" c17="0.0" c18="0.0" c19="0.0" c20="0.0" c21="0.0" c22="0.0" c23="0.0" c24="0.0" c25="0.0" c26="0.0" c27="0.0"/>
+
+  <pose name="camera calib" dim="27" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="camera calib" dim="27" c1="2.15357" c2="-1.44173" c3="2.41636" c4="-1.23597" c5="0.526307" c6="0.0401937" c7="-1.15166" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="camera calib" dim="27" c1="2.11749" c2="-1.40559" c3="1.89855" c4="-1.20024" c5="0.972302" c6="-0.137083" c7="-1.02379" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="camera calib" dim="27" c1="2.12903" c2="-0.979393" c3="1.61952" c4="-1.22827" c5="1.31727" c6="-0.160591" c7="-1.01719" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+
+  <pose name="scan" dim="27" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="1.98703" c2="-1.82022" c3="2.68371" c4="-0.993679" c5="-0.472118" c6="0.701058" c7="-0.601755" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="1.60132" c2="-1.8583" c3="1.77602" c4="-0.0109462" c5="0.450068" c6="1.04633" c7="-0.639206" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="1.65994" c2="-1.53044" c3="1.68963" c4="-0.361575" c5="0.208216" c6="0.61754" c7="-0.0829202" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="1.64565" c2="-1.20667" c3="1.61824" c4="-0.496629" c5="-0.143018" c6="0.587833" c7="0.634178" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="1.7097" c2="-0.944053" c3="1.20653" c4="-0.707639" c5="0.126298" c6="0.751986" c7="0.84115" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+  <pose name="scan" dim="27" c1="2.05575" c2="-0.926678" c3="0.688772" c4="-1.6953" c5="0.721298" c6="0.410064" c7="0.531536" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0"/>
+</golem>

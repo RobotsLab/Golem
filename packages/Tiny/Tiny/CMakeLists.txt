@@ -1,0 +1,40 @@
+###############################################################################
+#
+# Golem Tiny/Tiny library
+#
+###############################################################################
+
+if(GOLEM_BUILD_TINY)
+	SET(PACKAGE_DIR "${PACKAGE_TINY}/Tiny")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemTiny SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})
+		TARGET_COMPILE_OPTIONS(GolemTiny PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemTiny STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	TARGET_LINK_LIBRARIES(GolemTiny GolemApp GolemPhys GolemCtrlKatana)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemTiny PUBLIC ${PACKAGE_DIR}/include)
+	
+	if (CPACK_BUILD_TINY)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemTiny RUNTIME DESTINATION bin COMPONENT tiny_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemTiny LIBRARY DESTINATION bin COMPONENT tiny_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemTiny ARCHIVE DESTINATION lib COMPONENT tiny_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Tiny/ COMPONENT tiny_headers)
+	endif (CPACK_BUILD_TINY)
+	
+	SET_PROPERTY(TARGET GolemTiny PROPERTY PROJECT_LABEL "Tiny")
+	SET_PROPERTY(TARGET GolemTiny PROPERTY FOLDER "Tiny")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+endif(GOLEM_BUILD_TINY)

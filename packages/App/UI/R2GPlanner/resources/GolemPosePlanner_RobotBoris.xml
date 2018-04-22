@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="8"></parallels>
+  <messages level="error"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="GolemAppUI">
+    <!--<window x="0" y="0" width="640" height="480"></window>-->
+    <!--<window x="0" y="0" width="800" height="600"></window>-->
+    <window x="0" y="0" width="1288" height="964"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="PosePlanner">
+    <simulation restitution="0.0" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"/>
+    </simulation>
+    <opengl view_name="Front" view_inc="0.2">
+      <view_point v1="21.0" v2="0.0" v3="10.0"/>
+      <view_dir v1="-1.0" v2="0.0" v3="-0.45"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Workspace" view_inc="0.2">
+      <view_point v1="12.0" v2="-5.0" v3="2.0"/>
+      <view_dir v1="-0.8640" v2="0.0" v3="-0.7"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <pose_planner data_name="data.poseplanner" screen_capture="1" points="1000" features="10000" attempts="10" kernels="1000" neighbours="200" distance_range="20.0" distance_max="0.02" feature_norm_eps="1e-7">
+    <nn_search neighbours="0" search_checks="32" search_kdtrees="4" search_leaf_max_size="10"/>
+    <covariance dim="7" c1="0.01" c2="0.01" c3="0.01" c4="0.1" c5="0.1" c6="0.1" c7="0.1"/>
+    <!--<covariance dim="7" c1="10" c2="10" c3="1" c4="1" c5="1" c6="1" c7="1"/>-->
+    <mean_shift population_size="100" generations_min="20" generations_max="200" distance_diff="1e-4"/>
+    <pose_stddev lin="0.001" ang="500.0"/>
+    <dist prod="0" lin="1.0" ang="1.0" feature="0"/>
+    <optimisation minimum="1" population_size="10" generations_num="1000" de_diff_fac="0.5" de_cross_prob="0.1" test_generations="100" test_pairs="100" test_variance="1e-6" num_of_threads="-1" thread_priority="lowest"/>
+ 
+    <heuristic contact_fac="1000.0" non_contact_fac="1000.0" max_surface_points_inkd="5000">
+      <evaluation_model neighbours="50" points="250" depth_stddev="1.0" likelihood="1.0"/>
+      <check_model neighbours="100" points="10000" depth_stddev="1000.0" likelihood="1000.0"/>
+      <ftmodel dist_max="0.8" cone_theta_orizontal_axis="0.5" cone_theta_vertical_axis="0.785" num_nearest_points="5" num_points="5000" mahalanobis_fac="0.05" enabled_likelihood="1" intrinsic_exp_parameter="1">
+        <joint_fac dim="16" c1="0.01" c2="0.01" c3="0.38" c4="0.60" c5="0.01" c6="0.01" c7="0.38" c8="0.60" c9="0.01" c10="0.01" c11="0.38" c12="0.60" c13="0.01" c14="0.01" c15="0.38" c16="0.60"/>
+      </ftmodel>
+      <covariance dim="7" c1="0.01" c2="0.01" c3="0.01" c4="0.01" c5="0.01" c6="0.01" c7="0.01"/>
+    </heuristic>
+
+    <model camera="DepthSim+DepthSim" handler="PointsCurv+PointsCurv" item="Model" item_obj="ModelObj" handler_trj="Trajectory+TrajectoryDemo" item_trj="TrajectoryModel">
+      <scan_pose dim="61" c1="1.7097" c2="-0.944053" c3="1.20653" c4="-0.707639" c5="0.126298" c6="0.751986" c7="0.84115" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+      <colour>
+        <solid R="0" G="0" B="255" A="32"/>
+        <wire R="0" G="0" B="255" A="255"/>
+      </colour>
+
+      <model id="Any">
+        <contact_3d curv_fac="100.0" min_num="50" subsample_size="0" distance="0.01" lambda="50.0" normal_slope="3.1415927"/>
+      </model>
+      
+      <appearance points_show="1" frames_show="0" bounds_frame_show="0">
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="0" B="0" A="0"/>
+        <colour R="0" G="255" B="255" A="100"/>
+        <colour R="0" G="255" B="255" A="100"/>
+        <colour R="0" G="255" B="255" A="100"/>
+        <colour R="0" G="255" B="255" A="100"/>
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <bounds_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </appearance>
+    </model>
+
+    <query camera="DepthSim+DepthSim" handler="PointsCurv+PointsCurv" item="Query" item_obj="QueryObj" handler_trj="Trajectory+TrajectoryDemo" item_trj="TrajectoryQuery">
+      <query id="Any" weight="1.0">
+        <contact_3d kernels="5000" epsilon="1e-10" trials="100" feature_std_dev_max="5.0" pose_std_dev_max="5.0"/>
+        <nn_search neighbours="0" search_checks="32" search_kdtrees="1" search_leaf_max_size="10"/>
+        <pose kernels="100">
+          <std_dev lin="0.1" ang="10.0"/>
+          <path_dist lin="0.075" ang="100.0" std_dev="0.01"/>
+        </pose>
+      </query>
+      <optimisation runs="1000" steps="1000" sa_temp="0.1" sa_delta_lin="1.0" sa_delta_ang="0.2" sa_energy="0.1" epsilon="1.e-10"/>
+
+      <cluster_map type="plate-up" slot="1"/>
+      <cluster_map type="plate-dn" slot="1"/>
+      <cluster_map type="cup" slot="2"/>
+    </query>
+
+    <object camera="DepthSim+DepthSim" handler_scan="Image+ImageDemoObject" handler="PointsCurv+PointsCurv" item_scan="ObjectScan" item="Object">
+      <scan_pose dim="61" c1="2.47067" c2="-0.850383" c3="2.35997" c4="-1.65389" c5="2.47979" c6="-1.14518" c7="1" c8="0.22" c9="0.6" c10="0.1" c11="0.1" c12="0.05" c13="0.8" c14="0.2" c15="0.2" c16="0.05" c17="0.8" c18="0.2" c19="0.2" c20="0" c21="0.8" c22="0.2" c23="0.2" c24="0" c25="0.8" c26="0.2" c27="0.2" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+
+      <frame_adjustment lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.2" v2="0.2" v3="0.2"/>
+        <colour>
+          <solid R="0" G="0" B="0" A="255"/>
+          <wire R="0" G="0" B="0" A="255"/>
+        </colour>
+      </frame_adjustment>
+    </object>
+ 
+   <manipulator item_trj="TrajectoryManip">
+      <config_map i1="0" i2="0" i3="0" i4="0" i5="0" i6="0" i7="0" i8="0" i9="0" i10="0" i11="10" i12="0" i13="0" i14="0" i15="14" i16="0" i17="0" i18="0" i19="18" i20="0" i21="0" i22="0" i23="22" i24="0" i25="0" i26="0" i27="26"/>
+      <trajectory lin="2000.0" ang="1000.0" collision="1" cluster_size="10" timeout="2.0" duration="10.0"/>
+      <pose_stddev lin="0.002" ang="1000.0" dist_max="5.0"/>
+      <threshold v1="0.5" v2="0.5" v3="0.5" w1="0.1" w2="0.1" w3="0.1"/>
+
+      <withdraw_action release_fraction="0.5" lift_distance="0.20"/>
+
+      <appearance show_bounds="1" show_frames="0">
+        <bounds show_solid="1" show_wire="1" wire_width="1.0">
+          <solid_colour R="255" G="255" B="0" A="150"/>
+          <wire_colour R="127" G="127" B="127" A="255"/>
+        </bounds>
+        <bounds_select show_solid="1" show_wire="0" wire_width="1.0">
+          <solid_colour R="0" G="0" B="255" A="150"/>
+          <wire_colour R="127" G="127" B="127" A="255"/>
+        </bounds_select>
+        <chains_frame_size v1="0.1" v2="0.1" v3="0.1"/>
+        <joints_frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      </appearance>
+    </manipulator>
+
+    <model_trn_frame v1="0.0" v2="0.0" v3="0.0" q0="1.0" q1="0.0" q2="0.0" q3="0.0"/>
+    <object_points_trn v1="-0.01" v2="-0.01" v3="0.01" q0="0.5" q1="0.0" q2="0.0" q3="0.001"/>
+    <appearance distrib_samples="100">
+      <model>
+        <line show="1" R="255" G="255" B="0" A="255"/>
+        <normal show="1" size="0.03" R="0" G="255" B="255" A="255"/>
+        <frame show="1" v1="0.02" v2="0.02" v3="0.02"/>
+      </model>
+      <query>
+        <line show="1" R="255" G="255" B="255" A="255"/>
+        <normal show="1" size="0.03" R="0" G="255" B="255" A="255"/>
+        <frame show="1" v1="0.02" v2="0.02" v3="0.02"/>
+      </query>
+    </appearance>
+    <hypothesis>
+      <collision>
+        <waypoint path_dist="0.0" points="1000" depth_stddev="1000.0" likelihood="1000.0"/>
+        <kdtree neighbours="1" points="1000" depth_stddev="1000.0" likelihood="1000.0"/>
+      </collision>
+    </hypothesis>
+    <tactile_model num_poses="10" num_hypotheses="5" max_surface_points="10000000">
+      <!--<covariance dim="7" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0"/>-->
+      <!--<covariance dim="7" c1="0.01" c2="0.01" c3="0.01" c4="0.01" c5="0.01" c6="0.01" c7="0.01"/>-->
+      <covariance dim="7" c1="0.001" c2="0.001" c3="0.001" c4="0.001" c5="0.001" c6="0.001" c7="0.001"/>
+    </tactile_model>
+    <trial_data enable="1" silent="0" name="default" path="./data/boris/experiments/" ext_trial=".xml">
+      <meta_query_transformation lin="0.1" ang="0.01"/>
+      <meta_obj_pose_transformation lin="0.005" ang="0.01"/>
+    </trial_data>
+  </pose_planner>
+
+  <player>
+    <!-- To run robot server uncomment: <server .../> -->
+    <!--<server port="54312" clients="10" message_interval="600.0"/>-->
+    
+    <!-- To run robot controller client (controller): library_path="GolemDeviceCtrlClient" -->
+    
+    <!-- Boris robot simulation (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBorisSim" -->
+    <!-- Boris robot (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBoris" -->
+
+    <!-- Birmingham robot simulation (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBhamSim" -->
+    <!-- Birmingham robot (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBham" -->
+
+    <!-- Eddie robot simulation (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotEddieSim" -->
+    <!-- Eddie robot (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotEddie" -->
+
+    <!-- UIBK robot simulation (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotUIBKSim" -->
+    <!-- UIBK robot (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotUIBK" -->
+
+    <!-- DLR Justin robot simulation (controller, planner): library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotJustin" -->
+    <!-- DLR Justin robot (controller, planner): library_path="GolemDeviceRobotJustin" config_path="GolemDeviceRobotJustin" -->
+    
+    <controller library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBorisSim">
+      <renderer>
+        <joint_appearance line_width="1.0">
+          <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+          <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+          <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+        </joint_appearance>
+        <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </path_renderer>
+        <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+          <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+        </state_renderer>
+      </renderer>
+    </controller>
+    <planner library_path="GolemDeviceMultiCtrl" config_path="GolemDeviceRobotBorisSim">
+      <renderer show_duration="600.0">
+        <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_renderer>
+        <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_population_renderer>
+        <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </global_graph_renderer>
+        <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+        </global_path_renderer>
+        <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </local_graph_renderer>
+        <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+        </local_path_renderer>
+        <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+        </optimised_path_rendererex>
+      </renderer>
+    </planner>
+    
+    <controller id="KukaLWRSim+KukaLWRBorisR"/>
+    <controller id="DLRHitHandIISim+DLRHitHandIIBorisR"/>
+
+    <!--<sensor id="FTClient+FTClient"/>-->
+
+    <activectrl library_path="GraspJointCtrl" config_path="GraspJointCtrl"/>
+    <activectrl library_path="GraspArmHandForce" config_path="GraspArmHandForce"/>
+    <activectrl library_path="GraspWorkspaceCtrl" config_path="GraspWorkspaceCtrl"/>
+    <activectrl library_path="GraspOspaceCtrl" config_path="GraspOspaceCtrl"/>
+
+    <trajectory name="trajectory" handler="Trajectory+Trajectory" idle_begin="0.5" idle_end="2.0" idle_perf="5.0" duration="5.0" trials="5"/>
+  
+    <!--<arm_tool_bounds type="box" group="1">
+      <dimensions v1="0.07" v2="0.07" v3="0.15"/>
+      <pose v1="-0.035" v2="-0.035" v3="0.22" roll="0.0" pitch="0.0" yaw="-2.3561944901994329"/>
+    </arm_tool_bounds>-->
+    <arm_tool_bounds type="convex_mesh" group="1">
+      <pose v1="0.0" v2="0.0" v3="0.2" roll="0.0" pitch="0.0" yaw="-2.3561944901994329"/>
+      <vertex v1="-0.05" v2="-0.07" v3="-0.1"/>
+      <vertex v1="+0.05" v2="-0.07" v3="-0.1"/>
+      <vertex v1="-0.05" v2="+0.07" v3="-0.1"/>
+      <vertex v1="+0.05" v2="+0.07" v3="-0.1"/>
+      <vertex v1="-0.02" v2="-0.06" v3="+0.19"/>
+      <vertex v1="+0.14" v2="+0.01" v3="+0.12"/>
+      <vertex v1="-0.02" v2="+0.06" v3="+0.19"/>
+      <vertex v1="+0.14" v2="+0.07" v3="+0.12"/>
+      <triangle t1="0" t2="3" t3="1"/>
+      <triangle t1="0" t2="2" t3="3"/>
+      <triangle t1="0" t2="1" t3="5"/>
+      <triangle t1="0" t2="5" t3="4"/>
+      <triangle t1="0" t2="4" t3="6"/>
+      <triangle t1="0" t2="6" t3="2"/>
+      <triangle t1="7" t2="4" t3="5"/>
+      <triangle t1="7" t2="6" t3="4"/>
+      <triangle t1="7" t2="5" t3="1"/>
+      <triangle t1="7" t2="1" t3="3"/>
+      <triangle t1="7" t2="3" t3="2"/>
+      <triangle t1="7" t2="2" t3="6"/>
+    </arm_tool_bounds>
+
+    <obstacle_bounds type="plane" distance="0.0" grid_size="10" grid_delta="0.1" group="1">
+      <normal v1="0.0" v2="0.0" v3="1.0"/>
+      <pose v1="0.0" v2="0.0" v3="-0.345" roll="0.0" pitch="0.0" yaw="0.0"/>
+    </obstacle_bounds>
+    <obstacle_bounds type="box" group="1" invisible="1">
+      <dimensions v1="0.15" v2="0.15" v3="0.15"/>
+      <pose v1="0.1" v2="0.0" v3="0.45" roll="0.0" pitch="0.0" yaw="0.0"/>
+    </obstacle_bounds>
+  </player>
+
+  <recorder>
+    <sensor library_path="GraspCameraDepthSim" config_path="GraspCameraDepthSim"/>
+    <!--<sensor library_path="GraspCameraKinect" config_path="GraspCameraKinect"/>-->
+    <!--<sensor library_path="GraspCameraOpenCV" config_path="GraspCameraOpenCV"/>-->
+    <sensor library_path="GraspCameraOpenGL" config_path="GraspCameraOpenGL"/>
+    <sensor library_path="GraspCameraOpenNI" config_path="GraspCameraOpenNI"/>
+    <!--<sensor library_path="GraspCameraPointGrey" config_path="GraspCameraPointGrey"/>-->
+    <!--<sensor library_path="GraspFTClient" config_path="GraspFTClient"/>-->
+    <!--<sensor library_path="GraspFTDAQ" config_path="GraspFTDAQ"/>-->
+
+    <recording label="recorder">
+      <sensor id="OpenNI+OpenNI"/>
+      <sensor id="PointGrey+PointGrey"/>
+      <sensor id="OpenGL+OpenGL"/>
+    </recording>
+  </recorder>
+
+  <manager>
+    <data_template path="./data" delete_if_moved="0" delete_if_unlinked="1" delete_if_temporary="1" ext=".xml" xml_handler="handler" xml_item="item" xml_label="label" xml_prefix="prefix" xml_name="use_name" sep_name="-" sep_field="&#x9;"/>
+
+    <handler library_path="GraspDataImage" config_path="GraspDataImage"/>
+    <handler library_path="GraspDataPointsCurv" config_path="GraspDataPointsCurv"/>
+    <handler library_path="GraspDataVideo" config_path="GraspDataVideo"/>
+    <handler library_path="GraspDataTrajectory" config_path="GraspDataTrajectory"/>
+    <handler library_path="GraspDataPredictorModel" config_path="GraspDataPredictorModel"/>
+    <handler library_path="GraspDataPredictorQuery" config_path="GraspDataPredictorQuery"/>
+    <handler library_path="GraspDataCompositions3D" config_path="GraspDataCompositions3D"/>
+
+    <handler library_path="GraspDataImage" config_path="GraspDataImageDemo"/>
+    <handler library_path="GraspDataImage" config_path="GraspDataImageDemoObject"/>
+    <handler library_path="GraspDataPointsCurv" config_path="GraspDataPointsCurvDemo"/>
+    <handler library_path="GraspDataTrajectory" config_path="GraspDataTrajectoryDemo"/>
+  </manager>
+
+  <pose name="zero" dim="70" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0" c10="0.0" c11="0.0" c12="0.0" c13="0.0" c14="0.0" c15="0.0" c16="0.0" c17="0.0" c18="0.0" c19="0.0" c20="0.0" c21="0.0" c22="0.0" c23="0.0" c24="0.0" c25="0.0" c26="0.0" c27="0.0" c28="0.0" c29="0.0" c30="0.0" c31="0.0" c32="0.0" c33="0.0" c34="0.0" c35="0.0" c36="0.0" c37="0.0" c38="0.0" c39="0.0" c40="0.0" c41="0.0" c42="0.0" c43="0.0" c44="0.0" c45="0.0" c46="0.0" c47="0.0" c48="0.0" c49="0.0" c50="0.0" c51="0.0" c52="0.0" c53="0.0" c54="0.0" c55="0.0" c56="0.0" c57="0.0" c58="0.0" c59="0.0" c60="0.0" c61="0.0" c62="0.0" c63="0.0" c64="0.0" c65="0.0" c66="0.0" c67="0.0" c68="0.0" c69="0.0" c70="0.0"/>
+
+  <pose name="home_closed_fingers" dim="70" c1="1.37019" c2="-0.298179" c3="-0.110428" c4="1.19817" c5="0.362895" c6="-0.448772" c7="-1.4312" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="1.2" c22="1.0" c23="1.0" c24="0" c25="1.2" c26="1.0" c27="1.0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"  c62="0.0" c63="0.0" c64="0.0" c65="0.0" c66="0.0" c67="0.0" c68="0.0" c69="0.0" c70="0.0"/>
+  <pose name="home" dim="70" c1="1.37019" c2="-0.298179" c3="-0.110428" c4="1.19817" c5="0.362895" c6="-0.448772" c7="-1.4312" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0" c62="0.0" c63="0.0" c64="0.0" c65="0.0" c66="0.0" c67="0.0" c68="0.0" c69="0.0" c70="0.0"/>
+
+  <pose name="camera calib" dim="61" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="2.15357" c2="-1.44173" c3="2.41636" c4="-1.23597" c5="0.526307" c6="0.0401937" c7="-1.15166" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="2.11749" c2="-1.40559" c3="1.89855" c4="-1.20024" c5="0.972302" c6="-0.137083" c7="-1.02379" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="2.12903" c2="-0.979393" c3="1.61952" c4="-1.22827" c5="1.31727" c6="-0.160591" c7="-1.01719" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+
+  <!--<pose name="camera calib" dim="61" c1="2.95783" c2="-1.37913" c3="-1.62936" c4="2.03815" c5="0.16207" c6="-0.981502" c7="-0.231029" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="2.34516" c2="-1.68539" c3="-0.645952" c4="1.42653" c5="-0.782267" c6="-1.6209" c7="-0.449301" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="1.99134" c2="-1.42646" c3="-1.45483" c4="0.612975" c5="0.07864" c6="-1.92635" c7="-0.114275" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="1.85295" c2="-0.536286" c3="-1.31154" c4="0.699703" c5="0.202925" c6="-1.85695" c7="0.780268" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="camera calib" dim="61" c1="2.19086" c2="-0.615082" c3="-2.65773" c4="1.82597" c5="1.20459" c6="-1.78497" c7="0.180716" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>-->
+
+  	<!-- Offset calibration points begin-->
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="1.1781" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- Intermediate Begin-->
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- Intermediate End-->
+	<pose name="f/t sensor calib" dim="61"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="-1.5707963267949" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="1.5707963267949" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- Intermediate Begin-->
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- Intermediate End-->
+	<pose name="f/t sensor calib" dim="61"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="1.5707963267949" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61"   c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="-1.5707963267949" c7="-1.9635" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- End pos-->
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<!-- Offset calibration points end-->
+	
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="-0.3927" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61"  c1="1.5707963267949" c2="-1.5707963267949" c3="0.2618" c4="0.0" c5="0.0" c6="0.0" c7="1.1781" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61" c1="0.852144" c2="-1.30045" c3="1.00197" c4="1.30222" c5="0.0996473" c6="-1.31975" c7="-0.0976072" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61" c1="1.09131" c2="-1.19123" c3="0.406603" c4="1.0304" c5="0.454392" c6="-1.27477" c7="0.407437" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61" c1="1.13584" c2="-0.988016" c3="0.47152" c4="1.09615" c5="-0.666784" c6="-1.08227" c7="-0.40794" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61" c1="0.925698" c2="-0.591254" c3="0.617655" c4="1.60022" c5="-1.31389" c6="-0.207623" c7="-0.407265" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>-->
+	<pose name="f/t sensor calib" dim="61" c1="0.959443" c2="-0.495088" c3="0.907602" c4="1.77567" c5="-2.31607" c6="-1.53935" c7="-0.35797" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61" c1="0.473599" c2="-0.549839" c3="0.913706" c4="1.65676" c5="-0.359258" c6="-1.00031" c7="-0.357973" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+	<pose name="f/t sensor calib" dim="61"  c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="-0.0" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+
+  <pose name="scan" dim="61" c1="2.24194" c2="-0.780102" c3="2.56493" c4="-1.99426" c5="0.489691" c6="-1.03589" c7="-1.15272" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.98703" c2="-1.82022" c3="2.68371" c4="-0.993679" c5="-0.472118" c6="0.701058" c7="-0.601755" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.60132" c2="-1.8583" c3="1.77602" c4="-0.0109462" c5="0.450068" c6="1.04633" c7="-0.639206" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.65994" c2="-1.53044" c3="1.68963" c4="-0.361575" c5="0.208216" c6="0.61754" c7="-0.0829202" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.64565" c2="-1.20667" c3="1.61824" c4="-0.496629" c5="-0.143018" c6="0.587833" c7="0.634178" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.7097" c2="-0.944053" c3="1.20653" c4="-0.707639" c5="0.126298" c6="0.751986" c7="0.84115" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="2.05575" c2="-0.926678" c3="0.688772" c4="-1.6953" c5="0.721298" c6="0.410064" c7="0.531536" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+
+  <!--<pose name="scan" dim="61" c1="2.95783" c2="-1.37913" c3="-1.62936" c4="2.03815" c5="0.16207" c6="-0.981502" c7="-0.231029" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="2.37398" c2="-1.72785" c3="-0.686556" c4="1.42491" c5="-0.849379" c6="-1.66039" c7="-0.462826" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.93654" c2="-1.87235" c3="-1.02301" c4="0.398304" c5="-0.467473" c6="-2.09446" c7="-0.303752" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.94184" c2="-1.43404" c3="-1.44315" c4="0.612321" c5="0.0920531" c6="-1.94379" c7="-0.111323" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.93214" c2="-0.879744" c3="-1.0842" c4="0.922991" c5="0.0140962" c6="-1.71017" c7="0.464595" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="1.85641" c2="-0.497926" c3="-1.26141" c4="0.727168" c5="0.297171" c6="-1.79742" c7="0.80121" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="2.81607" c2="-0.239208" c3="-2.14454" c4="1.39035" c5="0.370687" c6="-1.40074" c7="0.694823" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>
+  <pose name="scan" dim="61" c1="2.2598" c2="-0.731139" c3="-2.57955" c4="2.01941" c5="1.31088" c6="-1.71892" c7="0.197858" c8="0" c9="0" c10="0" c11="0" c12="0" c13="0" c14="0" c15="0" c16="0" c17="0" c18="0" c19="0" c20="0" c21="0" c22="0" c23="0" c24="0" c25="0" c26="0" c27="0" c28="0" c29="0" c30="0" c31="0" c32="0" c33="0" c34="0" c35="0" c36="0" c37="0" c38="0" c39="0" c40="0" c41="0" c42="0" c43="0" c44="0" c45="0" c46="0" c47="0" c48="0" c49="0" c50="0" c51="0" c52="0" c53="0" c54="0" c55="0" c56="0" c57="0" c58="0" c59="0" c60="0" c61="0"/>-->
+</golem>

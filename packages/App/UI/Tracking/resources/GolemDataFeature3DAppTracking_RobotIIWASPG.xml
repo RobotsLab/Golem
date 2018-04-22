@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1">
+    <cloud suffix=".pcd" thread_chunk_size="1000">
+      <filter enabled="1" window="10" samples="9"/>
+
+      <outrem_alignment enabled_radius="1" enabled_statistical="0" radius="0.01" min_neighbors_in_radius="10" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_alignment enabled_radius="1" enabled_statistical="0" radius="0.015" min_neighbors_in_radius="20" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_segmentation enabled_radius="1" enabled_statistical="0" radius="0.02" min_neighbors_in_radius="200" mean_k="50" stddev_mul_threshold="1.0"/>
+      <outrem_segmentation enabled_radius="1" enabled_statistical="0" radius="0.005" min_neighbors_in_radius="20" mean_k="50" stddev_mul_threshold="1.0"/>
+
+      <normal enabled_pca="1" enabled_mls="0" enabled_ii="0" normal_eps="1e-5" polynomial_fit="1" radius_search="0.015" max_depth_change_factor="0.02" normal_smoothing_size="0.02"/>
+
+      <curvature radius_search="0.015"/>
+      <narf36 planar_projection="0" focal_length="525.0" angular_resolution="0.0034907" max_angle_width="6.28318531" max_angle_height="6.28318531" noise_level="0.0" min_range="0.0" border_size="1" use_keypoints="0" support_size="0.02" rotation_invariant="1" upsampling="0" upsampling_dist_fac="5"/>
+      <fpfh radius_search="0.02"/>
+
+      <registration_alignment enabled="0" enabled_icp="1" enabled_icpnl="0" max_correspondence_distance="0.05" ransac_outlier_rejection_threshold="0.05" transformation_epsilon="1e-7" max_iterations="50"/>
+      <registration_segmentation enabled="0" enabled_icp="1" enabled_icpnl="0" max_correspondence_distance="0.05" ransac_outlier_rejection_threshold="0.05" transformation_epsilon="1e-7" max_iterations="50"/>
+
+      <downsample_alignment enabled="0" enabled_with_normals="1" enabled_voxel_grid="0" grid_leaf_size="0.0015"/>
+      <downsample_segmentation enabled="1" enabled_with_normals="1" enabled_voxel_grid="0" grid_leaf_size="0.0015"/>
+
+      <segmentation incremental="0" distance_threshold="0.00001"/>
+      <clustering enabled="1" tolerance="0.003" min_size="50" max_size="2147483647"/>
+
+      <region final_clip="0">
+        <bounds type="box" group="1">
+          <dimensions v1="0.2" v2="0.2" v3="0.15"/>
+          <pose v1="0.55" v2="0.0" v3="0.28" roll="0.014" pitch="-0.014" yaw="0.0"/>
+        </bounds>
+      </region>
+      <region_colour>
+        <solid R="0" G="0" B="255" A="32"/>
+        <wire R="0" G="0" B="255" A="255"/>
+      </region_colour>
+l
+
+      <!--<transform name="1 (Id)" m11="1" m12="0" m13="0" m21="0" m22="1" m23="0" m31="0" m32="0" m33="1" v1="0" v2="0" v3="0"/>
+      <transform name="2" m11="0.999846" m12="-0.00654103" m13="-0.0162814" m21="0.00622859" m22="0.999797" m23="-0.0191675" m31="0.0164035" m32="0.0190632" m33="0.999684" v1="0.00620801" v2="0.001579" v3="-0.00856707"/>
+      <transform name="3" m11="0.999795" m12="-0.0142579" m13="0.0143815" m21="0.014346" m22="0.999879" m23="-0.00604386" m31="-0.0142936" m32="0.00624893" m33="0.999878" v1="-0.00156179" v2="-0.000241158" v3="0.00486465"/>
+      <transform name="4" m11="0.999937" m12="-0.0102633" m13="0.00461261" m21="0.0102656" m22="0.999947" m23="-0.00048382" m31="-0.0046074" m32="0.00053114" m33="0.999989" v1="0.00259275" v2="-0.00420059" v3="0.00348909"/>
+      <transform name="5" m11="0.999513" m12="-0.0247643" m13="-0.018971" m21="0.0244332" m22="0.999548" m23="-0.01749" m31="0.0193956" m32="0.017018" m33="0.999667" v1="0.00953508" v2="-0.00965805" v3="-0.0111069"/>
+      <transform name="6" m11="0.999971" m12="0.00630285" m13="-0.00417852" m21="-0.00632484" m22="0.999966" m23="-0.00527136" m31="0.00414515" m32="0.00529764" m33="0.999977" v1="0.00295007" v2="0.00136747" v3="-0.00681627"/>
+      <transform name="7" m11="0.999982" m12="0.00521067" m13="0.00282391" m21="-0.005199" m22="0.999978" m23="-0.00412397" m31="-0.00284534" m32="0.00410922" m33="0.999988" v1="0.0012228" v2="0.00214318" v3="-0.00180545"/>-->
+
+      <appearance mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+        <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+        <colour override="1" R="127" G="127" B="127" A="255"/>
+        <clustering point_size="4.0">
+          <colour R="255" G="0" B="0" A="255"/>
+        </clustering>
+      </appearance>
+    </cloud>
+
+    <feature3d type="curvature">
+      <properties rand_ang="100.0">
+        <frame_std_dev lin="0.005" ang="200.0"/>
+      </properties>
+    </feature3d>
+
+    <clustering suffix=".cluster">
+      <selection name="processing"/>
+      <!--<selection name="collisions"/>-->
+    </clustering>
+  </data>
+</golem>

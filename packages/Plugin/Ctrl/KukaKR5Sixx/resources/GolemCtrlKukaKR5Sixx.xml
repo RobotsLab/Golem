@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Kuka KR 5 Sixx" enable_io="1" local_port="6008" debug="0">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+    <io thread_priority="critical" thread_timeout="10000" state_queue_size="5000" command_queue_size="500" time_quant="0.0001" cycle_avr_len="50" cycle_dur_ctrl="0" cycle_dur_init="0.012" cycle_dur_offs="0.03" cycle_dur_max_dev="2.0" sim_delta_recv="0.01" sim_delta_send="0.002"/>
+    <feedback_gain dim="6" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0"/>
+
+    <chain name="Kuka KR 5 Sixx arm" custom_kinematics="0" linked_chain_index="-1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+      <reference_pose v1="0.0" v2="0.08" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+      <links L0="0.335" L10="0.075" L11="0.365" L20="0.09" L21="0.405" L3="0.08"/>
+      <encoder_offset c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0"/>
+
+      <joint name="Axis #1">
+        <min pos="-2.9670597284" vel="-4.3633231300" acc="-31.415926"></min>
+        <max pos="+2.9670597284" vel="+4.3633231300" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="-1.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="0.0"></trn_init>
+
+        <bounds type="box" group="1">
+          <dimensions v1="0.09" v2="0.09" v3="0.1675"/>
+          <pose v1="0.0" v2="0.0" v3="0.1676" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #2">
+        <min pos="-3.3161255788" vel="-4.3633231300" acc="-31.415926"></min>
+        <max pos="+0.7853981634" vel="+4.3633231300" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+
+        <trn v1="0.0" v2="-0.335" v3="0.075" w1="-1.0" w2="0.0" w3="0.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.075" v3="0.335" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+        <bounds type="box" group="1">
+          <dimensions v1="0.05" v2="0.2575" v3="0.075"/>
+          <pose v1="-0.1" v2="0.1825" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #3">
+        <min pos="-2.0769418099" vel="-4.3633231300" acc="-31.415926"></min>
+        <max pos="+2.8797932658" vel="+4.3633231300" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="-0.335" v3="0.44" w1="-1.0" w2="0.0" w3="0.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.44" v3="0.335" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+        <bounds type="box" group="1">
+          <dimensions v1="0.045" v2="0.2425" v3="0.045"/>
+          <pose v1="0.0" v2="0.2025" v3="0.09" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+        <bounds type="sphere" group="1" radius="0.075">
+          <pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #4">
+        <min pos="-3.3161255788" vel="-7.1558499332" acc="-31.415926"></min>
+        <max pos="+3.3161255788" vel="+7.1558499332" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.425" v2="0.0" v3="0.0" w1="0.0" w2="-1.0" w3="0.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.845" v3="0.425" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+      </joint>
+      <joint name="Axis #5">
+        <!--<min pos="-1.7453292512" vel="-7.1558499332" acc="-31.415926"></min>
+        <max pos="+1.7453292512" vel="+7.1558499332" acc="+31.415926"></max>-->
+        <min pos="-2.0943951024" vel="-7.1558499332" acc="-31.415926"></min>
+        <max pos="+2.0943951024" vel="+7.1558499332" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="-0.425" v3="0.845" w1="-1.0" w2="0.0" w3="0.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.845" v3="0.425" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+      </joint>
+      <joint name="Axis #6">
+        <min pos="-6.2482787221" vel="-11.5191730632" acc="-31.415926"></min>
+        <max pos="+6.2482787221" vel="+11.5191730632" acc="+31.415926"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.425" v2="0.0" v3="0.0" w1="0.0" w2="-1.0" w3="0.0" th="0.0"></trn>
+        <trn_init v1="0.0" v2="0.845" v3="0.425" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+        <bounds type="box" group="1">
+          <dimensions v1="0.03" v2="0.04" v3="0.03"/>
+          <pose v1="0.0" v2="0.04" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+    </chain>
+  </controller>
+</golem>

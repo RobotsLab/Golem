@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="verbose"/>
+  <!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (Trajectory)">
+    <window x="0" y="0" width="1200" height="800"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Controller trajectory demo">
+    <simulation restitution="0.1" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.2">
+      <view_point v1="0" v2="-18" v3="12"/>
+      <view_dir v1="0.0179" v2="0.8819" v3="-0.4709"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <trajectory name="1">
+    <waypoint dt="5" />
+  </trajectory>
+
+  <trajectory name="2">
+    <waypoint dt="5" c8="0.2" c9="0.2"/>
+  </trajectory>
+
+  <trajectory name="3">
+    <waypoint dt="5" c1="0.5" 	c2="-1.01639" 	c3="2.00266" 	c4="0.98314" 	c5="0.0" 	c6="0.0" 	c7="1.25715"/>
+    <waypoint dt="5" c1="0.5" 	c2="-1.01639" 	c3="2.00266" 	c4="0.98314" 	c5="0.0" 	c6="0.0" 	c7="1.25715" c8="0.2" c9="0.2"/>
+  </trajectory>
+
+  <!-- ROS controller: library_path="GolemCtrlROSCtrl" -->
+  <!-- Simulator: library_path="GolemCtrlSim" -->
+  <controller library_path="GolemCtrlSim" config_path="GolemCtrlROSCtrlBaxter">
+    <renderer>
+      <joint_appearance line_width="1.0">
+        <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+        <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+        <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+      </joint_appearance>
+      <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </path_renderer>
+      <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+        <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+      </state_renderer>
+    </renderer>
+  </controller>
+</golem>

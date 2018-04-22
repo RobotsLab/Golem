@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="15" sampling_rate="2000" samples_per_channel="5" samples_bias="0" connection_type="differential" calibration_file="FT15753.cal" channel_map="Dev2/ai20:FX,Dev2/ai21:FY,Dev2/ai22:FZ,Dev2/ai23:TX,Dev2/ai32:TY,Dev2/ai33:TZ">
+    <handler snapshot="" sequence=""/>
+
+    <calibration file="GolemFTDAQIndex.cal" use_inertia="1" sampling_interval="10" sample_window_size="100" mass_param_manitude="1.0" offset_param_manitude="1.0">
+      <local_frame_param_manitude v1="0.0" v2="0.0" v3="0.0"/>
+      <!-- dz = -7mm dy = 30.4mm -->
+      <!-- Angle between the <X- axis of the Ati, X axis of the FingerTip> = 42 (90 - 48) degrees -->
+      <local_frame v1="0.0" v2="0.304" v3="-0.007" roll="3.14159" pitch="0.0" yaw="0.733038"/>
+    </calibration>
+
+    <appearance>
+      <frame show="0" v1="0.02" v2="0.02" v3="0.02"/>
+      <shape show="0" R="127" G="0" B="0" A="64">
+        <bounds type="box" group="1">
+          <dimensions v1="0.025" v2="0.025" v3="0.025"/>
+          <pose v1="0.0" v2="0.0" v3="-0.025" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

@@ -1,0 +1,44 @@
+###############################################################################
+#
+# Golem Plugin/Sensor/CameraEnsenso library
+#
+###############################################################################
+
+option(GOLEM_BUILD_PLUGIN_SENSOR_CAMERAENSENSO "Build Golem Plugin/Sensor Ensenso plugin" NO)
+mark_as_advanced(GOLEM_BUILD_PLUGIN_SENSOR_CAMERAENSENSO)
+
+if(GOLEM_BUILD_PLUGIN_SENSOR AND GOLEM_BUILD_PLUGIN_SENSOR_CAMERAENSENSO)
+	SET(PACKAGE_DIR "${PACKAGE_PLUGIN_SENSOR}/CameraEnsenso")
+
+	# OpenCV
+	FIND_PACKAGE(OpenCV REQUIRED)
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+	FILE(GLOB_RECURSE PACKAGE_FILES_CAL "${PACKAGE_DIR}/resources/*.cal")
+
+	ADD_LIBRARY(GolemCameraEnsenso SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES} ${PACKAGE_FILES_CAL})
+	TARGET_COMPILE_OPTIONS(GolemCameraEnsenso PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+
+	TARGET_LINK_LIBRARIES(GolemCameraEnsenso GolemTools)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemCameraEnsenso PUBLIC ${PACKAGE_DIR}/include ${OPENCV_INCLUDE_DIRS})
+
+	COPY_FILES(GolemCameraEnsenso ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+
+	if (CPACK_BUILD_CORE)
+		if (WIN32)
+			INSTALL(TARGETS GolemCameraEnsenso RUNTIME DESTINATION bin COMPONENT sensor_execs)
+		elseif (UNIX)
+			INSTALL(TARGETS GolemCameraEnsenso LIBRARY DESTINATION bin COMPONENT sensor_execs)
+		endif()
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/Sensor/CameraEnsenso/ COMPONENT sensor_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT sensor_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemCameraEnsenso PROPERTY PROJECT_LABEL "CameraEnsenso")
+	SET_PROPERTY(TARGET GolemCameraEnsenso PROPERTY FOLDER "Plugin/Sensor")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES} ${PACKAGE_FILES_CAL})
+endif(GOLEM_BUILD_PLUGIN_SENSOR AND GOLEM_BUILD_PLUGIN_SENSOR_CAMERAENSENSO)

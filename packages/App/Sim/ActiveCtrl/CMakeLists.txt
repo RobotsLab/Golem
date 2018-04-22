@@ -1,0 +1,32 @@
+###############################################################################
+#
+# Golem App/Sim/ActiveCtrl application
+#
+###############################################################################
+
+if(GOLEM_BUILD_APP_SIM)
+	SET(PACKAGE_DIR "${PACKAGE_APP_SIM}/ActiveCtrl")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	ADD_EXECUTABLE(GolemAppActiveCtrl ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	TARGET_LINK_LIBRARIES(GolemAppActiveCtrl GolemAppCommon GolemPlannerGraphPlanner)
+	TARGET_INCLUDE_DIRECTORIES(GolemAppActiveCtrl PUBLIC ${PACKAGE_DIR}/include)
+
+	COPY_FILES(GolemAppActiveCtrl ${RUNTIME_OUTPUT_DIRECTORY} ${PACKAGE_FILES})
+	SET_PROPERTY(TARGET GolemAppActiveCtrl PROPERTY RELEASE_POSTFIX ${CMAKE_RELEASE_POSTFIX})
+	SET_PROPERTY(TARGET GolemAppActiveCtrl PROPERTY DEBUG_POSTFIX ${CMAKE_DEBUG_POSTFIX})
+	
+	if (CPACK_BUILD_CORE)
+		INSTALL(TARGETS GolemAppActiveCtrl RUNTIME DESTINATION bin COMPONENT app_execs)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/App/ActiveCtrl/ COMPONENT app_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT app_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemAppActiveCtrl PROPERTY PROJECT_LABEL "ActiveCtrl")
+	SET_PROPERTY(TARGET GolemAppActiveCtrl PROPERTY FOLDER "App/Sim")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_APP_SIM)

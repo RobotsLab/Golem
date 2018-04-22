@@ -1,0 +1,43 @@
+###############################################################################
+#
+# Golem App/Sim/Common library
+#
+###############################################################################
+
+if(GOLEM_BUILD_APP_SIM)
+	SET(PACKAGE_DIR "${PACKAGE_APP_SIM}/Common")
+
+	FILE(GLOB_RECURSE PACKAGE_SOURCES "${PACKAGE_DIR}/src/*.cpp")
+	FILE(GLOB_RECURSE PACKAGE_HEADERS "${PACKAGE_DIR}/include/*.h")
+	FILE(GLOB_RECURSE PACKAGE_FILES "${PACKAGE_DIR}/resources/*.xml")
+
+	if(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemAppCommon SHARED ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+		TARGET_COMPILE_OPTIONS(GolemAppCommon PUBLIC ${CMAKE_DLL_EXPORT_FLAGS})
+	else(GOLEM_DYNAMIC_LIBS)
+		ADD_LIBRARY(GolemAppCommon STATIC ${PACKAGE_SOURCES} ${PACKAGE_HEADERS} ${PACKAGE_FILES})
+	endif(GOLEM_DYNAMIC_LIBS)
+
+	TARGET_LINK_LIBRARIES(GolemAppCommon GolemApp)
+	
+	TARGET_INCLUDE_DIRECTORIES(GolemAppCommon PUBLIC ${PACKAGE_DIR}/include)
+
+	if (CPACK_BUILD_CORE)
+		if(GOLEM_DYNAMIC_LIBS)
+			if (WIN32)
+				INSTALL(TARGETS GolemAppCommon RUNTIME DESTINATION bin COMPONENT app_libs)
+			elseif (UNIX)
+				INSTALL(TARGETS GolemAppCommon LIBRARY DESTINATION bin COMPONENT app_libs)
+			endif()
+		else(GOLEM_DYNAMIC_LIBS)
+			INSTALL(TARGETS GolemAppCommon ARCHIVE DESTINATION lib COMPONENT app_libs)
+		endif(GOLEM_DYNAMIC_LIBS)
+		INSTALL(FILES ${PACKAGE_HEADERS} DESTINATION include/Golem/App/Common/ COMPONENT app_headers)
+		INSTALL(FILES ${PACKAGE_FILES} DESTINATION bin COMPONENT app_configs)
+	endif (CPACK_BUILD_CORE)
+
+	SET_PROPERTY(TARGET GolemAppCommon PROPERTY PROJECT_LABEL "Common")
+	SET_PROPERTY(TARGET GolemAppCommon PROPERTY FOLDER "App/Sim")
+	SOURCE_GROUP("Include Files" FILES ${PACKAGE_HEADERS})
+	SOURCE_GROUP("Resource Files" FILES ${PACKAGE_FILES})
+endif(GOLEM_BUILD_APP_SIM)

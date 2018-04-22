@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data delete_if_moved="1" delete_if_unlinked="1" delete_if_temporary="1" ext_suffix=".hbs">
+    <belief points="1" features="1" attempts="10" kernels="25" neighbours="5" distance_range="20.0" distance_max="0.02" feature_norm_eps="1e-7" cluster="1">
+      <nn_search neighbours="0" search_checks="32" search_kdtrees="4" search_leaf_max_size="10"/>
+      <covariance dim="7" c1="0.001" c2="0.001" c3="0.001" c4="0.001" c5="0.0001" c6="0.0001" c7="0.0001"/>
+      <mean_shift population_size="100" generations_min="20" generations_max="200" distance_diff="1e-4"/>
+      <pose_stddev lin="0.001" ang="500.0"/>
+      <dist prod="0" lin="1.0" ang="1.0" feature="0"/>
+      <optimisation minimum="1" population_size="200" generations_num="2000" de_diff_fac="0.5" de_cross_prob="0.1" test_generations="100" test_pairs="100" test_variance="1e-6" num_of_threads="-1" thread_priority="lowest"/>
+      <align lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+        <colour>
+          <solid R="0" G="0" B="255" A="32"/>
+          <wire R="0" G="0" B="255" A="255"/>
+        </colour>
+      </align>
+
+      <hypothesis>
+        <collision>
+          <waypoint path_dist="0.0" points="1000" depth_stddev="1000.0" likelihood="1000.0"/>
+          <kdtree neighbours="1" points="1000" depth_stddev="1000.0" likelihood="1000.0" radius="0.0"/>
+        </collision>
+      </hypothesis>
+      <tactile_model num_hypotheses="5" max_surface_points="10000000">
+        <!--<covariance dim="7" c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0"/>-->
+        <!--<covariance dim="7" c1="0.01" c2="0.01" c3="0.01" c4="0.01" c5="0.01" c6="0.01" c7="0.01"/>-->
+      </tactile_model>
+      <pose_estimation points="15000" features="15000" attempts="10" kernels="15000" neighbours="2000" distance_range="20.0" distance_max="0.02" feature_norm_eps="1e-7" search_checks="32" search_kdtrees="4">
+        <nn_search neighbours="0" search_checks="32" search_kdtrees="4" search_leaf_max_size="10"/>
+        <covariance dim="7" c1="0.001" c2="0.001" c3="0.001" c4="0.001" c5="0.001" c6="0.001" c7="0.001"/>
+        <!--<covariance dim="7" c1="10" c2="10" c3="1" c4="1" c5="1" c6="1" c7="1"/>-->
+        <mean_shift population_size="100" generations_min="20" generations_max="200" distance_diff="1e-4"/>
+        <pose_stddev lin="0.001" ang="500.0"/>
+        <dist prod="0" lin="1.0" ang="1.0" feature="0"/>
+        <optimisation minimum="1" population_size="10" generations_num="1000" de_diff_fac="0.5" de_cross_prob="0.1" test_generations="100" test_pairs="100" test_variance="1e-6" num_of_threads="-1" thread_priority="lowest"/>
+        <align lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+          <increment lin="0.05" ang="0.2617993877991494"/>
+          <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+          <colour>
+            <solid R="0" G="0" B="255" A="32"/>
+            <wire R="0" G="0" B="255" A="255"/>
+          </colour>
+        </align>
+      </pose_estimation>
+    </belief>
+
+    <poses_appearance show_frame="0" show_points="0" distrib_samples="100" mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+      <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      <!-- MAGENTA -->
+      <colour override="1" R="255" G="0" B="255" A="255"/>
+    </poses_appearance>
+    <meanpose_appearance show_frame="1" show_points="1" mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+      <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+      <!-- GREEN -->
+      <colour override="1" R="0" G="255" B="0" A="255"/>
+    </meanpose_appearance>
+    <hypothesis_appearance show_frame="1" show_points="1" mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+      <frame_size v1="0.01" v2="0.01" v3="0.01"/>
+      <!-- BLUE -->
+      <colour override="1" R="0" G="0" B="255" A="255"/>
+    </hypothesis_appearance>
+    <ground_truth_appearance show_frame="0" show_points="1" mode="point" mode_3d="1" mode_3d_a="177" point_size="1.0" frame_num="100" camera_frame="1" camera_frame_size="0.05" feature_curv_pow="1.0">
+      <frame_size v1="0.1" v2="0.1" v3="0.1"/>
+      <!-- BLACK -->
+      <colour override="1" R="0" G="0" B="0" A="255"/>
+    </ground_truth_appearance>
+  </data>
+</golem>

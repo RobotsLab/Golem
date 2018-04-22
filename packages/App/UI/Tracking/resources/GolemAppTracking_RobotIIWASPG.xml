@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="16"></parallels>
+  <messages level="verbose"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="GolemAppTracking">
+    <!-- x_offs/y_offs: DPI 100% -> 8, DPI 125% -> 10, DPI 150% -> 12 -->
+    <!--<window x="0" y="0" width="640" height="480" x_offs="8" y_offs="8"></window>-->
+    <!--<window x="0" y="0" width="800" height="600" x_offs="8" y_offs="8"></window>-->
+	  <window x="0" y="0" width="1024" height="768" x_offs="8" y_offs="8"></window>
+	  <!--<window x="0" y="0" width="2048" height="1536" x_offs="10" y_offs="10"></window>-->
+	<simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="GolemAppTracking_RobotIIWASPG.xml">
+    <simulation restitution="0.0" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"/>
+    </simulation>
+    <opengl view_name="Front" view_inc="0.2">
+      <view_point v1="21.0" v2="0.0" v3="10.0"/>
+      <view_dir v1="-1.0" v2="0.0" v3="-0.3"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Closeup" view_inc="0.2">
+      <!--<view_point v1="6.8215" v2="8.9677" v3="7.7338"/>
+      <view_dir v1="-0.1543" v2="-0.8847" v3="-0.4397"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>-->
+		<view_point v1="6.2968" v2="5.9595" v3="6.2387"/>
+		<view_dir v1="-0.1543" v2="-0.8848" v3="-0.4397"/>
+		<view_up v1="0.0000" v2="0.0000" v3="1.0000"/>		
+      <clear_color R="255" G="255" B="255" A="255"/>
+      <draw solid="1" wire="0" shadow="0" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <demo bundle="./GolemAppTrackingData_RobotIIWASPG.xml" bundle_log="./data/AppTracking/trial" camera="OpenNI+OpenNIAppTracking_RobotIIWASPG" camera_tracking="OpenNI+OpenNIAppTracking">
+    <image handler="Image+ImageAppTracking_RobotIIWASPG" item="image"/>
+    <process handler="Feature3D+Feature3DAppTracking_RobotIIWASPG" item="process" break="1"/>
+    <model handler="ContactModel+ContactModel" item="model"/>
+    <query handler="ContactQuery+ContactQueryAppTracking_RobotIIWASPG" item="query"/>
+    <log handler="Text+Text" item="text"/>
+    <video handler="PointGrey+PointGreyAppTracking" item="video"/>
+    <!--<video handler="OpenGL+OpenGL" item="video"/>-->
+
+    <scan>
+      <!--<pose dim="9" c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012"/>-->
+      <pose dim="9" c1="0.637403" c2="-0.510645" c3="-1.22179" c4="-1.61674" c5="-1.25368" c6="1.42625" c7="1.91492" c8="0.0151482" c9="0.0151482"/>
+      <pose dim="9" c1="2.60888" c2="-0.976339" c3="-2.63362" c4="-0.424025" c5="-1.07267" c6="1.24274" c7="1.20778" c8="0.0151485" c9="0.0151485"/>
+	  <pose dim="9" c1="0.593841" c2="1.08994" c3="-0.123274" c4="-0.00316126" c5="0.394052" c6="1.29388" c7="-0.0489158" c8="0.0152117" c9="0.0152117"/>
+      <pose dim="9" c1="-0.843904" c2="-0.279151" c3="1.8798" c4="-1.69318" c5="0.89156" c6="1.11459" c7="-1.07855" c8="0.0151792" c9="0.0151792"/>
+      
+      <region>
+        <!--<bounds type="box" group="1">
+          <dimensions v1="0.25" v2="0.25" v3="0.2"/>
+          <pose v1="0.60" v2="0.0" v3="0.28" roll="0.014" pitch="-0.014" yaw="0.0"/>
+        </bounds>-->
+        <bounds type="box" group="1">
+          <dimensions v1="0.3" v2="0.3" v3="0.25"/>
+          <pose v1="0.60" v2="0.0" v3="0.37" roll="0.014" pitch="-0.014" yaw="0.0"/>
+        </bounds>
+      </region>
+    </scan>
+
+    <tracking threads="16">
+    </tracking>
+
+    <manipulator>
+      <trajectory lin="1000.0" ang="1000.0" collision="1" cluster_size="100" timeout="0.1" throw="1"/>
+    
+      <kinematics thread_timeout="1000" thread_parallels="8" dist_root_global_fac="0.001" dist_root_local_fac="0.01" minimum="1"  population_size="40" generations_num="1000000" de_diff_fac="0.5" de_cross_prob="0.05" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-9" num_of_threads="-1" thread_priority="normal"/>
+
+      <controller dist_thr="0.2" exec_dt="2.0" pred_dt="0.1" reac_dt="0.05" ikin_dt="0.05"/>
+
+      <profile pruning="0" pruning_distance="0.001">
+        <velocity dim="9" c1="0.2" c2="0.2" c3="0.2" c4="0.2" c5="0.2" c6="0.2" c7="0.2" c8="0.5" c9="0.5"/>
+        <acceleration dim="9" c1="0.1" c2="0.1" c3="0.1" c4="0.1" c5="0.1" c6="0.1" c7="0.1" c8="0.5" c9="0.5"/>
+        <distance dim="9" c1="10.0" c2="10.0" c3="10.0" c4="10.0" c5="10.0" c6="10.0" c7="10.0" c8="1.0" c9="1.0"/>
+        <grip dim="9" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="-0.005" c9="-0.005"/>
+      </profile>
+        
+      <appearance_bounds show_solid="1" show_wire="1" wire_width="1.0">
+        <solid_colour R="127" G="127" B="127" A="50"/>
+        <wire_colour R="127" G="127" B="127" A="255"/>
+      </appearance_bounds>
+      <appearance_selection show_solid="1" show_wire="1" wire_width="1.0">
+        <solid_colour R="0" G="0" B="255" A="50"/>
+        <wire_colour R="0" G="0" B="255" A="255"/>
+      </appearance_selection>
+      <appearance_solution show_solid="1" show_wire="1" wire_width="1.0">
+        <solid_colour R="255" G="0" B="0" A="50"/>
+        <wire_colour R="255" G="0" B="0" A="255"/>
+      </appearance_solution>
+    </manipulator>
+
+    <object point_size="1.0">
+      <point_colour R="0" G="0" B="0" A="127"/>
+      <solid_colour R="0" G="0" B="255" A="64"/>
+      <wire_colour R="0" G="0" B="255" A="255"/>
+      <tracking_colour R="0" G="255" B="0" A="127"/>
+  	</object>
+  </demo>
+  
+  <player planner_index="0" trajectory_name="trajectory" trajectory_profile_semi_auto="semiauto">
+    <!-- To run robot server uncomment: <server .../> -->
+    <!--<server port="54312" clients="10" message_interval="600.0"/>-->
+
+    <!-- To run robot controller client (controller): library_path="GolemCtrlCtrlClient" -->
+
+    <!-- Boris robot simulation (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotBorisSim" -->
+    <!-- Boris robot (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotBoris" -->
+
+    <!-- Baxter robot (controller): library_path="GolemCtrlROSCtrl" config_path="GolemCtrlROSCtrlBaxter" -->
+
+    <!-- Birmingham robot simulation (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotBhamSim" -->
+    <!-- Birmingham robot (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotBham" -->
+
+    <!-- Eddie robot simulation (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotEddieSim" -->
+    <!-- Eddie robot (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotEddie" -->
+
+    <!-- UIBK robot simulation (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotUIBKSim" -->
+    <!-- UIBK robot (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotUIBK" -->
+
+    <!-- DLR Justin robot simulation (controller): library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotJustin" -->
+    <!-- DLR Justin robot (controller): library_path="GolemCtrlRobotJustin" config_path="GolemCtrlRobotJustin" -->
+
+    <controller library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotIIWASPG">
+      <renderer>
+        <joint_appearance line_width="1.0">
+          <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+          <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+          <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+        </joint_appearance>
+        <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </path_renderer>
+        <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="0" state_joint_frames_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+          <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+        </state_renderer>
+      </renderer>
+    </controller>
+    <planner library_path="GolemPlannerGraphPlanner" config_path="GolemAppTracking_GolemPlannerRobotIIWASPG">
+      <controller id="KukaIIWA+KukaIIWA" begin="0" end="1"/>
+      <controller id="SchunkParallelGripper+SchunkParallelGripper" begin="1" end="3"/>
+      <!--<controller id="KukaIIWASim+KukaIIWA" begin="0" end="1"/>
+      <controller id="Sim+SchunkParallelGripper" begin="1" end="3"/>-->
+
+      <!--<sensor id="FTClient+FTClient"/>-->
+      <!--<sensor id="FTDAQ+FTDAQ"/>-->
+
+      <trajectory handler="Trajectory+TrajectoryAppTracking_RobotIIWASPG" idle_begin="0.5" idle_end="3.0" idle_perf="5.0" duration="5.0" trials="5"/>
+
+      <renderer show_duration="600.0">
+        <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_renderer>
+        <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </goal_population_renderer>
+        <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="0" G="0" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </global_graph_renderer>
+        <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+        </global_path_renderer>
+        <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="127" G="127" B="127" A="255"></edge_colour>
+        </local_graph_renderer>
+        <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+          <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+        </local_path_renderer>
+        <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+          <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+          <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+          <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+        </optimised_path_rendererex>
+        <collision_bounds>
+          <chain show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </chain>
+          <joint show_solid="0" show_wire="1" wire_width="2">
+            <solid_colour R="0" G="0" B="255" A="255"/>
+            <wire_colour R="0" G="0" B="255" A="255"/>
+          </joint>
+        </collision_bounds>
+      </renderer>
+    </planner>
+
+    <activectrl library_path="GolemJointCtrl" config_path="GolemJointCtrl"/>
+    <activectrl library_path="GolemArmHandForce" config_path="GolemArmHandForce"/>
+    <activectrl library_path="GolemWorkspaceCtrl" config_path="GolemWorkspaceCtrl"/>
+    <activectrl library_path="GolemOspaceCtrl" config_path="GolemOspaceCtrl"/>
+
+    <objects>
+      <bounds type="plane" distance="0.0" grid_size="10" grid_delta="0.1" group="1" invisible="0">
+        <normal v1="0.0" v2="0.0" v3="1.0"/>
+        <pose v1="0.0" v2="0.0" v3="0.16" roll="0.0" pitch="0.0" yaw="0.0"/>
+      </bounds>
+    </objects>
+  </player>
+
+  <recorder>
+    <!--<sensor library_path="GolemCameraDepthSim" config_path="GolemCameraDepthSim"/>-->
+    <!--<sensor library_path="GolemCameraKinect" config_path="GolemCameraKinect"/>-->
+    <!--<sensor library_path="GolemCameraOpenCV" config_path="GolemCameraOpenCV"/>-->
+    <sensor library_path="GolemCameraOpenGL" config_path="GolemCameraOpenGL"/>
+	  <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNIAppTracking"/>
+	  <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNIAppTracking_RobotIIWASPG"/>
+	  <sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGreyAppTracking"/>
+    <!--<sensor library_path="GolemFTClient" config_path="GolemFTClient"/>-->
+    <!--<sensor library_path="GolemFTDAQ" config_path="GolemFTDAQ"/>-->
+
+    <recording label="recorder">
+      <!--<sensor id="OpenNI+OpenNI_RobotIIWASPG"/>-->
+      <!--<sensor id="PointGrey+PointGreyAppTracking"/>-->
+      <sensor id="OpenGL+OpenGL"/>
+    </recording>
+
+    <cloud>
+      <adjust lin_keys="wsedrf" ang_keys="WSEDRF" inc_keys="-+">
+        <increment lin="0.05" ang="0.2617993877991494"/>
+        <frame_size v1="0.2" v2="0.2" v3="0.2"/>
+        <colour>
+          <solid R="255" G="0" B="0" A="255"/>
+          <wire R="255" G="0" B="0" A="255"/>
+        </colour>
+      </adjust>
+    </cloud>
+  </recorder>
+
+  <manager>
+    <data_template path="./GolemAppTrackingData_RobotIIWASPG.xml" delete_if_moved="0" delete_if_unlinked="1" delete_if_temporary="1" ext=".xml" xml_handler="handler" xml_item="item" xml_label="label" xml_prefix="prefix" xml_name="use_name" sep_name="-" sep_field="&#x9;"/>
+    <data path="./GolemAppTrackingData_RobotIIWASPG.xml"/>
+
+    <handler library_path="GolemDataImage" config_path="GolemDataImage"/>
+	<handler library_path="GolemDataImage" config_path="GolemDataImage_RobotIIWASPG"/>
+	<handler library_path="GolemDataImage" config_path="GolemDataImageAppTracking_RobotIIWASPG"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3D"/>
+    <handler library_path="GolemDataFeature3D" config_path="GolemDataFeature3DAppTracking_RobotIIWASPG"/>
+    <handler library_path="GolemDataVideo" config_path="GolemDataVideo"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemDataTrajectory"/>
+    <handler library_path="GolemDataTrajectory" config_path="GolemDataTrajectoryAppTracking_RobotIIWASPG"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemDataContactModel"/>
+    <handler library_path="GolemDataContactModel" config_path="GolemDataContactModel_RobotIIWASPG"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemDataContactQuery"/>
+    <handler library_path="GolemDataContactQuery" config_path="GolemDataContactQueryAppTracking_RobotIIWASPG"/>
+    <handler library_path="GolemDataText" config_path="GolemDataText"/>
+    <!--<handler library_path="GolemDataPart3DHoP" config_path="GolemDataPart3DHoP"/>-->
+  </manager>
+
+  <pose name="zero" planner_index="0" dim="70" c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0" c8="0.0" c9="0.0" c10="0.0" c11="0.0" c12="0.0" c13="0.0" c14="0.0" c15="0.0" c16="0.0" c17="0.0" c18="0.0" c19="0.0" c20="0.0" c21="0.0" c22="0.0" c23="0.0" c24="0.0" c25="0.0" c26="0.0" c27="0.0" c28="0.0" c29="0.0" c30="0.0" c31="0.0" c32="0.0" c33="0.0" c34="0.0" c35="0.0" c36="0.0" c37="0.0" c38="0.0" c39="0.0" c40="0.0" c41="0.0" c42="0.0" c43="0.0" c44="0.0" c45="0.0" c46="0.0" c47="0.0" c48="0.0" c49="0.0" c50="0.0" c51="0.0" c52="0.0" c53="0.0" c54="0.0" c55="0.0" c56="0.0" c57="0.0" c58="0.0" c59="0.0" c60="0.0" c61="0.0" c62="0.0" c63="0.0" c64="0.0" c65="0.0" c66="0.0" c67="0.0" c68="0.0" c69="0.0" c70="0.0"/>
+
+  <pose name="test" planner_index="0" dim="9" c1="0.5" 	c2="-1.01639" 	c3="2.00266" 	c4="0.98314" 	c5="0.0" 	c6="0.0" 	c7="1.25715" c8="0.0" c9="0.0"/>
+
+  <pose name="calibration pose" planner_index="0" dim="9" c1="0.583475" c2="-0.322019" c3="-0.4752" c4="-1.90231" c5="0.454294" c6="-0.250571" c7="-0.304449" c8="0.0151485" c9="0.0151485"/>
+  <pose name="calibration pose" planner_index="0" dim="9" c1="1.17194" c2="-0.832345" c3="-1.22162" c4="-1.78021" c5="0.0607615" c6="-0.0789362" c7="-0.195811" c8="0.01515" c9="0.01515"/>
+  <pose name="calibration pose" planner_index="0" dim="9" c1="-0.274003" c2="0.143294" c3="0.263711" c4="-1.50379" c5="0.00798284" c6="0.0701319" c7="0.258317" c8="0.0151485" c9="0.0151485"/>
+  <pose name="calibration pose" planner_index="0" dim="9" c1="0.322798" c2="0.00509551" c3="0.430157" c4="-1.77375" c5="1.12441" c6="-0.787685" c7="-1.17784" c8="0.0151485" c9="0.0151485"/>
+
+  <!--<pose name="scan pose (quick)" planner_index="0" dim="9" c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012"/>
+  <pose name="scan pose (quick)" planner_index="0" dim="9" c1="0.637403" c2="-0.510645" c3="-1.22179" c4="-1.61674" c5="-1.25368" c6="1.42625" c7="1.91492" c8="0.0151482" c9="0.0151482"/>
+  <pose name="scan pose (quick)" planner_index="0" dim="9" c1="-0.843904" c2="-0.279151" c3="1.8798" c4="-1.69318" c5="0.89156" c6="1.11459" c7="-1.07855" c8="0.0151792" c9="0.0151792"/>-->
+
+  <pose name="scan pose (demo)" planner_index="0" dim="9" c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012"/>
+  <pose name="scan pose (demo)" planner_index="0" dim="9" c1="0.637403" c2="-0.510645" c3="-1.22179" c4="-1.61674" c5="-1.25368" c6="1.42625" c7="1.91492" c8="0.0151482" c9="0.0151482"/>
+  <pose name="scan pose (demo)" planner_index="0" dim="9" c1="2.60888" c2="-0.976339" c3="-2.63362" c4="-0.424025" c5="-1.07267" c6="1.24274" c7="1.20778" c8="0.0151485" c9="0.0151485"/>
+  <pose name="scan pose (demo)" planner_index="0" dim="9" c1="0.593841" c2="1.08994" c3="-0.123274" c4="-0.00316126" c5="0.394052" c6="1.29388" c7="-0.0489158" c8="0.0152117" c9="0.0152117"/>
+  <pose name="scan pose (demo)" planner_index="0" dim="9" c1="-0.843904" c2="-0.279151" c3="1.8798" c4="-1.69318" c5="0.89156" c6="1.11459" c7="-1.07855" c8="0.0151792" c9="0.0151792"/>
+
+  <pose name="scan pose" planner_index="0" dim="9" c1="0.159428" c2="-0.261903" c3="-0.184451" c4="-1.81999" c5="-0.223151" c6="-0.123758" c7="0.484728" c8="0.0143012" c9="0.0143012"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="0.0248948" c2="1.12059" c3="-0.215373" c4="0.000143331" c5="0.132773" c6="1.06813" c7="0.415634" c8="0.0151457" c9="0.0151457"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="0.637403" c2="-0.510645" c3="-1.22179" c4="-1.61674" c5="-1.25368" c6="1.42625" c7="1.91492" c8="0.0151482" c9="0.0151482"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="2.60888" c2="-0.976339" c3="-2.63362" c4="-0.424025" c5="-1.07267" c6="1.24274" c7="1.20778" c8="0.0151485" c9="0.0151485"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="0.593841" c2="1.08994" c3="-0.123274" c4="-0.00316126" c5="0.394052" c6="1.29388" c7="-0.0489158" c8="0.0152117" c9="0.0152117"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="-0.843904" c2="-0.279151" c3="1.8798" c4="-1.69318" c5="0.89156" c6="1.11459" c7="-1.07855" c8="0.0151792" c9="0.0151792"/>
+  <pose name="scan pose" planner_index="0" dim="9" c1="0.00966366" c2="-1.05423" c3="-0.103264" c4="-2.00996" c5="1.92253" c6="-0.0445627" c7="-1.68971" c8="0.0151765" c9="0.0151765"/>
+</golem>

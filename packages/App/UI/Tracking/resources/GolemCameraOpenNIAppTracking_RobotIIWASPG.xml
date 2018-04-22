@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <sensor config_joint="7" calibration_file="GolemCameraOpenNI_RobotIIWASPG.cal" index="1" buffer_len="60" buffer_off="1" thread_timeout="20000" stream_timeout="1000">
+    <property width="640" height="480" fps="30" mode="ir" format="203"/>
+    <property width="640" height="480" fps="30" mode="depth" format="101"/>
+    <!--<property width="320" height="240" fps="30" mode="ir" format="203"/>
+    <property width="320" height="240" fps="30" mode="colour, depth" format="200 101"/>-->
+    <colour R="127" G="127" B="127" A="255"/>
+
+    <handler snapshot="Image+Image_RobotIIWASPG" sequence="Video+Video"/>
+    
+    <calibration file="GolemCameraOpenNI_RobotIIWASPG.cal" use_deformation_map="1">
+      <optimisation minimum="1" population_size="100" generations_num="1000000000" de_diff_fac="0.5" de_cross_prob="0.2" test_value="0" test_generations="1000" test_pairs="100" test_variance="1e-7" num_of_threads="-1" thread_priority="lowest">
+        <distance_weights lin="10.0" ang="1.0"/>
+        <sample_magnitude lin="0.1" ang="0.5"/>
+      </optimisation>
+      <deformation_dist dim="9" c1="10.0" c2="10.0" c3="10.0" c4="10.0" c5="10.0" c6="10.0" c7="10.0" c8="0" c9="0"/>
+    </calibration>
+
+    <appearance>
+      <frame show="1" v1="0.05" v2="0.05" v3="0.1"/>
+      <shape show="1" R="127" G="127" B="127" A="255">
+        <bounds type="box" group="1">
+          <dimensions v1="0.025" v2="0.025" v3="0.025"/>
+          <pose v1="0.0" v2="0.0" v3="-0.025" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </shape>
+    </appearance>
+  </sensor>
+</golem>

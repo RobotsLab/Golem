@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="info"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (TinyGrasp)">
+    <window x="0" y="0" width="800" height="600"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Tiny interface">
+    <simulation restitution="0.2" static_friction="0.5" dynamic_friction="0.5">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.2">
+      <view_dir v1="-1.0" v2="-1.0" v3="-0.7"/>
+      <view_point v1="6.0" v2="6.0" v3="6.0"/>
+      <view_up v1="0.0" v2="0.0" v3="1.0"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+
+  <robot>
+    <controller planner_tries="1000">
+      <pose v1="0.03" v2="0.0" v3="0.24" roll="0.0" pitch="0.0" yaw="-1.5707963268"/>
+      <gripper length="0.05" diam="0.015" gap="0.1"/>
+      <grasping approach_offset="0.08" grasp_offset="0.02" robot_distance="0.4" error_lin="0.01" error_ang="0.01" sensor_threshold="100" encoder_threshold="30000"/>
+    </controller>
+    <base>
+      <pose v1="-0.04" v2="0.0" v3="0.12" roll="0.0" pitch="0.0" yaw="0.0"/>
+      <dimensions v1="0.22" v2="0.19" v3="0.11"/>
+    </base>
+    <beam>
+      <pose v1="-0.14" v2="0.0" v3="0.74" roll="0.0" pitch="0.0" yaw="0.0"/>
+      <dimensions v1="0.04" v2="0.04" v3="0.5"/>
+    </beam>
+  </robot>
+
+  <controller>
+    <renderer>
+      <joint_appearance line_width="1.0">
+        <solid_colour R="192" G="192" B="0" A="100"></solid_colour>
+        <wire_colour R="127" G="127" B="127" A="255"></wire_colour>
+        <shadow_colour R="12" G="25" B="37" A="255"></shadow_colour>
+      </joint_appearance>
+      <path_renderer show="1" vertex_position_show="0" vertex_frame_show="0" edge_show="1" path_time_past="0" path_time_future="1e10" path_segments="5000" path_segment_duration="0.1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </path_renderer>
+      <state_renderer show="1" vertex_position_show="1" vertex_frame_show="1" edge_show="0" state_use_commands="1" state_joint_frames_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+        <state_joint_frames_size v1="0.03" v2="0.03" v3="0.03"/>
+      </state_renderer>
+    </renderer>
+  </controller>
+
+  <planner>
+    <renderer show_duration="60.0">
+      <goal_renderer show="1" vertex_position_show="0" vertex_frame_show="1" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </goal_renderer>
+      <goal_population_renderer show="1" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </goal_population_renderer>
+      <global_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </global_graph_renderer>
+      <global_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="0" G="255" B="255" A="255"></edge_colour>
+      </global_path_renderer>
+      <local_graph_renderer show="0" vertex_position_show="1" vertex_frame_show="0" edge_show="0">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="255" B="255" A="255"></edge_colour>
+      </local_graph_renderer>
+      <local_path_renderer show="0" vertex_position_show="0" vertex_frame_show="0" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.05" v2="0.05" v3="0.05"></vertex_frame_size>
+        <edge_colour R="255" G="0" B="255" A="255"></edge_colour>
+      </local_path_renderer>
+      <optimised_path_rendererex show="0" vertex_position_show="0" vertex_frame_show="1" edge_show="1">
+        <vertex_position_colour R="255" G="255" B="0" A="255"></vertex_position_colour>
+        <vertex_frame_size v1="0.02" v2="0.02" v3="0.02"></vertex_frame_size>
+        <edge_colour R="0" G="0" B="0" A="255"></edge_colour>
+      </optimised_path_rendererex>
+      <collision_bounds>
+        <chain show_solid="0" show_wire="1" wire_width="2">
+          <solid_colour R="0" G="0" B="255" A="255"/>
+          <wire_colour R="0" G="0" B="255" A="255"/>
+        </chain>
+        <joint show_solid="0" show_wire="1" wire_width="2">
+          <solid_colour R="0" G="0" B="255" A="255"/>
+          <wire_colour R="0" G="0" B="255" A="255"/>
+        </joint>
+      </collision_bounds>
+    </renderer>
+  </planner>
+</golem>

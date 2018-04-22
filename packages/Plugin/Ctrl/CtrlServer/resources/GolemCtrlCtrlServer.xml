@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <messages level="verbose"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+  <server port="54312" clients="1" message_interval="60.0"/>
+
+  <controller library_path="GolemCtrlMultiCtrl" config_path="GolemCtrlRobotBhamSim"/>
+</golem>

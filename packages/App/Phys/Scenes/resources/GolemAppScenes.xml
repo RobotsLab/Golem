@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <rand seed="0"></rand>
+  <parallels threads="4"></parallels>
+  <messages level="debug"/><!-- level="undef" level="verbose" level="debug" level="info" level="warning" level="error" level="crit" -->
+
+  <universe name="Golem (Scenes)" num_scenes="2">
+    <window x="0" y="0" width="800" height="600"></window>
+    <simulation fps="30" real_time="0" skin_width="0.005" sleep_lin_vel_squared="0.0025" sleep_ang_vel_squared="0.0025" max_angular_velocity="7.0" bounce_threshold="-2.0"></simulation>
+  </universe>
+
+  <scene name="Robotic arm demo">
+    <simulation restitution="0.1" static_friction="0.2" dynamic_friction="0.1">
+      <gravity v1="0.0" v2="0.0" v3="-9.81"></gravity>
+    </simulation>
+    <opengl view_name="Default" view_inc="0.2">
+      <view_point v1="6.0" v2="6.0" v3="6.0"/>
+      <view_dir v1="-1.0" v2="-1.0" v3="-0.7"/>
+      <view_up v1="0.0" v2="0.0" v3="1.0"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+    <opengl view_name="Bird" view_inc="0.2">
+      <view_point v1="1.9475" v2="-12.1494" v3="17.1338"/>
+      <view_dir v1="-0.3894" v2="0.3669" v3="-0.8449"/>
+      <view_up v1="0.0000" v2="0.0000" v3="1.0000"/>
+      <clear_color R="55" G="55" B="60" A="255"/>
+      <draw solid="1" wire="0" shadow="1" simulation="0" normals="0"/>
+    </opengl>
+  </scene>
+</golem>

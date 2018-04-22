@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <data use_name="0">
+    <item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="GolemAppGraspData_RobotBoris"></item>
+
+    <!--<item aspect=".aspect" data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/test/model/data-item-model-1">
+      <query selectors="" type="Any"></query>
+    </item>-->
+
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T1/A1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T1/A4/data-item-model-1"></item>-->
+    
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T1/A6/data-item-model-1"></item>-->
+
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A2/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A3/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A4/data-item-model-1"></item>-->
+    
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A5/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T2/A6/data-item-model-1"></item>-->
+
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/bowl/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/bowlsmall/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/bucket/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/chocsticks/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/coke/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/colander/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/container1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/container2/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/danishham/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/deodorant/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/dustpan/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/foambox/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/funellarge/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/glass1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/guttering/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/heringtin/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/jug/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/ladle/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/lemonjuice/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/moisturiser/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/mrmuscle/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/mug1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/mug3/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/mug4/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/mug5/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/rennie/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/scraper/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/shampoo/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/soupbox/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/spatula/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/stand1/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/stand2/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/stapler/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/tongs/data-item-model-1"></item>-->
+    <!--<item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="data/model/T3/A6/toothpaste/data-item-model-1"></item>-->
+  </data>
+</golem>
