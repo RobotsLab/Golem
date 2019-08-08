@@ -2,7 +2,7 @@
 
 <golem>
   <data use_name="0">
-    <item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="GolemAppGraspData_RobotBorisNNLearning-item-model-1">
+    <item data_index="0" handler="ContactModel+ContactModel" label="model" model=".model" prefix="GolemAppGraspData_RobotBoris-item-model-1">
       <query selectors="" type="Any"></query>
     </item>
   </data>

@@ -34,7 +34,7 @@
     </opengl>
   </scene>
 
-  <demo bundle="./GolemAppGraspData_RobotBorisNNLearning.xml" camera="OpenNI+OpenNI">
+  <demo bundle="./GolemAppGraspData_RobotBorisNNLearning.xml" camera="OpenGL+OpenGL">
     <image handler="Image+Image" item="image"/>
     <process handler="Feature3D+Feature3D" item="process" break="1"/>
     <model handler="ContactModel+ContactModel" item="model"/>
@@ -197,8 +197,8 @@
     <!--<sensor library_path="GolemCameraKinect" config_path="GolemCameraKinect"/>-->
     <!--<sensor library_path="GolemCameraOpenCV" config_path="GolemCameraOpenCV"/>-->
     <sensor library_path="GolemCameraOpenGL" config_path="GolemCameraOpenGL"/>
-    <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>
-    <sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>
+    <!--<sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>-->
+    <!--<sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>-->
     <!--<sensor library_path="GolemFTClient" config_path="GolemFTClient"/>-->
     <!--<sensor library_path="GolemFTDAQ" config_path="GolemFTDAQ"/>-->
 

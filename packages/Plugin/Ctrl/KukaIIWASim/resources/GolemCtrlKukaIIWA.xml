@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Kuka IIWA" enable_io="1" debug="0">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></global_pose>
+    <io thread_priority="critical" thread_timeout="10000" state_queue_size="5000" command_queue_size="500" time_quant="0.0001" cycle_avr_len="50" cycle_cont_ctrl="0" cycle_dur_ctrl="0" cycle_dur_init="0.0011" cycle_dur_offs="0.001" cycle_dur_max_dev="5.0" sim_delta_recv="0.005" sim_delta_send="0.005"/>
+
+    <chain name="Kuka IIWA arm" custom_kinematics="0" linked_chain_index="-1">
+      <local_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></local_pose>
+      <reference_pose v1="0.0" v2="0.0" v3="0.078" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+      <links L0="0.360" L2="0.420" L4="0.400" L7="0.126"/>
+      <encoder_offset c1="0.0" c2="0.0" c3="0.0" c4="0.0" c5="0.0" c6="0.0" c7="0.0"/>
+
+      <joint name="Axis #1">
+        <min pos="-2.9670597284" vel="-1.71042" acc="-7.6794487088"></min>
+        <max pos="+2.9670597284" vel="+1.71042" acc="+7.6794487088"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="0.0" n3="1.0" l1="0.0" l2="0.0" l3="0.360"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.075" v2="0.075" v3="0.180"/>
+          <pose v1="0.0" v2="0.0" v3="-0.180" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+        <bounds type="sphere" group="1" radius="0.12">
+          <pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #2">
+        <min pos="-2.0943951024" vel="-1.71042" acc="-7.6794487088"></min>
+        <max pos="+2.0943951024" vel="+1.71042" acc="+7.6794487088"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="1.0" n3="0.0" l1="0.0" l2="0.0" l3="0.360"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.06" v2="0.06" v3="0.21"/>
+          <pose v1="0.0" v2="0.0" v3="0.21" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+        <bounds type="sphere" group="1" radius="0.1">
+          <pose v1="0.0" v2="0.0" v3="0.42" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #3">
+        <min pos="-2.9670597284" vel="-1.74533" acc="-8.9360857704"></min>
+        <max pos="+2.9670597284" vel="+1.74533" acc="+8.9360857704"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+
+        <trn n1="0.0" n2="0.0" n3="1.0" l1="0.0" l2="0.0" l3="0.780"/>
+      </joint>
+      <joint name="Axis #4">
+        <min pos="-2.0943951024" vel="-2.26893" acc="-8.9360857704"></min>
+        <max pos="+2.0943951024" vel="+2.26893" acc="+8.9360857704"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="-1.0" n3="0.0" l1="0.0" l2="0.0" l3="0.780"/>
+        <bounds type="box" group="1">
+          <dimensions v1="0.06" v2="0.06" v3="0.2"/>
+          <pose v1="0.0" v2="0.0" v3="0.2" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+        <bounds type="sphere" group="1" radius="0.09">
+          <pose v1="0.0" v2="0.0" v3="0.4" roll="0.0" pitch="0.0" yaw="0.0"/>
+        </bounds>
+      </joint>
+      <joint name="Axis #5">
+        <min pos="-2.9670597284" vel="-2.44346" acc="-14.2418866964"></min>
+        <max pos="+2.9670597284" vel="+2.44346" acc="+14.2418866964"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn n1="0.0" n2="0.0" n3="1.0" l1="0.0" l2="0.0" l3="1.180"/>
+      </joint>
+      <joint name="Axis #6">
+        <min pos="-2.0943951024" vel="-3.14159" acc="-12.8456232948"></min>
+        <max pos="+2.0943951024" vel="+3.14159" acc="+12.8456232948"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+
+        <trn n1="0.0" n2="1.0" n3="0.0" l1="0.0" l2="0.0" l3="1.180"/>
+      </joint>
+      <joint name="Axis #7">
+        <min pos="-3.05433" vel="-3.14159" acc="-12.8456232948"></min>
+        <max pos="+3.05433" vel="+3.14159" acc="+12.8456232948"></max>
+        <offset pos="0.031415927" vel="0.031415927" acc="0.31415927"/>
+
+        <trn n1="0.0" n2="0.0" n3="1.0" l1="0.0" l2="0.0" l3="1.180"/>
+      </joint>
+    </chain>
+  </controller>
+</golem>

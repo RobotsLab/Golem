@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="KIT Head Simulator Client example">
+    <client host="localhost" port="54312" time_out="1.0" lost_packages="10"/>
+    <controller library_path="GolemCtrlKITHeadSim" config_path="GolemCtrlKITHeadSim"/>
+  </controller>
+</golem>

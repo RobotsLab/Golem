@@ -55,7 +55,7 @@
       <pose dim="61" dt="1.0" flags="open"/>
     </action>
 
-    <interop enabled="1" input_cloud="1" training="0" inference="1" override_break="1">
+    <interop enabled="0" input_cloud="1" training="0" inference="1" override_break="1">
       <server host="localhost" port="26783"/>
     </interop>
 
@@ -197,8 +197,8 @@
     <!--<sensor library_path="GolemCameraKinect" config_path="GolemCameraKinect"/>-->
     <!--<sensor library_path="GolemCameraOpenCV" config_path="GolemCameraOpenCV"/>-->
     <sensor library_path="GolemCameraOpenGL" config_path="GolemCameraOpenGL"/>
-    <sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>
-    <sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>
+    <!--<sensor library_path="GolemCameraOpenNI" config_path="GolemCameraOpenNI"/>-->
+    <!--<sensor library_path="GolemCameraPointGrey" config_path="GolemCameraPointGrey"/>-->
     <!--<sensor library_path="GolemFTClient" config_path="GolemFTClient"/>-->
     <!--<sensor library_path="GolemFTDAQ" config_path="GolemFTDAQ"/>-->
 

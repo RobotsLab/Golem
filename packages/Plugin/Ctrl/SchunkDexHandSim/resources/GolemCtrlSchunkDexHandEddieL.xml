@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<golem>
+  <controller name="Eddie Left Schunk Dextrous Hand" enable_io="1" debug="0">
+    <global_pose v1="0.0" v2="0.0" v3="0.0" roll="0.0" pitch="0.0" yaw="0.0"></global_pose>
+    <io thread_priority="critical" thread_timeout="10000" state_queue_size="5000" command_queue_size="500" time_quant="0.0001" cycle_avr_len="50" cycle_dur_ctrl="0" cycle_dur_init="0.0011" cycle_dur_offs="0.001" cycle_dur_max_dev="5.0" sim_delta_recv="0.01" sim_delta_send="0.01"/>
+
+    <sdh init_time_out="60.0">
+      <tcpip host="" port="23" time_out="5.0"/>
+      <rs232 port="0" baudrate="115200" time_out="-1.0" format="/dev/ttyUSB1"/>
+      <p>
+        <acc_max c1="3.0" c2="3.0" c3="3.0" c4="3.0" c5="3.0" c6="3.0" c7="3.0"/>
+        <vel_max c1="1.0" c2="1.0" c3="1.0" c4="1.0" c5="1.0" c6="1.0" c7="1.0" c8="1.0"/>
+        <gain c1="10.0" c2="10.0" c3="10.0" c4="10.0" c5="10.0" c6="10.0" c7="10.0" c8="10.0"/>
+      </p>
+      <temp>
+        <on c1="50.0" c2="50.0" c3="50.0" c4="50.0" c5="50.0" c6="50.0" c7="50.0" c8="70.0" c9="70.0"/>
+        <off c1="48.0" c2="48.0" c3="48.0" c4="48.0" c5="48.0" c6="48.0" c7="48.0" c8="68.0" c9="68.0"/>
+      </temp>
+      <safety sleep_mode_dt="60" temperature_read_dt="10" />
+    </sdh>
+
+    <chain name="Thumb (middle finger)" custom_kinematics="0" linked_chain_index="-1">
+<!--       finger base -->
+      <local_pose v1="-0.038105" v2="0.0" v3="0.098" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"></local_pose>
+<!--       finger-tip coordinate system in the last joint coordinate system -->
+      <reference_pose v1="0.0" v2="0.0" v3="0.0685" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+
+      <!--palm-base-right.iv-->
+     <bounds type="convex_mesh" group="1">
+        <pose v1="0.038105" v2="0.0" v3="-0.049" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="-0.074105" v2="0.0165" v3="-0.045"/>
+        <vertex v1="-0.074105" v2="0.0165" v3="0.045"/>
+        <vertex v1="0.01" v2="0.066" v3="-0.045"/>
+        <vertex v1="0.01" v2="0.066" v3="0.045"/>
+        <vertex v1="0.052053" v2="0.043" v3="-0.045"/>
+        <vertex v1="0.052053" v2="0.043" v3="0.045"/>
+        <vertex v1="0.052053" v2="-0.043" v3="-0.045"/>
+        <vertex v1="0.052053" v2="-0.043" v3="0.045"/>
+        <vertex v1="0.01" v2="-0.066" v3="-0.045"/>
+        <vertex v1="0.01" v2="-0.066" v3="0.045"/>
+        <vertex v1="-0.074105" v2="-0.0165" v3="-0.045"/>
+        <vertex v1="-0.074105" v2="-0.0165" v3="0.045"/>
+        <triangle t1="0" t2="10" t3="2"/>
+        <triangle t1="10" t2="4" t3="2"/>
+        <triangle t1="10" t2="6" t3="4"/>
+        <triangle t1="10" t2="8" t3="6"/>
+        <triangle t1="1" t2="3" t3="11"/>
+        <triangle t1="11" t2="3" t3="5"/>
+        <triangle t1="11" t2="5" t3="7"/>
+        <triangle t1="11" t2="7" t3="9"/>
+        <triangle t1="0" t2="1" t3="10"/>
+        <triangle t1="1" t2="11" t3="10"/>
+        <triangle t1="0" t2="2" t3="1"/>
+        <triangle t1="2" t2="3" t3="1"/>
+        <triangle t1="2" t2="4" t3="3"/>
+        <triangle t1="4" t2="5" t3="3"/>
+        <triangle t1="4" t2="6" t3="5"/>
+        <triangle t1="6" t2="7" t3="5"/>
+        <triangle t1="6" t2="8" t3="9"/>
+        <triangle t1="9" t2="7" t3="6"/>
+        <triangle t1="10" t2="11" t3="8"/>
+        <triangle t1="8" t2="11" t3="9"/>
+      </bounds>
+
+<!--       Gripper_thumb_2_joint  -->
+      <joint name="Axis #1">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.04325" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="0.04325"/>
+        <triangle t1="7" t2="6" t3="5"/>
+        <triangle t1="3" t2="7" t3="5"/>
+        <triangle t1="4" t2="6" t3="0"/>
+        <triangle t1="6" t2="4" t3="5"/>
+        <triangle t1="3" t2="1" t3="0"/>
+        <triangle t1="1" t2="3" t3="5"/>
+        <triangle t1="1" t2="4" t3="0"/>
+        <triangle t1="4" t2="1" t3="5"/>
+        <triangle t1="2" t2="6" t3="7"/>
+        <triangle t1="3" t2="2" t3="7"/>
+        <triangle t1="6" t2="2" t3="0"/>
+        <triangle t1="2" t2="3" t3="0"/>
+      </bounds>
+
+      </joint>
+
+<!--       Gripper_thumb_3_joint -->
+      <joint name="Axis #2">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="-0.0865" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0865" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.0" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+          <vertex v1="0.0135" v2="0.015" v3="0"/>
+          <vertex v1="0.0135" v2="-0.015" v3="0"/>
+          <vertex v1="0.0135" v2="0.015" v3="0.0335"/>
+          <vertex v1="0.0135" v2="-0.015" v3="0.0335"/>
+          <vertex v1="0.0" v2="0.015" v3="0.0685"/>
+          <vertex v1="0.0" v2="-0.015" v3="0.0685"/>
+          <vertex v1="-0.0135" v2="0.015" v3="0.0685"/>
+          <vertex v1="-0.0135" v2="-0.015" v3="0.0685"/>
+          <vertex v1="-0.0135" v2="0.015" v3="0.0"/>
+          <vertex v1="-0.0135" v2="-0.015" v3="0.0"/>
+          <triangle t1="4" t2="6" t3="2"/>
+          <triangle t1="0" t2="2" t3="6"/>
+          <triangle t1="8" t2="0" t3="6"/>
+          <triangle t1="5" t2="3" t3="7"/>
+          <triangle t1="1" t2="7" t3="3"/>
+          <triangle t1="9" t2="7" t3="1"/>
+          <triangle t1="2" t2="1" t3="3"/>
+          <triangle t1="2" t2="0" t3="1"/>
+          <triangle t1="4" t2="3" t3="5"/>
+          <triangle t1="4" t2="2" t3="3"/>
+          <triangle t1="6" t2="5" t3="7"/>
+          <triangle t1="6" t2="4" t3="5"/>
+          <triangle t1="8" t2="7" t3="9"/>
+          <triangle t1="8" t2="6" t3="7"/>
+          <triangle t1="0" t2="9" t3="1"/>
+          <triangle t1="0" t2="8" t3="9"/>
+      </bounds>
+
+      </joint>
+    </chain>
+
+    <chain name="Finger 2 (left)" custom_kinematics="0" linked_chain_index="-1">
+      <local_pose v1="0.019053" v2="-0.033" v3="0.098" m11="-1.0" m12="0.0" m13="0.0" m21="0.0" m22="-1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"></local_pose>
+      <reference_pose v1="0.0" v2="0.0" v3="0.0685" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+
+<!--       knuckle_joint  -->
+      <joint name="Axis #1">
+        <min pos="0" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="-1.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+      </joint>
+
+<!--       finger_22_joint  -->
+      <joint name="Axis #2">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.04325" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="0.04325"/>
+        <triangle t1="7" t2="6" t3="5"/>
+        <triangle t1="3" t2="7" t3="5"/>
+        <triangle t1="4" t2="6" t3="0"/>
+        <triangle t1="6" t2="4" t3="5"/>
+        <triangle t1="3" t2="1" t3="0"/>
+        <triangle t1="1" t2="3" t3="5"/>
+        <triangle t1="1" t2="4" t3="0"/>
+        <triangle t1="4" t2="1" t3="5"/>
+        <triangle t1="2" t2="6" t3="7"/>
+        <triangle t1="3" t2="2" t3="7"/>
+        <triangle t1="6" t2="2" t3="0"/>
+        <triangle t1="2" t2="3" t3="0"/>
+      </bounds>
+      </joint>
+
+<!--       finger_23_joint  -->
+      <joint name="Axis #3">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="-0.0865" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.00" v3="0.0865" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.0" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="0.0135" v2="0.015" v3="0"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0"/>
+        <vertex v1="0.0135" v2="0.015" v3="0.0335"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0.0335"/>
+        <vertex v1="0.0" v2="0.015" v3="0.0685"/>
+        <vertex v1="0.0" v2="-0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.0"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.0"/>
+        <triangle t1="4" t2="6" t3="2"/>
+        <triangle t1="0" t2="2" t3="6"/>
+        <triangle t1="8" t2="0" t3="6"/>
+        <triangle t1="5" t2="3" t3="7"/>
+        <triangle t1="1" t2="7" t3="3"/>
+        <triangle t1="9" t2="7" t3="1"/>
+        <triangle t1="2" t2="1" t3="3"/>
+        <triangle t1="2" t2="0" t3="1"/>
+        <triangle t1="4" t2="3" t3="5"/>
+        <triangle t1="4" t2="2" t3="3"/>
+        <triangle t1="6" t2="5" t3="7"/>
+        <triangle t1="6" t2="4" t3="5"/>
+        <triangle t1="8" t2="7" t3="9"/>
+        <triangle t1="8" t2="6" t3="7"/>
+        <triangle t1="0" t2="9" t3="1"/>
+        <triangle t1="0" t2="8" t3="9"/>
+      </bounds>
+
+      </joint>
+    </chain>
+
+    <chain name="Finger 1 (right)" custom_kinematics="0" linked_chain_index="-1">
+      <local_pose v1="0.019053" v2="0.033" v3="0.098" m11="-1.0" m12="0.0" m13="0.0" m21="0.0" m22="-1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"></local_pose>
+      <reference_pose v1="0.0" v2="0.0" v3="0.0685" roll="0.0" pitch="0.0" yaw="0.0"></reference_pose>
+
+<!--       knuckle_joint  -->
+      <joint name="Axis #1">
+        <min pos="0" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="1.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+      </joint>
+
+<!--       finger_12_joint  -->
+      <joint name="Axis #2">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.0" v3="0.0" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.04325" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="-0.04325"/>
+        <vertex v1="0.0135" v2="0.015" v3="0.04325"/>
+        <triangle t1="7" t2="6" t3="5"/>
+        <triangle t1="3" t2="7" t3="5"/>
+        <triangle t1="4" t2="6" t3="0"/>
+        <triangle t1="6" t2="4" t3="5"/>
+        <triangle t1="3" t2="1" t3="0"/>
+        <triangle t1="1" t2="3" t3="5"/>
+        <triangle t1="1" t2="4" t3="0"/>
+        <triangle t1="4" t2="1" t3="5"/>
+        <triangle t1="2" t2="6" t3="7"/>
+        <triangle t1="3" t2="2" t3="7"/>
+        <triangle t1="6" t2="2" t3="0"/>
+        <triangle t1="2" t2="3" t3="0"/>
+      </bounds>
+      </joint>
+
+<!--       finger_13_joint  -->
+      <joint name="Axis #3">
+        <min pos="-1.570796326" vel="-6.28318530718" acc="-314.159265359"></min>
+        <max pos="+1.570796326" vel="+6.28318530718" acc="+314.159265359"></max>
+        <offset pos="0.0031415927" vel="0.031415927" acc="0.31415927"/>
+        
+        <trn v1="-0.0865" v2="0.0" v3="0.0" w1="0.0" w2="1.0" w3="0.0" th="0"></trn>
+        <trn_init v1="0.0" v2="0.00" v3="0.0865" w1="0.0" w2="0.0" w3="0.0" th="1.0"></trn_init>
+
+      <bounds type="convex_mesh" group="1">
+        <pose v1="0.0" v2="0.0" v3="0.0" m11="1.0" m12="0.0" m13="0.0" m21="0.0" m22="1.0" m23="0.0" m31="0.0" m32="0.0" m33="1.0"/>
+        <vertex v1="0.0135" v2="0.015" v3="0"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0"/>
+        <vertex v1="0.0135" v2="0.015" v3="0.0335"/>
+        <vertex v1="0.0135" v2="-0.015" v3="0.0335"/>
+        <vertex v1="0.0" v2="0.015" v3="0.0685"/>
+        <vertex v1="0.0" v2="-0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.0685"/>
+        <vertex v1="-0.0135" v2="0.015" v3="0.0"/>
+        <vertex v1="-0.0135" v2="-0.015" v3="0.0"/>
+        <triangle t1="4" t2="6" t3="2"/>
+        <triangle t1="0" t2="2" t3="6"/>
+        <triangle t1="8" t2="0" t3="6"/>
+        <triangle t1="5" t2="3" t3="7"/>
+        <triangle t1="1" t2="7" t3="3"/>
+        <triangle t1="9" t2="7" t3="1"/>
+        <triangle t1="2" t2="1" t3="3"/>
+        <triangle t1="2" t2="0" t3="1"/>
+        <triangle t1="4" t2="3" t3="5"/>
+        <triangle t1="4" t2="2" t3="3"/>
+        <triangle t1="6" t2="5" t3="7"/>
+        <triangle t1="6" t2="4" t3="5"/>
+        <triangle t1="8" t2="7" t3="9"/>
+        <triangle t1="8" t2="6" t3="7"/>
+        <triangle t1="0" t2="9" t3="1"/>
+        <triangle t1="0" t2="8" t3="9"/>
+      </bounds>
+
+      </joint>
+    </chain>
+
+  </controller>
+</golem>
