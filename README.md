@@ -48,23 +48,11 @@ Update package database.
 
 Install essential c++ development packages.
 
-* `sudo apt-get install build-essential cmake-qt-gui git`
+* `sudo apt-get install build-essential cmake git`
 
 Install mandatory dependencies.
 
-* `sudo apt-get install libpopt-dev zlib1g-dev libxmu-dev libxi-dev libproj-dev libboost-dev libexpat-dev freeglut3-dev libpcl-dev`
-
-Install OpenCV 2.4.X
-
-* `sudo apt-get install libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev`
-* `sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev libjasper-dev`
-* `wget http://downloads.sourceforge.net/project/opencvlibrary/opencv-unix/2.4.13/opencv-2.4.13.zip`
-* `unzip opencv-2.4.13.zip`
-* `cd opencv-2.4.13`
-* `mkdir build`
-* `cd build`
-* `cmake -G "Unix Makefiles" -D CMAKE_CXX_COMPILER=/usr/bin/g++ CMAKE_C_COMPILER=/usr/bin/gcc -D CUDA_GENERATION=Auto -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local -D WITH_TBB=ON -D BUILD_NEW_PYTHON_SUPPORT=ON -D WITH_V4L=ON -D INSTALL_C_EXAMPLES=OFF -D INSTALL_PYTHON_EXAMPLES=OFF -D BUILD_EXAMPLES=OFF -D WITH_QT=OFF -D WITH_OPENGL=ON -D BUILD_FAT_JAVA_LIB=ON -D INSTALL_TO_MANGLED_PATHS=ON -D INSTALL_CREATE_DISTRIB=ON -D INSTALL_TESTS=OFF -D ENABLE_FAST_MATH=ON -D WITH_IMAGEIO=ON -D BUILD_SHARED_LIBS=OFF -D WITH_GSTREAMER=ON ..`
-* `sudo make install -j16`
+* `sudo apt-get install libpopt-dev zlib1g-dev libxmu-dev libxi-dev libproj-dev libboost-dev libexpat-dev freeglut3-dev libpcl-dev libopencv-dev`
 
 Install optional dependencies (Optional).
 
@@ -86,11 +74,11 @@ Configure Golem (without optional dependencies).
 * `cd Golem`
 * `mkdir build`
 * `cd build`
-* `cmake -G "Unix Makefiles" -D CMAKE_CXX_COMPILER=/usr/bin/g++ CMAKE_C_COMPILER=/usr/bin/gcc -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local ..`
+* `mkdir build && cd build && cmake build .. -DCMAKE_BUILD_TYPE=RELEASE -DCMAKE_INSTALL_PREFIX=/usr/local`
 
 Build and install Golem.
 
-* `sudo make install -j16`
+* `sudo make install -j`
 
 Notes
 
@@ -116,3 +104,19 @@ Golem Grasp Neural Network client.
 
 * `GolemAppGrasp /usr/local/bin/GolemAppGrasp_RobotBorisNNLearning.xml GolemAppGrasp.log stdout`
 * Press `R` then `G` in the OpenGL window to run the client.
+
+
+Docker installation
+------------------
+
+We assume here that you have Docker Engine already installed on your system. There are several available tutorials on the Web, for example [Install Docker Engine on Ubuntu](https://docs.docker.com/engine/install/ubuntu/).
+
+Copy all Golem docker files ![Golem docker](/docker/) to some local directory.
+
+Create docker image `golem_test`.
+
+* `./Dockerfile.sh golem_test`
+
+Run Golem Grasp application for Birmingham Boris robot.
+
+* `./run_Grasp.sh golem_test Boris`

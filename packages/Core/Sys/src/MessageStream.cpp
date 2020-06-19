@@ -36,10 +36,17 @@ StreamMessageCallback::StreamMessageCallback(const Desc& desc, std::ostream& ost
 }
 
 void StreamMessageCallback::write(const Message& message) {
+#if defined(ENABLE_MESSAGE_CSTREAM)
 	if (desc.enableFormat)
 		fprintf(desc.file, "%s%s%s", desc.escSeqLevel[message.level()].c_str(), message.what(), desc.escSeqReset.c_str());
 	else
 		fprintf(desc.file, "%s", message.what());
+#else
+	if (desc.enableFormat)
+		std::cout << desc.escSeqLevel[message.level()] << message.what() << desc.escSeqReset << std::flush;
+	else
+		std::cout << message.what() << std::flush;
+#endif
 	//ostr << desc.escSeqLevel[message.level()] << message.what() << desc.escSeqReset;
 }
 
